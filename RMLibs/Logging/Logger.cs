@@ -77,7 +77,7 @@ namespace RMLibs.Logging
 
         public void Debug(string msg)
         {
-            if (level >= DEBUG)
+            if (level <= DEBUG)
             {
                 string message = ComposeMessage(msg, "DEBUG");
                 WriteLog(message);
@@ -86,7 +86,7 @@ namespace RMLibs.Logging
 
         public void Info(string msg)
         {
-            if (level >= INFO)
+            if (level <= INFO)
             {
                 string message = ComposeMessage(msg, "INFO");
                 WriteLog(message);
