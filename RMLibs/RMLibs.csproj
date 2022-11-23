@@ -15,6 +15,7 @@
     <None Remove="MySqlConnector" />
     <None Remove="Dapper" />
     <None Remove="Dapper.SimpleCRUD" />
+    <None Remove="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Basic\" />
@@ -22,6 +23,7 @@
     <Folder Include="SQLDBManager\" />
     <Folder Include="SQLDBManager\DAO\" />
     <Folder Include="SQLDBManager\MySql\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
