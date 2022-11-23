@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DBManager\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DBManager\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RMLibs\RMLibs.csproj" />
+  </ItemGroup>
+</Project>
