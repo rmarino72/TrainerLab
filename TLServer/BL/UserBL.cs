@@ -48,6 +48,19 @@ namespace TLServer.BL
 				throw;
 			}
 		}
-	}
+
+        public RESTListResult GetCities()
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetCities().Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+    }
 }
 

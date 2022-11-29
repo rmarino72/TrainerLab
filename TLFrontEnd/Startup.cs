@@ -10,7 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Swashbuckle;
+
 using TLServer;
+using TLServer.Logging;
 
 namespace TLFrontEnd
 {
@@ -27,6 +30,11 @@ namespace TLFrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Config.LogName = Configuration.GetValue<string>("Log:LogName");
+            Config.LogPath = Config.BaseDir + Configuration.GetValue<string>("Log:LogPath");
+            Config.Debug = Configuration.GetValue<bool>("Log:Debug");
+            Config.Verbose = Configuration.GetValue<bool>("Log:Verbose");
+            TLLogger.Instance.Info("Starting TrainerLab...");
             // Read config parameters
             Config.DBHost = Configuration.GetValue<string>("LocalDatabase:DBHost");
             Config.DBName = Configuration.GetValue<string>("LocalDatabase:DBName");
@@ -34,13 +42,10 @@ namespace TLFrontEnd
             Config.DBUser = Configuration.GetValue<string>("LocalDatabase:DBUser");
             Config.DBPassword = Configuration.GetValue<string>("LocalDatabase:DBPassword");
 
-            Config.LogName = Configuration.GetValue<string>("Log:LogName");
-            Config.LogPath = Config.BaseDir + Configuration.GetValue<string>("Log:LogPath");
-            Config.Debug = Configuration.GetValue<bool>("Log:Debug");
-            Config.Verbose = Configuration.GetValue<bool>("Log:Verbose");
+
+            services.AddSwaggerGen();
 
             services.AddControllersWithViews().AddNewtonsoftJson();
-
             services.AddControllersWithViews();
 
             services.AddControllers();
@@ -68,7 +73,12 @@ namespace TLFrontEnd
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {

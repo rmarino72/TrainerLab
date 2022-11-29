@@ -31,6 +31,19 @@ namespace TLServer.DBManager
 				throw;
 			}
 		}
+
+		public List<City> GetCities()
+		{
+            try
+            {
+                return conn.GetList<City>().ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
 	}
 }
 
