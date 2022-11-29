@@ -30,18 +30,23 @@ namespace TLFrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Config.Name = Configuration.GetValue<string>("Application:Name");
+            Config.DisplayName = Configuration.GetValue<string>("Application:DisplayName");
+            Config.Version = Configuration.GetValue<string>("Application:Version");
+            Config.Session = Configuration.GetValue<int>("Application:Session");
+
             Config.LogName = Configuration.GetValue<string>("Log:LogName");
             Config.LogPath = Config.BaseDir + Configuration.GetValue<string>("Log:LogPath");
             Config.Debug = Configuration.GetValue<bool>("Log:Debug");
             Config.Verbose = Configuration.GetValue<bool>("Log:Verbose");
-            TLLogger.Instance.Info("Starting TrainerLab...");
-            // Read config parameters
+            
             Config.DBHost = Configuration.GetValue<string>("LocalDatabase:DBHost");
             Config.DBName = Configuration.GetValue<string>("LocalDatabase:DBName");
             Config.DBPort = Configuration.GetValue<int>("LocalDatabase:DBPort");
             Config.DBUser = Configuration.GetValue<string>("LocalDatabase:DBUser");
             Config.DBPassword = Configuration.GetValue<string>("LocalDatabase:DBPassword");
 
+            TLLogger.Instance.Info("Starting TrainerLab...");
 
             services.AddSwaggerGen();
 

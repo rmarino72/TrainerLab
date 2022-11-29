@@ -4,6 +4,11 @@ namespace TLServer
 {
 	public class Config
 	{
+        public static string Version { set; get; }
+        public static string Name { set; get; }
+        public static string DisplayName { set; get; }
+        public static int Session { set; get; }
+
         public static string BaseDir { set; get; }
 
         public static string DBHost { set; get; }
@@ -16,6 +21,8 @@ namespace TLServer
         public static string LogPath { set; get; }
         public static bool Debug { set; get; }
         public static bool Verbose { set; get; }
+
+
     }
 }
 

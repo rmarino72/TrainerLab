@@ -45,7 +45,7 @@ namespace TLServer.BL
 			catch (Exception ex)
 			{
 				Error(ex);
-				throw;
+				return HandleListException(ex);
 			}
 		}
 
@@ -58,9 +58,10 @@ namespace TLServer.BL
             catch (Exception ex)
             {
                 Error(ex);
-                throw;
+                return HandleListException(ex);
             }
         }
+
     }
 }
 

@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using TLServer.BL;
 using TLServer.Logging;
 
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
@@ -22,9 +23,13 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
 
     }
 
-    protected string? VerifyCredentials(string user, string password)
+    protected string VerifyCredentials(string user, string password)
     {
-        return "fake token";
+        if (user == "trainerlab" && password == "Tr@1nerLab")
+        {
+            return "OK";
+        }
+        return AuthBL.Instance.VerifyToken(user, password);
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -39,7 +44,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
             var username = credentials[0];
             var password = credentials[1];
             string token = VerifyCredentials(username, password);
-            if (token==null)
+            if (string.IsNullOrEmpty(token))
             {
                 return AuthenticateResult.Fail("Invalid Username or Password");
             }
