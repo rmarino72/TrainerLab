@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using TLServer;
-using TLServer.Logging;
 
 namespace TLFrontEnd
 {
@@ -26,13 +27,25 @@ namespace TLFrontEnd
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Config.Debug = Configuration.GetValue<bool>("Log:Debug");
-            Config.Verbose = Configuration.GetValue<bool>("Log:Verbose");
+            // Read config parameters
+            Config.DBHost = Configuration.GetValue<string>("LocalDatabase:DBHost");
+            Config.DBName = Configuration.GetValue<string>("LocalDatabase:DBName");
+            Config.DBPort = Configuration.GetValue<int>("LocalDatabase:DBPort");
+            Config.DBUser = Configuration.GetValue<string>("LocalDatabase:DBUser");
+            Config.DBPassword = Configuration.GetValue<string>("LocalDatabase:DBPassword");
+
             Config.LogName = Configuration.GetValue<string>("Log:LogName");
             Config.LogPath = Config.BaseDir + Configuration.GetValue<string>("Log:LogPath");
+            Config.Debug = Configuration.GetValue<bool>("Log:Debug");
+            Config.Verbose = Configuration.GetValue<bool>("Log:Verbose");
 
-            TLLogger.Instance.Info("Trainer Lab Platform started");
+            services.AddControllersWithViews().AddNewtonsoftJson();
+
             services.AddControllersWithViews();
+
+            services.AddControllers();
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +66,9 @@ namespace TLFrontEnd
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

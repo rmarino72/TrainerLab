@@ -2,12 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.31" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TLServer\TLServer.csproj">
@@ -15,9 +10,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="log\" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+    <None Remove="src\" />
+    <None Remove="Log\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="log\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.31" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="Log\" />
   </ItemGroup>
 </Project>

@@ -1,1 +1,1 @@
-﻿Log Folder
+﻿This is the log directory
