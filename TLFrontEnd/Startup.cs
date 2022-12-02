@@ -52,6 +52,7 @@ namespace TLFrontEnd
 
             services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddControllers();
             services.AddAuthentication("BasicAuthentication")
@@ -90,6 +91,7 @@ namespace TLFrontEnd
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

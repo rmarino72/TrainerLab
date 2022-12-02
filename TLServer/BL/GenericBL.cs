@@ -11,20 +11,20 @@ namespace TLServer.BL
 	public class GenericBL: BasicObject
 	{
 
-		protected RESTListResult MakeRestListResponse(List<BasicObject> data, int code = 0, string message = "")
+		protected RESTListResult MakeRestListResponse(List<BasicObject> data, bool outcome=true, int code = 0, string message = "")
 		{
 			RESTListResult result = new RESTListResult();
-			result.Outcome = true;
+			result.Outcome = outcome;
 			result.Data = data;
 			result.Message = message;
 			result.Code = code;
 			return result;
 		}
 
-        protected RESTObjectResult MakeRestObjectResponse(BasicObject data, int code = 0, string message = "")
+        protected RESTObjectResult MakeRestObjectResponse(BasicObject data, bool outcome = true, int code = 0, string message = "")
         {
             RESTObjectResult result = new RESTObjectResult();
-            result.Outcome = true;
+            result.Outcome = outcome;
             result.Data = data;
             result.Message = message;
             result.Code = code;

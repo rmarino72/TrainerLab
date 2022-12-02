@@ -83,13 +83,34 @@ namespace TLServer.BL
                 User user = BODB.GetUserByEmail(email);
                 if (user == null)
                 {
-                    return MakeRestObjectResponse(null, 1, "user not foud");
+                    return MakeRestObjectResponse(null, false, 1, "user not foud");
                 }
                 if (StringUtils.DecodeBase64(user.Password) != password)
                 {
-                    return MakeRestObjectResponse(null, 2, "wrong password");
+                    return MakeRestObjectResponse(null, false, 2, "wrong password");
                 }
                 return MakeRestObjectResponse(new StringValue { Value=RenewToken(email)});
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult Logout(string email)
+        {
+            try
+            {
+                User user = BODB.GetUserByEmail(email);
+                if (user == null)
+                {
+                    return MakeRestObjectResponse(null, false, 1, "user not foud");
+                }
+                user.Token = String.Empty;
+                user.ValidTokenDateTime = null;
+                BODB.UpdateUser(user);
+                return MakeRestObjectResponse(null);
             }
             catch (Exception ex)
             {

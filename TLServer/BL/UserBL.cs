@@ -36,6 +36,19 @@ namespace TLServer.BL
 
         #endregion
 
+        public RESTListResult GetRegions()
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetRegions().Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
         public RESTListResult GetProvinces()
 		{
 			try
@@ -49,6 +62,19 @@ namespace TLServer.BL
 			}
 		}
 
+        public RESTListResult GetProvincesByRegion(string region)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetProvincesByRegion(region).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
         public RESTListResult GetCities()
         {
             try
@@ -59,6 +85,71 @@ namespace TLServer.BL
             {
                 Error(ex);
                 return HandleListException(ex);
+            }
+        }
+
+        public RESTListResult GetCitiesByProvince(string province)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetCitiesByProvince(province).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
+        public RESTListResult GetSexes()
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetSexes().Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
+        public RESTObjectResult GetUserByEmail(string email)
+        {
+            try
+            {
+                return MakeRestObjectResponse(BODB.GetUserByEmail(email));
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTListResult GetFullUsers()
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetFullUsers().Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
+        public RESTObjectResult GetFullUserByEmail(string email)
+        {
+            try
+            {
+                return MakeRestObjectResponse(BODB.GetFullUserByEmail(email));
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
             }
         }
 

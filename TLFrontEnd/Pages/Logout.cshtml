@@ -1,0 +1,18 @@
+﻿@page
+@{
+}
+
+<script>
+    function init() {
+        var user = getFromStorage(STORAGE_USER);
+        ajaxCall(USER_LOGOUT + user, "GET", null, loggedOut);
+    }
+
+    function loggedOut(data)
+    {
+        clearStorage();
+        window.location = "Login";
+    }
+
+    $(document).ready(init);
+</script>

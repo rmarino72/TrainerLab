@@ -13,7 +13,7 @@ namespace TLServer.DAO
 		public string Password { set; get; }
 		public string Role { set; get; }
 		public string Token { set; get; }
-		public DateTime ValidTokenDateTime { set; get; }
+		public DateTime? ValidTokenDateTime { set; get; }
 		public DateTime CreationDateTime { set; get; }
 		public DateTime LastUpdateDateTime { set; get; }
     }
