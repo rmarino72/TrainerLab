@@ -218,3 +218,53 @@ function formatPrice(value) {
         return "" + parseFloat(v).toFixed(2);
     }
 }
+
+
+//************************************* DATE TIME
+
+function getLocalDate()
+{
+    return DateTimeUtils.convertUTCDateToLocalDate(new Date());
+}
+
+function convertUTCDateToLocalDate(date)
+{
+    var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+    newDate.setHours(hours - offset);
+    return newDate;
+}
+
+function dateForCSharp(date)
+{
+    return date.toJSON();
+}
+
+function italianFormatFullDateTime(date)
+{
+    var options = { 'weekday': 'long', 'month': '2-digit', 'year': 'numeric', 'day': '2-digit', 'hour': '2-digit', 'minute': '2-digit' };
+    return date.toLocaleString('it-IT', options);
+}
+
+function italianFormatDateTime(date) {
+    var options = { 'day': 'numeric', 'month': '2-digit', 'year': 'numeric', 'day': '2-digit', 'hour': '2-digit', 'minute': '2-digit' };
+    return date.toLocaleString('it-IT', options);
+}
+
+function italianFormatDate(date)
+{
+    var options = { 'day': 'numeric', 'month': '2-digit', 'year': 'numeric', 'day': '2-digit' };
+    return date.toLocaleString('it-IT', options);
+}
+
+function dateForInput(dt)
+{
+    var date = new Date(dt);
+    return "" + date.getFullYear() + "-" + StringUtils.pad(date.getMonth() + 1, 2) + "-" + StringUtils.pad(date.getDate(), 2);
+}
+
+function splitDateFormat(dateStr)
+{
+    return dateStr.split("/").reverse().join("/");
+}

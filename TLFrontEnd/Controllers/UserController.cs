@@ -33,6 +33,10 @@ namespace TLFrontEnd.Controllers
         public RESTListResult GetCitiesByProvince(string province) => UserBL.Instance.GetCitiesByProvince(province);
 
         [HttpGet]
+        [Route("user/role")]
+        public RESTListResult GetRoles() => UserBL.Instance.GetRoles();
+
+        [HttpGet]
         [Route("user/sex")]
         public RESTListResult GetSexes() => UserBL.Instance.GetSexes();
 

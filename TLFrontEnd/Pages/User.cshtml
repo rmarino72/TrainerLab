@@ -18,9 +18,10 @@
                         <thead>
                             <tr>
                                 <th data-field="id">#</th>
-                                <th data-field="firstName">First Name</th>
-                                <th data-field="lastName">Last Name</th>
+                                <th data-field="firstName">Nome</th>
+                                <th data-field="lastName">Cognome</th>
                                 <th data-field="email">Email</th>
+                                <th data-field="birthDate">Data di nascita</th>
                             </tr>
                         </thead>
                         <tbody role="button"></tbody>
@@ -56,6 +57,16 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-material-group col-lg-12">
+                                <label class="form-label" for="role-cmb">Ruolo *</label>
+                                <select class="form-control" id="role-cmb" name="roleCmb" required data-validate-field="roleCmb">
+                                    <option value=""> - </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="email-txt">Email *</label>
@@ -72,13 +83,13 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
-                                <label class="form-label" for="birthDate-txt">Data di Nascita</label>
+                                <label class="form-label" for="birthDate-txt">Data di Nascita *</label>
                                 <input class="form-control" id="birthDate-txt" type="date" name="birthDateTxt" autocomplete="off" required data-validate-field="birthDateTxt">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
-                                <label class="form-label" for="sex-cmb">Genere</label>
+                                <label class="form-label" for="sex-cmb">Genere *</label>
                                 <select class="form-control" id="sex-cmb" name="sexCmb" required data-validate-field="sexCmb">
                                     <option value=""> - </option>
                                 </select>
@@ -131,9 +142,10 @@
                             </div>
                         </div>
                     </div>
+
                     <hr />
                     <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
-                    <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done_outline</span>&nbsp; Ok</button>
+                    <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
             </div>
         </div>
@@ -169,6 +181,9 @@
             },
             sexCmb: {
                 required: true
+            },
+            roleCmb: {
+                required: true
             }
         };
 
@@ -179,6 +194,7 @@
             lastNameTxt: "Campo obbligatorio",
             birthDateTxt: "Inserire una data valida",
             sexCmb: "Campo obbligatorio",
+            roleCmb: "Campo obbligatorio",
         }
 
         validateForm('editForm', rules, messages);
@@ -186,6 +202,11 @@
     }
 
     function gotUsers(data) {
+
+        data.data.forEach(e => {
+            e.birthDate = italianFormatDate(new Date(e.birthDate));
+        });
+
         fillDataTable('dataTable', data.data, userDetail, true);
         ajaxCall(USER_SEX, 'GET', null, gotSex);
     }
@@ -202,6 +223,25 @@
             }));
         });
         
+    }
+
+    function loadRoles() {
+        ajaxCall(USER_ROLE, 'GET', null, gotRoles);
+    }
+
+    function gotRoles(data) {
+        if (!data.outcome) {
+            alertify.error(data.message);
+            return;
+        }
+        data.data.forEach(e => {
+            $('#role-cmb').append($('<option/>', {
+                value: e.name,
+                text: e.labelIT
+            }));
+        });
+
+        loadRegions();
     }
 
     function loadRegions()
@@ -287,7 +327,8 @@
     function prepareForNew()
     {
         resetForm("editForm");
-        loadRegions();
+
+        loadRoles();
         $('#mainPg').hide();
         $('#editPg').show();
     }
@@ -295,5 +336,5 @@
 
     function refreshCap() {
         $('#cap-txt').val($('#city-cmb').val());
-    }</script>
-
+    }
+</script>

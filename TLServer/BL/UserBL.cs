@@ -101,6 +101,19 @@ namespace TLServer.BL
             }
         }
 
+        public RESTListResult GetRoles()
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetRoles().Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
         public RESTListResult GetSexes()
         {
             try

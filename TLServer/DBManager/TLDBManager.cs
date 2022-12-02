@@ -76,7 +76,7 @@ namespace TLServer.DBManager
                 throw;
             }
         }
-
+        
         public List<City> GetCitiesByProvince(string province)
         {
             try
@@ -88,6 +88,20 @@ namespace TLServer.DBManager
             {
                 Error(ex);
                 throw;
+            }
+        }
+
+        public List<Role> GetRoles()
+        {
+            try
+            {
+                return conn.GetList<Role>().ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+
             }
         }
 
