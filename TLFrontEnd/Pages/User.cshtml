@@ -17,11 +17,12 @@
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="dataTable">
                         <thead>
                             <tr>
-                                <th data-field="id">#</th>
-                                <th data-field="firstName">Nome</th>
-                                <th data-field="lastName">Cognome</th>
-                                <th data-field="email">Email</th>
-                                <th data-field="birthDate">Data di nascita</th>
+                                <th data-field="Id">#</th>
+                                <th data-field="FirstName">Nome</th>
+                                <th data-field="LastName">Cognome</th>
+                                <th data-field="Email">Email</th>
+                                <th data-field="BirthDate">Data di nascita</th>
+                                <th data-field="City">Citt&agrave;</th>
                             </tr>
                         </thead>
                         <tbody role="button"></tbody>
@@ -202,24 +203,27 @@
     }
 
     function gotUsers(data) {
-
-        data.data.forEach(e => {
-            e.birthDate = italianFormatDate(new Date(e.birthDate));
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
+        }    
+        data.Data.forEach(e => {
+            e.BirthDate = italianFormatDate(new Date(e.BirthDate));
         });
 
-        fillDataTable('dataTable', data.data, userDetail, true);
+        fillDataTable('dataTable', data.Data, userDetail, true);
         ajaxCall(USER_SEX, 'GET', null, gotSex);
     }
 
     function gotSex(data) {
-        if (!data.outcome) {
-            alertify.error(data.message);
+        if (!data.Outcome) {
+            alertify.error(data.Message);
             return;
         }
-        data.data.forEach(e => {
+        data.Data.forEach(e => {
             $('#sex-cmb').append($('<option/>', {
-                value: e.name,
-                text: e.labelIT
+                value: e.Name,
+                text: e.LabelIT
             }));
         });
         
@@ -230,14 +234,14 @@
     }
 
     function gotRoles(data) {
-        if (!data.outcome) {
-            alertify.error(data.message);
+        if (!data.Outcome) {
+            alertify.error(data.Message);
             return;
         }
-        data.data.forEach(e => {
+        data.Data.forEach(e => {
             $('#role-cmb').append($('<option/>', {
-                value: e.name,
-                text: e.labelIT
+                value: e.Name,
+                text: e.LabelIT
             }));
         });
 
@@ -250,20 +254,20 @@
     }
 
     function gotRegions(data) {
-        if (!data.outcome) {
+        if (!data.Outcome) {
             alertify.error(data.message);
             return;
         }
-        data.data.forEach(e => {
+        data.Data.forEach(e => {
             $('#region-cmb').append($('<option/>', {
-                value: e.value,
-                text: e.value
+                value: e.Value,
+                text: e.Value
             }));
         });
     }
 
     function userDetail(row) {
-        var user = row.email;
+        var user = row.Email;
         alert(user);
     }
 
@@ -285,15 +289,15 @@
     }
 
     function gotProvinces(data) {
-        if (!data.outcome) {
-            alertify.error(data.message);
+        if (!data.Outcome) {
+            alertify.error(data.Message);
             return;
         }
 
-        data.data.forEach(e => {
+        data.Data.forEach(e => {
             $('#province-cmb').append($('<option/>', {
-                value: e.abbreviation,
-                text: e.name
+                value: e.Abbreviation,
+                text: e.Name
             }));
         });
     }
@@ -311,15 +315,15 @@
     }
 
     function gotCities(data) {
-        if (!data.outcome) {
-            alertify.error(data.message);
+        if (!data.Outcome) {
+            alertify.error(data.Message);
             return;
         }
 
-        data.data.forEach(e => {
+        data.Data.forEach(e => {
             $('#city-cmb').append($('<option/>', {
-                value: e.cap,
-                text: e.name
+                value: e.CAP,
+                text: e.Name
             }));
         });
     }
@@ -333,6 +337,42 @@
         $('#editPg').show();
     }
 
+    function formToObj(withId = false)
+    {
+        var obj = new Object();
+        obj.Id = withId ? $('#id-txt').val() : 0;
+        obj.Email = $('#email-txt').val();
+        obj.Phone = $('#phone-txt').val();
+        obj.FirstName = $('#firstName-txt').val();
+        obj.LastName = $('#lastName-txt').val();
+        obj.Sex = $('#sex-cmb').val();
+        obj.SexDesc = null;
+        obj.Role = $('#role-cmb').val();
+        obj.RoleDesc = null;
+        obj.BirthDate = dateForCSharp(new Date(splitDateFormat($('#birthDate-txt').val())));
+        obj.AddressStreet = $('#address-txt').val();
+        obj.AddressStreetNumber = $('#number-txt').val();
+        obj.Region = $('#region-txt').val();
+
+
+        /*
+        public string Phone { set; get; }
+        public string FirstName { set; get; }
+		public string LastName { set; get; }
+        public string Sex { set; get; }
+        public string SexDesc { set; get; }
+        public string Role { set; get; }
+		public string RoleDesc { set; get; }
+		public DateTime BirthDate { set; get; }
+        public string AddressStreet { set; get; }
+        public string AddressStreetNumber { set; get; }
+        public string Region { set; get; }
+        public string City { set; get; }
+        public string Province { set; get; }
+        public string CAP { set; get; }
+*/
+
+    }
 
     function refreshCap() {
         $('#cap-txt').val($('#city-cmb').val());

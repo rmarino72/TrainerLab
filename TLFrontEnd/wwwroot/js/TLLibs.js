@@ -5,8 +5,8 @@
 
 function gotMyUser(data) {
     console.log(JSON.stringify(data));
-    $('#userFirstLast').html(data.data.firstName + " " + data.data.lastName);
-    if (data.data.role != "ADMIN") 
+    $('#userFirstLast').html(data.Data.FirstName + " " + data.Data.LastName);
+    if (data.Data.Role != "ADMIN") 
     {
         $('#adminTitle').hide();
         $('#adminMenu').hide();

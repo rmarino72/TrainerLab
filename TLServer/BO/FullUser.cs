@@ -12,9 +12,16 @@ namespace TLServer.BO
         public string FirstName { set; get; }
 		public string LastName { set; get; }
         public string Sex { set; get; }
+        public string SexDesc { set; get; }
         public string Role { set; get; }
 		public string RoleDesc { set; get; }
 		public DateTime BirthDate { set; get; }
+        public string AddressStreet { set; get; }
+        public string AddressStreetNumber { set; get; }
+        public string Region { set; get; }
+        public string City { set; get; }
+        public string Province { set; get; }
+        public string CAP { set; get; }
 
     }
 }
