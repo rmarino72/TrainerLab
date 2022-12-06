@@ -105,21 +105,21 @@
 
         function logged(data)
         {
-            if (!data.outcome)
+            if (!data.Outcome)
             {
-                if (data.code === 1)
+                if (data.Code === 1)
                 {
                     alertify.error("User not found");
                     return;
                 }
-                if (data.code === 2)
+                if (data.Code === 2)
                 {
                     alertify.error("Wrong password");
                     return;
                 }
             }
             localStorage["tlab_user"] = user;
-            localStorage["tlab_token"] = data.data.value;
+            localStorage["tlab_token"] = data.Data.Value;
             window.location = "Main";
         
         }

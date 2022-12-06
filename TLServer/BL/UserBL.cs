@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TLServer.BO;
 using TLServer.Logging;
 using RMLibs.basic;
+using TLServer.DAO;
 
 namespace TLServer.BL
 {
@@ -158,6 +159,39 @@ namespace TLServer.BL
             try
             {
                 return MakeRestObjectResponse(BODB.GetFullUserByEmail(email));
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult NewUser(FullUser fullUser)
+        {
+            try
+            {
+                User user = BODB.GetUserByEmail(fullUser.Email);
+                if (user != null)
+                {
+                    return MakeRestObjectResponse(null, false, 1, "The following email already exists: " + fullUser.Email);
+                }
+                BODB.NewUser(fullUser);
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult UpdateUser(FullUser fullUser)
+        {
+            try
+            {
+                BODB.UpdateUser(fullUser);
+                return MakeRestObjectResponse(null);
             }
             catch (Exception ex)
             {

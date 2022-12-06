@@ -261,7 +261,7 @@ function italianFormatDate(date)
 function dateForInput(dt)
 {
     var date = new Date(dt);
-    return "" + date.getFullYear() + "-" + StringUtils.pad(date.getMonth() + 1, 2) + "-" + StringUtils.pad(date.getDate(), 2);
+    return "" + date.getFullYear() + "-" + pad(date.getMonth() + 1, 2) + "-" + pad(date.getDate(), 2);
 }
 
 function splitDateFormat(dateStr)

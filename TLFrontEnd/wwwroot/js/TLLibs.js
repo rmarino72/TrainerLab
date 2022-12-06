@@ -4,7 +4,6 @@
 }
 
 function gotMyUser(data) {
-    console.log(JSON.stringify(data));
     $('#userFirstLast').html(data.Data.FirstName + " " + data.Data.LastName);
     if (data.Data.Role != "ADMIN") 
     {

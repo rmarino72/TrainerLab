@@ -49,6 +49,14 @@ namespace TLFrontEnd.Controllers
         [Route("user/logout/{email}")]
         public RESTObjectResult Logout(string email) => AuthBL.Instance.Logout(email);
 
+        [HttpPost]
+        [Route("user/")]
+        public RESTObjectResult NewUser([FromBody] FullUser fullUser) => UserBL.Instance.NewUser(fullUser);
+
+        [HttpPatch]
+        [Route("user/")]
+        public RESTObjectResult UpdateUser([FromBody] FullUser fullUser) => UserBL.Instance.UpdateUser(fullUser);
+
         [HttpGet]
         [Route("user/{email}")]
         public RESTObjectResult GetUserByEmail(string email) => UserBL.Instance.GetUserByEmail(email);

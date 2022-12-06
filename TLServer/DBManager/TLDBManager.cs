@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using Dapper;
 using Org.BouncyCastle.Asn1.X509.Qualified;
 using RMLibs.basic;
@@ -171,6 +172,99 @@ namespace TLServer.DBManager
                 Error(ex);
                 throw;
             }
+        }
+
+        public void NewUser(FullUser fullUser)
+        {
+            try
+            {
+                using (TransactionScope ts = CreateTransactionScope())
+                {
+                    User user = new User();
+                    user.Email = fullUser.Email;
+                    user.Password = "na";
+                    user.Role = fullUser.Role;
+                    user.CreationDateTime = DateTime.Now;
+                    user.LastUpdateDateTime = DateTime.Now;
+                    conn.Insert(user);
+
+                    UserData userData = new UserData();
+                    userData.AddressStreet = fullUser.AddressStreet;
+                    userData.AddressStreetNumber = fullUser.AddressStreetNumber;
+                    userData.BirthDate = fullUser.BirthDate;
+                    userData.CAP = fullUser.CAP;
+                    userData.City = fullUser.City;
+                    userData.Email = fullUser.Email;
+                    userData.FirstName = fullUser.FirstName;
+                    userData.LastName = fullUser.LastName;
+                    userData.LastUpdateDateTime = DateTime.Now;
+                    userData.Phone = fullUser.Phone;
+                    userData.Province = string.IsNullOrEmpty(fullUser.Province) ? null : fullUser.Province;
+                    userData.Region = fullUser.Region;
+                    userData.Sex = fullUser.Sex;
+                    conn.Insert(userData);
+
+                    ts.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public UserData GetUserDataByEmail(string Email)
+        {
+            try
+            {
+                string query = String.Format("SELECT * FROM userdata WHERE Email = {0}", Apex(Email));
+                return conn.Query<UserData>(query).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void UpdateUser(FullUser fullUser)
+        {
+            try
+            {
+                User user = GetUserByEmail(fullUser.Email);
+                UserData userData = GetUserDataByEmail(fullUser.Email);
+
+                user.Role = fullUser.Role;
+                user.LastUpdateDateTime = DateTime.Now;
+
+                userData.AddressStreet = fullUser.AddressStreet;
+                userData.AddressStreetNumber = fullUser.AddressStreetNumber;
+                userData.BirthDate = fullUser.BirthDate;
+                userData.CAP = fullUser.CAP;
+                userData.City = fullUser.City;                
+                userData.FirstName = fullUser.FirstName;
+                userData.LastName = fullUser.LastName;
+                userData.LastUpdateDateTime = DateTime.Now;
+                userData.Phone = fullUser.Phone;
+                userData.Province = string.IsNullOrEmpty(fullUser.Province) ? null: fullUser.Province;
+                userData.Region = fullUser.Region;
+                userData.Sex = fullUser.Sex;
+
+                using (TransactionScope ts = CreateTransactionScope())
+                {
+                    conn.Update(user);
+                    conn.Update(userData);
+                    ts.Complete();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+
         }
 	}
 }
