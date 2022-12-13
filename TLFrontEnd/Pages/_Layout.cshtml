@@ -32,7 +32,7 @@
 
 
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/just-validate/js/just-validate.min.js"></script>
+    <script src="vendor/just-validate/js/just-validate.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="js/charts-home.js"></script>
@@ -61,16 +61,6 @@
                         </svg>
                     </button>
                 </div>
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item logout px-lg-2">
-                        <a class="nav-link text-sm text-reset px-1 px-lg-0" id="logout" href="Logout">
-                            <span class="d-none d-sm-inline-block">Logout </span>
-                            <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                                <use xlink:href="#disable-1"> </use>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </nav>
     </header>
@@ -79,38 +69,70 @@
         <!-- Sidebar Navigation-->
         <nav id="sidebar">
             <!-- Sidebar Header-->
-            <div class="sidebar-header d-flex align-items-center p-4">
-                <img class="avatar shadow-0 img-fluid rounded-circle" src="img/user.png" alt="...">
-                <div class="ms-3 title">
-                    <h1 class="h5 mb-1" id="userFirstLast">First Last</h1>
-
-                </div>
-            </div>
-            <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
             <ul class="list-unstyled">
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="#personalMenu" data-bs-toggle="collapse">
+                        <div class="sidebar-header d-flex align-items-center p-4">
+                            <img class="avatar shadow-0 img-fluid rounded-circle" src="img/user.png" alt="...">
+                            <div class="ms-3 title">
+                                <h1 class="h5 mb-1" id="userFirstLast"></h1>
+                            </div>
+                        </div>
+                    </a>
+                    <ul class="collapse list-unstyled " id="personalMenu">
+                        <li>
+                            <a class="sidebar-link" href="Me">
+                                <span class="material-symbols-outlined">manage_accounts</span>
+                                &nbsp; Dati personali
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-link" href="ChangePass">
+                                <span class="material-symbols-outlined">key</span>
+                                &nbsp; Cambia password
+                            </a>
+                        </li>
+                        <li>
+                            <a class="sidebar-link" href="Logout">
+                                <span class="material-symbols-outlined">logout</span>
+                                &nbsp; Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a class="sidebar-link" href="Main">
-                        <span class="material-symbols-outlined">
-                            home
-                        </span>
+                        <span class="material-symbols-outlined">home</span>
                         &nbsp; Home
                     </a>
                 </li>
-
-                <li>
-                    &nbsp;
-                </li>
             </ul>
 
-            <span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2" id="adminTitle">Admin</span>
+           
             <ul class="list-unstyled" id="adminMenu">
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="User">
-                        <span class="material-symbols-outlined">
-                            group
-                        </span>
-                        &nbsp; Utenti
+                    <a class="sidebar-link" href="#adminList" data-bs-toggle="collapse">
+                        <span class="material-symbols-outlined">admin_panel_settings</span>
+                        &nbsp;Area admin
                     </a>
+                    <ul class="collapse list-unstyled " id="adminList">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="User">
+                                <span class="material-symbols-outlined">
+                                    group
+                                </span>
+                                &nbsp; Utenti
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="SetPass">
+                                <span class="material-symbols-outlined">
+                                    lock_reset
+                                </span>
+                                &nbsp; Assegna Password
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

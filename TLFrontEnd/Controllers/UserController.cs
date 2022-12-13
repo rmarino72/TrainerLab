@@ -69,6 +69,10 @@ namespace TLFrontEnd.Controllers
         [Route("user/full/{email}")]
         public RESTObjectResult GetFullUserByEmail(string email) => UserBL.Instance.GetFullUserByEmail(email);
 
+        [HttpPost]
+        [Route("user/pass")]
+        public RESTObjectResult ChangePass([FromBody] ChangePassData changePassData) => UserBL.Instance.ChangePass(changePassData);
+
 
     }
 }

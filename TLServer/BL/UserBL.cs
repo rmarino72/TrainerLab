@@ -5,6 +5,7 @@ using TLServer.BO;
 using TLServer.Logging;
 using RMLibs.basic;
 using TLServer.DAO;
+using RMLibs.Utilities;
 
 namespace TLServer.BL
 {
@@ -191,6 +192,34 @@ namespace TLServer.BL
             try
             {
                 BODB.UpdateUser(fullUser);
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult ChangePass(ChangePassData changePassData)
+        {
+            try
+            {
+                if (changePassData.NewPassword != changePassData.ConfirmPassword)
+                {
+                    return MakeRestObjectResponse(null, false, 1, "Confirm passowrd does not match with new password");
+                }
+                User user = BODB.GetUserByEmail(changePassData.Email);
+                if (!string.IsNullOrEmpty(changePassData.OldPassword))
+                {   
+                    if (changePassData.OldPassword != StringUtils.DecodeBase64(user.Password))
+                    {
+                        return MakeRestObjectResponse(null, false, 2, "Old password is wrong");
+                    }
+                }
+                user.Password = StringUtils.EncodeBase64(changePassData.NewPassword);
+                user.LastUpdateDateTime = DateTime.Now;
+                BODB.UpdateUser(user);
                 return MakeRestObjectResponse(null);
             }
             catch (Exception ex)
