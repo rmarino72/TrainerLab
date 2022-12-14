@@ -1,4 +1,5 @@
-﻿//*************************** AJAX
+﻿
+//*************************** AJAX
 
 var _success_func = null;
 var _success_data = null;

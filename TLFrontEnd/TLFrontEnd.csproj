@@ -13,9 +13,9 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <None Remove="src\" />
-    <None Remove="Log\" />
     <None Remove="Swashbuckle.AspNetCore" />
     <None Remove="Pages\" />
+    <None Remove="Log\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
@@ -24,9 +24,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\" />
-    <Folder Include="Log\" />
     <Folder Include="wwwroot\img\" />
     <Folder Include="Pages\" />
+    <Folder Include="Log\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\img\" />
