@@ -61,7 +61,36 @@
                         </svg>
                     </button>
                 </div>
-            </div>
+            
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item dropdown">
+                        <a class="nav-link dropdown-toggle text-sm text-reset px-1 px-lg-0" id="languages" rel="nofollow" data-bs-target="#" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="avatar shadow-0 img-fluid rounded-circle" src="img/user.png" alt="...">
+                            <span class="ms-3 title" id="userFirstLast">
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end mt-sm-3 dropdown-menu-dark" aria-labelledby="languages">
+                            <li>
+                                <a class="dropdown-item" rel="nofollow" href="Me">
+                                    <span class="material-symbols-outlined">manage_accounts</span>
+                                    &nbsp; Dati personali
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" rel="nofollow" href="ChangePass">
+                                    <span class="material-symbols-outlined">key</span>
+                                    &nbsp; Cambia password
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" rel="nofollow" href="Logout">
+                                    <span class="material-symbols-outlined">logout</span>
+                                    &nbsp; Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
         </nav>
     </header>
 
@@ -70,36 +99,7 @@
         <nav id="sidebar">
             <!-- Sidebar Header-->
             <ul class="list-unstyled">
-                <li class="sidebar-item">
-                    <a class="sidebar-link" href="#personalMenu" data-bs-toggle="collapse">
-                        <div class="sidebar-header d-flex align-items-center p-4">
-                            <img class="avatar shadow-0 img-fluid rounded-circle" src="img/user.png" alt="...">
-                            <div class="ms-3 title">
-                                <h1 class="h5 mb-1" id="userFirstLast"></h1>
-                            </div>
-                        </div>
-                    </a>
-                    <ul class="collapse list-unstyled " id="personalMenu">
-                        <li>
-                            <a class="sidebar-link" href="Me">
-                                <span class="material-symbols-outlined">manage_accounts</span>
-                                &nbsp; Dati personali
-                            </a>
-                        </li>
-                        <li>
-                            <a class="sidebar-link" href="ChangePass">
-                                <span class="material-symbols-outlined">key</span>
-                                &nbsp; Cambia password
-                            </a>
-                        </li>
-                        <li>
-                            <a class="sidebar-link" href="Logout">
-                                <span class="material-symbols-outlined">logout</span>
-                                &nbsp; Logout
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                
                 <li>
                     <a class="sidebar-link" href="Main">
                         <span class="material-symbols-outlined">home</span>
