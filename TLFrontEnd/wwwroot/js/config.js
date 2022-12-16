@@ -1,5 +1,6 @@
 ﻿/****************** DATA STORAGE */
 var STORAGE_USER = "tlab_user";
+var STORAGE_ERROR = "tlab_error";
 
 /****************** ENDPOINTS */
 var USER = "user/";

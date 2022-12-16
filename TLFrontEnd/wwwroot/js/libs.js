@@ -21,15 +21,16 @@ function urlencodeFormData(fd) {
 
 function _error(data) {
     if (data.status == 401) {
-        alertify.alert("Error", "Session expired!", function () {
-            clearStorage();
-            window.location = "Login";
-            return;
-        });
+
+        storeData(STORAGE_ERROR, "Sessione scaduta!");
+        window.location.href = "Error";
+        return;
     }
 
     if (data.status == 404) {
-        alertify.error("Page not found!");
+        storeData(STORAGE_ERROR, "pagina non trovata!");
+        window.location.href = "Error";
+        return;
     }
 
     if (data.status == 500) {
