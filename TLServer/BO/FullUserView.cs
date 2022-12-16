@@ -4,7 +4,7 @@ using RMLibs.basic;
 namespace TLServer.BO
 {
 	[Table("fulluserview")]
-	public class FullUser: BasicObject
+	public class FullUserView: BasicObject
 	{
 		public int Id { set; get; }
 		public string Email { set; get; }

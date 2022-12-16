@@ -168,7 +168,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult NewUser(FullUser fullUser)
+        public RESTObjectResult NewUser(FullUserView fullUser)
         {
             try
             {
@@ -187,7 +187,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult UpdateUser(FullUser fullUser)
+        public RESTObjectResult UpdateUser(FullUserView fullUser)
         {
             try
             {

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
 using Dapper;
-using Org.BouncyCastle.Asn1.X509.Qualified;
-using RMLibs.basic;
 using RMLibs.Logging;
 using RMLibs.SQLDBManager.MySql;
+using RMLibs.Utilities;
 using TLServer.BO;
 using TLServer.DAO;
 
@@ -147,11 +146,11 @@ namespace TLServer.DBManager
             }
         }
 
-		public List<FullUser> GetFullUsers()
+		public List<FullUserView> GetFullUsers()
 		{
 			try
 			{
-				return conn.GetList<FullUser>().ToList();
+				return conn.GetList<FullUserView>().ToList();
 			}
             catch (Exception ex)
             {
@@ -160,12 +159,12 @@ namespace TLServer.DBManager
             }
         }
 
-		public FullUser GetFullUserByEmail(string Email)
+		public FullUserView GetFullUserByEmail(string Email)
 		{
             try
             {
                 string query = String.Format("SELECT * FROM fulluserview WHERE Email = {0}", Apex(Email));
-                return conn.Query<FullUser>(query).FirstOrDefault();
+                return conn.Query<FullUserView>(query).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -174,7 +173,7 @@ namespace TLServer.DBManager
             }
         }
 
-        public void NewUser(FullUser fullUser)
+        public void NewUser(FullUserView fullUser)
         {
             try
             {
@@ -228,7 +227,7 @@ namespace TLServer.DBManager
             }
         }
 
-        public void UpdateUser(FullUser fullUser)
+        public void UpdateUser(FullUserView fullUser)
         {
             try
             {
@@ -264,7 +263,25 @@ namespace TLServer.DBManager
                 Error(ex);
                 throw;
             }
+        }
 
+        public List<FullSlotView> GetSlotByInterval(DateTimeInterval interval)
+        {
+            try
+            {
+                string query = string.Format(
+                    "SELECT * FROM fullslotview WHERE StartDateTime >= {0} AND EndDateTime < {1} ORDER BY StartDateTime",
+                    Apex(DateTimeUtils.DateTimeToMySqlString(interval.Start)),
+                    Apex(DateTimeUtils.DateTimeToMySqlString(interval.End))
+                    );
+
+                return conn.Query<FullSlotView>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
         }
 	}
 }

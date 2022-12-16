@@ -51,11 +51,11 @@ namespace TLFrontEnd.Controllers
 
         [HttpPost]
         [Route("user/")]
-        public RESTObjectResult NewUser([FromBody] FullUser fullUser) => UserBL.Instance.NewUser(fullUser);
+        public RESTObjectResult NewUser([FromBody] FullUserView fullUser) => UserBL.Instance.NewUser(fullUser);
 
         [HttpPatch]
         [Route("user/")]
-        public RESTObjectResult UpdateUser([FromBody] FullUser fullUser) => UserBL.Instance.UpdateUser(fullUser);
+        public RESTObjectResult UpdateUser([FromBody] FullUserView fullUser) => UserBL.Instance.UpdateUser(fullUser);
 
         [HttpGet]
         [Route("user/{email}")]

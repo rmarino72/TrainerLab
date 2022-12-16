@@ -3,6 +3,8 @@ var STORAGE_USER = "tlab_user";
 var STORAGE_ERROR = "tlab_error";
 
 /****************** ENDPOINTS */
+var SCHEDULER_SLOT = "scheduler/slot/";
+
 var USER = "user/";
 var USER_CITY = "user/city/";
 var USER_FULL = "user/full/";
