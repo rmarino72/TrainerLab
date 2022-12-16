@@ -3,7 +3,7 @@ using Dapper;
 using RMLibs.basic;
 namespace TLServer.BO
 {
-	[Table("fulluser")]
+	[Table("fulluserview")]
 	public class FullUser: BasicObject
 	{
 		public int Id { set; get; }

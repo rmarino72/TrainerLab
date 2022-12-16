@@ -164,7 +164,7 @@ namespace TLServer.DBManager
 		{
             try
             {
-                string query = String.Format("SELECT * FROM fulluser WHERE Email = {0}", Apex(Email));
+                string query = String.Format("SELECT * FROM fulluserview WHERE Email = {0}", Apex(Email));
                 return conn.Query<FullUser>(query).FirstOrDefault();
             }
             catch (Exception ex)
