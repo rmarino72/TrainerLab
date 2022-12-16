@@ -50,6 +50,11 @@
 </head>
 <body>
 
+    <div id="spinner-div" >
+        <div class="spinner-border text-primary" id="sp-div" role="status">
+        </div>
+    </div>
+
     <header class="header">
         <nav class="navbar navbar-expand-lg py-3 bg-dash-dark-2 border-bottom border-dash-dark-1 z-index-10">
             <div class="container-fluid d-flex align-items-center justify-content-between py-1">
@@ -94,6 +99,7 @@
                         </ul>
                     </li>
                 </ul>
+            </div>
         </nav>
     </header>
 
@@ -182,12 +188,25 @@
                 document.body.insertBefore(div, document.body.childNodes[0]);
             }
         }
+
+        function showSpinner()
+        {
+            $('#spinner-div').attr("style", "display: flex;");
+        }
+
+        function hideSpinner() {
+            $('#spinner-div').attr("style", "display: none;");
+        }
+
         // this is set to BootstrapTemple website as you cannot
         // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
         // while using file:// protocol
         // pls don't forget to change to your domain :)
         injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
-
+        $(document).on({
+            ajaxStart: showSpinner,
+            ajaxStop: hideSpinner
+        });
         refreshUserName();</script>
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
