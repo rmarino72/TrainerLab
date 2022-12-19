@@ -4,6 +4,7 @@ var STORAGE_ERROR = "tlab_error";
 
 /****************** ENDPOINTS */
 var SCHEDULER_SLOT = "scheduler/slot/";
+var SCHEDULER_SLOT_STATUS = "scheduler/slot/status/";
 
 var USER = "user/";
 var USER_CITY = "user/city/";

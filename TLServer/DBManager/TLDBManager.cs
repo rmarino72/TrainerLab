@@ -265,6 +265,19 @@ namespace TLServer.DBManager
             }
         }
 
+        public List<SlotStatus> GetSlotStatuses()
+        {
+            try
+            {
+                return conn.GetList<SlotStatus>().ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
         public List<FullSlotView> GetSlotByInterval(DateTimeInterval interval)
         {
             try
@@ -276,6 +289,46 @@ namespace TLServer.DBManager
                     );
 
                 return conn.Query<FullSlotView>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public bool VerifySlot(Slot slot)
+        {
+            try
+            {
+                string stdt = DateTimeUtils.DateTimeToMySqlString(slot.StartDateTime);
+                string eddt = DateTimeUtils.DateTimeToMySqlString(slot.EndDateTime);
+                string query = "" +
+                    "SELECT * " +
+                    "FROM slot " +
+                    "WHERE Id <> {0} " +
+                    "AND (" +
+                    "   ({1} >= slot.StartDateTime AND {2} < slot.EndDateTime) OR" +
+                    "   ({3} > slot.StartDateTime AND {4} <= slot.EndDateTime))";
+
+                string fullQuery = string.Format(query, slot.Id, Apex(stdt), Apex(stdt), Apex(eddt), Apex(eddt));
+
+                List<Slot> slots = conn.Query<Slot>(fullQuery).ToList();
+                return slots.Count == 0;
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+
+        public void NewSlot(Slot slot)
+        {
+            try
+            {
+                conn.Insert(slot);
             }
             catch (Exception ex)
             {
