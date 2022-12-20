@@ -362,6 +362,19 @@ namespace TLServer.DBManager
                 throw;
             }
         }
+
+        public void DeleteSlot(int id)
+        {
+            try
+            {
+                conn.Delete<Slot>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
 	}
 }
 

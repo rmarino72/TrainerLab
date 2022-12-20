@@ -11,11 +11,7 @@
                 <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Gestione Agenda</h3>
             </div>
             <div class="card-body pt-0">
-                <div class="row">
-
-                </div>
                 <hr />
-
                 <button class="btn btn-primary" id="new-btn"><span class="material-symbols-outlined">add</span>&nbsp;Nuovo</button>
                 <hr/>
                 <div class="row">
@@ -36,6 +32,9 @@
             </div>
             <div class="card-body pt-0">
                 <form id="editForm" action="javascript:update();" method="get">
+                    <hr />
+                    <button class="btn btn-primary" type="button" id="delete-btn"><span class="material-symbols-outlined">delete</span>&nbsp;Elimina</button>
+                    <hr />
                     <input type="hidden" id="slot-id" />
                     <div class="row">
                         <div class="col-lg-6">
@@ -93,6 +92,7 @@
         $('#cancel-btn').click(cancel);
         $('#user-cmb').select2();
         $('#editPg').hide();
+        $('#delete-btn').click(deleteSlot);
 
 
         let rules = {
@@ -146,6 +146,16 @@
         calendar = new FullCalendar.Calendar(calendarEl, options);
         calendar.render();
         
+    }
+
+    function deleteSlot() {
+        alertify.confirm('Elimina appuntamento', 'Eliminare questo appuntamento?', confirmDelete, null);
+    }
+
+    function confirmDelete()
+    {
+        var id = $('#slot-id').val();
+        ajaxCall(SCHEDULER_SLOT + id, 'DELETE', null, done);
     }
 
     function gotStatuses(data)
@@ -216,6 +226,7 @@
         
         $('#description-txt').val(event.Description);
         $('#editPg').show();
+        $('#delete-btn').show();
         $('#mainPg').hide();
     }
 
@@ -271,6 +282,7 @@
         editing = false;
         resetForm("editForm");
         $('#editPg').show();
+        $('#delete-btn').hide();
         $('#mainPg').hide();
     }
 

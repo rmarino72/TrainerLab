@@ -122,6 +122,20 @@ namespace TLServer.BL
             }
 
         }
+
+        public RESTObjectResult DeleteSlot(int id)
+        {
+            try
+            {
+                BODB.DeleteSlot(id);
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                return HandleObjectException(ex);
+            }
+
+        }
     }
 }
 
