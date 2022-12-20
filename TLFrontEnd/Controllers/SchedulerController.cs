@@ -44,6 +44,10 @@ namespace TLFrontEnd.Controllers
         public RESTObjectResult DeleteSlot(int id) => SchedulerBL.Instance.DeleteSlot(id);
 
         [HttpGet]
+        [Route("scheduler/slot/booked")]
+        public RESTListResult GetBookedSlots() => SchedulerBL.Instance.GetBookedSlots();
+
+        [HttpGet]
         [Route("scheduler/slot/status")]
         public RESTListResult GetSlotStatuses() => SchedulerBL.Instance.GetSlotStatuses();
 

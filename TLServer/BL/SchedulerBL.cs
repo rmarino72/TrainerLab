@@ -214,6 +214,21 @@ namespace TLServer.BL
                 return HandleObjectException(ex);
             }
         }
+
+        public RESTListResult GetBookedSlots()
+        {
+            try
+            {
+                DateTimeInterval interval = new DateTimeInterval { Start = DateTime.Now, End = DateTime.Now.AddYears(100) };
+                List<FullSlotView> slots = BODB.GetSlotByInterval(interval);
+                return MakeRestListResponse(slots.FindAll(x => x.Status == SlotStatusEnum.BOOKED).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                return HandleListException(ex);
+            }
+
+        }
     }
 }
 

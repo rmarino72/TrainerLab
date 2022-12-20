@@ -5,18 +5,48 @@
 <br />
 <br />
 <div class="col-lg-12" id="mainPg">
-    <div class="container">
-        <div class="card mb-0">
-            <div class="card-header">
-                <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Gestione Agenda</h3>
-            </div>
-            <div class="card-body pt-0">
-                <hr />
-                <button class="btn btn-primary" id="new-btn"><span class="material-symbols-outlined">add</span>&nbsp;Nuovo</button>
-                <hr/>
-                <div class="row">
-                    <div id="calendar" class="col-lg-12">
+    <div class="container row">
+        <div class="col-lg-6">
+            <div class="container">
+                <div class="card mb-0">
+                    <div class="card-header">
+                        <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Gestione Agenda</h3>
+                    </div>
+                    <div class="card-body pt-0">
+                        <hr />
+                        <button class="btn btn-primary" id="new-btn"><span class="material-symbols-outlined">add</span>&nbsp;Nuovo</button>
+                        <hr />
+                        <div class="row">
+                            <div id="calendar" class="col-lg-12">
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="container">
+                <div class="card mb-0">
+                    <div class="card-header">
+                        <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Appuntamenti da confermare</h3>
+                    </div>
+                    <div class="card-body pt-0">
+                        <hr />
+                        
+                        <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th data-field="Id" data-visible="false">#</th>
+                                    <th data-field="FirstName">Nome</th>
+                                    <th data-field="LastName">Cognome</th>
+                                    <th data-field="Email">Email</th>
+                                    <th data-field="StartDateTime">Data e Ora</th>
+                                </tr>
+                            </thead>
+                            <tbody role="button"></tbody>
+                            
+                        </table>
                     </div>
                 </div>
             </div>
@@ -256,51 +286,73 @@
             alertify.error(data.Message);
             return;
         }
-        {
-            data.Data.forEach(e => {
+        
+        data.Data.forEach(e => {
 
-                var event = new Object();
-                event.id = e.Id;
-                event.start = e.StartDateTime;
-                event.end = e.EndDateTime;
-                event.title = e.Status;
-                event.description = e.FirstName + " " + e.LastName;
+            var event = new Object();
+            event.id = e.Id;
+            event.start = e.StartDateTime;
+            event.end = e.EndDateTime;
+            event.title = e.Status;
+            event.description = e.FirstName + " " + e.LastName;
 
-                if (e.Status == "FREE")
-                {
-                    event.title = "Libero";
-                    event.backgroundColor = 'green';
-                    event.description = "Libero";
-                }
-                if (e.Status == "BOOKED") {
-                    event.title = e.FirstName + " " + e.LastName;
-                    event.backgroundColor = 'red';
-                    event.description = e.Email;
-                }
-                if (e.Status == "BUSY") {
-                    event.title = "Non disponibile";
-                    event.backgroundColor = 'gray';
-                    event.description = e.Email;
-                }
-                if (e.Status == "CONFIRMED") {
-                    event.title = e.FirstName + " " + e.LastName;
-                    event.backgroundColor = 'orange';
-                    event.description = e.Email;
-                }
-                if (e.Status == "DONE") {
-                    event.title = e.FirstName + " " + e.LastName;
-                    event.backgroundColor = 'yellow';
-                    event.textColor = "black";
-                    event.description = e.Email;
-                }
-                calendar.addEvent(event);
-            });
+            if (e.Status == "FREE")
+            {
+                event.title = "Libero";
+                event.backgroundColor = 'green';
+                event.description = "Libero";
+            }
+            if (e.Status == "BOOKED") {
+                event.title = e.FirstName + " " + e.LastName;
+                event.backgroundColor = 'red';
+                event.description = e.Email;
+            }
+            if (e.Status == "BUSY") {
+                event.title = "Non disponibile";
+                event.backgroundColor = 'gray';
+                event.description = e.Email;
+            }
+            if (e.Status == "CONFIRMED") {
+                event.title = e.FirstName + " " + e.LastName;
+                event.backgroundColor = 'orange';
+                event.description = e.Email;
+            }
+            if (e.Status == "DONE") {
+                event.title = e.FirstName + " " + e.LastName;
+                event.backgroundColor = 'yellow';
+                event.textColor = "black";
+                event.description = e.Email;
+            }
+            calendar.addEvent(event);
+        });
+        
+        ajaxCall(SCHEDULER_SLOT_BOOKED, 'GET', null, gotBooked);
+    }
+
+
+    function gotBooked(data)
+    {
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
         }
-        if (!initialized)
-        {
+
+        data.Data.forEach(e => {
+            e.StartDateTime = italianFormatDateTime(new Date(e.StartDateTime));
+        });
+
+        fillDataTable('dataTable', data.Data, toConfirm, true);
+
+        if (!initialized) {
             initialized = true;
             ajaxCall(SCHEDULER_SLOT_STATUS, 'GET', null, gotStatuses);
         }
+    }
+
+    function toConfirm(row)
+    {
+        var id = row.Id;
+        ajaxCall(SCHEDULER_SLOT + id, 'GET', null, gotSlot);
     }
 
     function prepareForNew() {
