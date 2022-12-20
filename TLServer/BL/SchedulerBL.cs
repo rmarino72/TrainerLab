@@ -83,6 +83,45 @@ namespace TLServer.BL
                 return HandleObjectException(ex);
             }
         }
+
+        public RESTObjectResult GetSlotById(int id)
+        {
+            try
+            {
+                return MakeRestObjectResponse(BODB.GetSlotById(id));
+            }
+            catch (Exception ex)
+            {
+                return HandleObjectException(ex);
+            }
+
+        }
+
+        public RESTObjectResult UpdateSlot(Slot slot)
+        {
+            try
+            {
+                using (TransactionScope transactionScope = BODB.CreateTransactionScope())
+                {
+                    slot.StartDateTime = slot.StartDateTime.ToLocalTime();
+                    slot.EndDateTime = slot.EndDateTime.ToLocalTime();
+                    if (!BODB.VerifySlot(slot))
+                    {
+                        transactionScope.Dispose();
+                        return MakeRestObjectResponse(null, false, 1, "Not compatible slot!");
+                    }
+                    BODB.UpdateSlot(slot);
+                    transactionScope.Complete();
+                }
+                return MakeRestObjectResponse(null);
+            }
+            
+            catch (Exception ex)
+            {
+                return HandleObjectException(ex);
+            }
+
+        }
     }
 }
 

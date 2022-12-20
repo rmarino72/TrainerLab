@@ -147,6 +147,7 @@ function resetForm(formId) {
     $('#' + formId).find("input[type=date]").val("");
     $('#' + formId).find("input[type=email]").val("");
     $('#' + formId).find("select").val("");
+    $('#' + formId).find("select").trigger('change');
     $('#' + formId).find("input[type=checkbox]").removeAttr("checked");
 }
 

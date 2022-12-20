@@ -139,7 +139,8 @@
                 day: 'giorno',
                 list: 'lista'
             },
-            datesSet: refreshEvents
+            datesSet: refreshEvents,
+            eventClick: editEvent
         };
 
         calendar = new FullCalendar.Calendar(calendarEl, options);
@@ -191,6 +192,31 @@
         interval.End = dateForCSharp(e.end);
 
         ajaxCall(SCHEDULER_SLOT, "POST", JSON.stringify(interval), gotEvents)
+    }
+
+    function editEvent(e)
+    {
+        var id = e.event.id;
+        ajaxCall(SCHEDULER_SLOT + id, 'GET', null, gotSlot);
+    }
+
+    function gotSlot(data)
+    {
+        editing = true;
+        resetForm("editForm");
+        var event = data.Data;
+        $('#slot-id').val(event.Id);
+        $('#start-txt').val(event.StartDateTime);
+        $('#end-txt').val(event.EndDateTime);
+        $('#status-cmb').val(event.Status);
+        if (event.Email != null) {
+            $('#user-cmb').val(event.Email);
+            $('#user-cmb').trigger('change');
+        }
+        
+        $('#description-txt').val(event.Description);
+        $('#editPg').show();
+        $('#mainPg').hide();
     }
 
     function gotEvents(data)
@@ -250,7 +276,7 @@
 
     function formToObj(withId = false) {
         var o = new Object();
-        o.Id = withId ? $('#slot_id').val() : -1;
+        o.Id = withId ? $('#slot-id').val() : -1;
         o.StartDateTime = dateForCSharp(new Date($('#start-txt').val()));
         o.EndDateTime = dateForCSharp(new Date($('#end-txt').val()));
         o.Status = $('#status-cmb').val();
@@ -266,10 +292,15 @@
 
     function update()
     {
+        var slot = formToObj(editing);
         if (!editing)
         {
-            var slot = formToObj();
+            
             ajaxCall(SCHEDULER_SLOT, 'PUT', JSON.stringify(slot), done);
+        }
+        else
+        {
+            ajaxCall(SCHEDULER_SLOT, 'PATCH', JSON.stringify(slot), done);
         }
     }
 

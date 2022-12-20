@@ -19,9 +19,18 @@ namespace TLFrontEnd.Controllers
         [Route("scheduler/slot")]
         public RESTObjectResult NewSlot([FromBody] Slot slot) => SchedulerBL.Instance.NewSlot(slot);
 
+        [HttpPatch]
+        [Route("scheduler/slot")]
+        public RESTObjectResult UpdateSlot([FromBody] Slot slot) => SchedulerBL.Instance.UpdateSlot(slot);
+
+        [HttpGet]
+        [Route("scheduler/slot/{id}")]
+        public RESTObjectResult GetSlotById(int id) => SchedulerBL.Instance.GetSlotById(id);
+
         [HttpGet]
         [Route("scheduler/slot/status")]
         public RESTListResult GetSlotStatuses() => SchedulerBL.Instance.GetSlotStatuses();
+
     }
 }
 

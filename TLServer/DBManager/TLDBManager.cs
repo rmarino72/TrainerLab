@@ -323,12 +323,38 @@ namespace TLServer.DBManager
             }
         }
 
-
         public void NewSlot(Slot slot)
         {
             try
             {
                 conn.Insert(slot);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public Slot GetSlotById(int id)
+        {
+            try
+            {
+                return conn.Get<Slot>(id);
+            }
+            catch(Exception ex)
+            {
+                Error(ex);
+                throw;
+
+            }
+        }
+
+        public void UpdateSlot(Slot slot)
+        {
+            try
+            {
+                conn.Update(slot);
             }
             catch (Exception ex)
             {
