@@ -15,6 +15,18 @@ namespace TLFrontEnd.Controllers
         [Route("scheduler/slot")]
         public RESTListResult GetSlotByInterval([FromBody] DateTimeInterval interval) => SchedulerBL.Instance.GetSlotByInterval(interval);
 
+        [HttpPost]
+        [Route("scheduler/myslot/{email}")]
+        public RESTListResult GetMySlots(string email, [FromBody] DateTimeInterval interval) => SchedulerBL.Instance.GetMySlots(email, interval);
+
+        [HttpPost]
+        [Route("scheduler/book/{email}/{id}")]
+        public RESTObjectResult BookSlot(string email, int id) => SchedulerBL.Instance.BookSlot(email, id);
+
+        [HttpPost]
+        [Route("scheduler/free/{id}")]
+        public RESTObjectResult FreeSlot(int id) => SchedulerBL.Instance.FreeSlot(id);
+
         [HttpPut]
         [Route("scheduler/slot")]
         public RESTObjectResult NewSlot([FromBody] Slot slot) => SchedulerBL.Instance.NewSlot(slot);

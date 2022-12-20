@@ -261,6 +261,12 @@ function italianFormatDate(date)
     return date.toLocaleString('it-IT', options);
 }
 
+function formatTime(date)
+{
+    var options = { 'hour': '2-digit', 'minute': '2-digit' };
+    return date.toLocaleString('it-IT', options);
+}
+
 function dateForInput(dt)
 {
     var date = new Date(dt);

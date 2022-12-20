@@ -3,6 +3,9 @@ var STORAGE_USER = "tlab_user";
 var STORAGE_ERROR = "tlab_error";
 
 /****************** ENDPOINTS */
+var SCHEDULER_BOOK = "scheduler/book/";
+var SCHEDULER_FREE = "scheduler/free/";
+var SCHEDULER_MYSLOT = "scheduler/myslot/";
 var SCHEDULER_SLOT = "scheduler/slot/";
 var SCHEDULER_SLOT_STATUS = "scheduler/slot/status/";
 

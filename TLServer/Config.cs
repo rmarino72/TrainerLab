@@ -22,7 +22,8 @@ namespace TLServer
         public static bool Debug { set; get; }
         public static bool Verbose { set; get; }
 
-
+        /*Config table*/
+        public static int DismissTolerance { set; get; }
     }
 }
 

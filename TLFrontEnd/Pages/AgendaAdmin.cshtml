@@ -74,7 +74,7 @@
                     </div>
                     <hr />
                     <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
-                    <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
+                    <button class="btn btn-primary" type="submit" id="ok-btn"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
             </div>
         </div>
@@ -212,9 +212,16 @@
 
     function gotSlot(data)
     {
+        if (!data.Outcome)
+        {
+            alertify.error(data.Message);
+            return
+        }
+
         editing = true;
         resetForm("editForm");
         var event = data.Data;
+
         $('#slot-id').val(event.Id);
         $('#start-txt').val(event.StartDateTime);
         $('#end-txt').val(event.EndDateTime);
@@ -225,6 +232,18 @@
         }
         
         $('#description-txt').val(event.Description);
+
+        if (event.Status == "DONE")
+        {
+            $('#start-txt').attr("disabled", "true");
+            $('#end-txt').attr("disabled", "true");
+            $('#status-cmb').prop("disabled", "true");
+            $('#user-cmb').prop("disabled", "true");
+            $('#description-txt').attr("disabled", "true");
+            $("#ok-btn").hide();
+            $("#delete-btn").hide();
+        }
+
         $('#editPg').show();
         $('#delete-btn').show();
         $('#mainPg').hide();
@@ -266,6 +285,12 @@
                 if (e.Status == "CONFIRMED") {
                     event.title = e.FirstName + " " + e.LastName;
                     event.backgroundColor = 'orange';
+                    event.description = e.Email;
+                }
+                if (e.Status == "DONE") {
+                    event.title = e.FirstName + " " + e.LastName;
+                    event.backgroundColor = 'yellow';
+                    event.textColor = "black";
                     event.description = e.Email;
                 }
                 calendar.addEvent(event);
@@ -322,6 +347,12 @@
         {
             if (data.Code == 1) {
                 alertify.error("L'appuntamento si sovrappone ad altri");
+            }
+            else if (data.Code == 2) {
+                alertify.error("Un appuntamento svolto non puó essere eliminato!");
+            }
+            else if (data.Code == 4) {
+                alertify.error("Un appuntamento svolto non puó essere modificato!");
             }
             else
             {

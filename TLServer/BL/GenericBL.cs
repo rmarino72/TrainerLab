@@ -33,6 +33,7 @@ namespace TLServer.BL
 
 		protected RESTListResult HandleListException(Exception ex, int code = 0)
 		{
+            Error(ex);
             RESTListResult result = new RESTListResult();
             result.Outcome = false;
             result.Data = null;
@@ -43,6 +44,7 @@ namespace TLServer.BL
 
         protected RESTObjectResult HandleObjectException(Exception ex, int code = 0)
         {
+            Error(ex);
             RESTObjectResult result = new RESTObjectResult();
             result.Outcome = false;
             result.Data = null;

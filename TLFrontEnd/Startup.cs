@@ -14,6 +14,7 @@ using Newtonsoft.Json.Serialization;
 using Swashbuckle;
 
 using TLServer;
+using TLServer.DBManager;
 using TLServer.Logging;
 
 namespace TLFrontEnd
@@ -48,6 +49,9 @@ namespace TLFrontEnd
             Config.DBPassword = Configuration.GetValue<string>("LocalDatabase:DBPassword");
 
             TLLogger.Instance.Info("Starting TrainerLab...");
+
+
+            Config.DismissTolerance = BODBInstance.Instance.GetConfig().DismissTolerance;
 
             services.AddSwaggerGen();
 

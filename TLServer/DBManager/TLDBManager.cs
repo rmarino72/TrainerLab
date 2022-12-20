@@ -22,6 +22,20 @@ namespace TLServer.DBManager
 		{ 
 		}
 
+        public TLServer.DAO.Config GetConfig()
+        {
+            try
+            {
+                return conn.GetList<TLServer.DAO.Config>().First();
+            }
+            catch(Exception ex)
+            {
+                Error(ex);
+                throw;
+
+            }
+        }
+
 		public List<StringValue> GetRegions()
 		{
             try
