@@ -36,6 +36,19 @@ namespace TLServer.DBManager
             }
         }
 
+        public void UpdateConfig(TLServer.DAO.Config config)
+        {
+            try
+            {
+                conn.Update(config);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
 		public List<StringValue> GetRegions()
 		{
             try
@@ -389,6 +402,47 @@ namespace TLServer.DBManager
                 throw;
             }
         }
-	}
+
+        public List<Anthropometry> GetAnthropometries(string email)
+        {
+            try
+            {
+                string query = string.Format("SELECT * FROM anthropometry WHERE Email = {0} ORDER BY Date", Apex(email));
+                return conn.Query<Anthropometry>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void NewAnthropometry(Anthropometry anthropometry)
+        {
+            try
+            {
+                conn.Insert(anthropometry);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void UpdateAnthropometry(Anthropometry anthropometry)
+        {
+            try
+            {
+                conn.Update(anthropometry);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+    }
 }
 

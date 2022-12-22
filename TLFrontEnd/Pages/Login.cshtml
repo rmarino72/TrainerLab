@@ -79,14 +79,14 @@
     <script src="vendor/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="js/jquery-3.6.1.min.js" type="text/javascript"></script>
     <script src="alertify/alertify.js" type="text/javascript"></script>
+    <script src="js/libs.js" type="text/javascript"></script>
+    <script src="js/config.js" type="text/javascript"></script>
+    <script src="js/TLLibs.js" type="text/javascript"></script>
     <!-- Main File-->
     <script src="js/front.js"></script>
 
-    <script>
-
-        var user = null;
-        function login()
-        {
+    <script>var user = null;
+        function login() {
             var o = new Object();
 
             user = $('#login-username').val();
@@ -103,17 +103,13 @@
             });
         }
 
-        function logged(data)
-        {
-            if (!data.Outcome)
-            {
-                if (data.Code === 1)
-                {
+        function logged(data) {
+            if (!data.Outcome) {
+                if (data.Code === 1) {
                     alertify.error("User not found");
                     return;
                 }
-                if (data.Code === 2)
-                {
+                if (data.Code === 2) {
                     alertify.error("Wrong password");
                     return;
                 }
@@ -121,7 +117,7 @@
             localStorage["tlab_user"] = user;
             localStorage["tlab_token"] = data.Data.Value;
             window.location = "Main";
-        
+           
         }
 
         function error(data) {

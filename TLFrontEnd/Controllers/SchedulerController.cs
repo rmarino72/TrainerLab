@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TLServer.BL;
 using TLServer.BO;
 using TLServer.DAO;
+using TLServer.Enums;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,7 +46,11 @@ namespace TLFrontEnd.Controllers
 
         [HttpGet]
         [Route("scheduler/slot/booked")]
-        public RESTListResult GetBookedSlots() => SchedulerBL.Instance.GetBookedSlots();
+        public RESTListResult GetBookedSlots() => SchedulerBL.Instance.GetSlotsByStatus(SlotStatusEnum.BOOKED);
+
+        [HttpGet]
+        [Route("scheduler/slot/confirmed")]
+        public RESTListResult GetConfirmedSlots() => SchedulerBL.Instance.GetSlotsByStatus(SlotStatusEnum.CONFIRMED);
 
         [HttpGet]
         [Route("scheduler/slot/status")]

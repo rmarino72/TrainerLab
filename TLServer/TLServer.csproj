@@ -12,6 +12,7 @@
     <None Remove="BL\" />
     <None Remove="BO\" />
     <None Remove="Enums\" />
+    <None Remove="Telegram.Bot" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DBManager\" />

@@ -21,6 +21,7 @@ namespace TLServer.DAO
         public string Region { set; get; }
         public string CAP { set; get; }
 		public string Phone { set; get; }
+		public float Height { set; get; }
 		public DateTime LastUpdateDateTime { set; get; }
     }
 }

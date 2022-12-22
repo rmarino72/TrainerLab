@@ -16,6 +16,7 @@
     <None Remove="Dapper" />
     <None Remove="Dapper.SimpleCRUD" />
     <None Remove="Utilities\" />
+    <None Remove="Telegram.Bot" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Basic\" />

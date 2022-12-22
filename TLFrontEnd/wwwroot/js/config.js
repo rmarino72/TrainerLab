@@ -1,16 +1,21 @@
 ﻿/****************** DATA STORAGE */
 var STORAGE_USER = "tlab_user";
+var STORAGE_USER_DATA = "tlab_user_data";
 var STORAGE_ERROR = "tlab_error";
 
 /****************** ENDPOINTS */
+var APP_CONFIG = "app/config/";
+
 var SCHEDULER_BOOK = "scheduler/book/";
 var SCHEDULER_FREE = "scheduler/free/";
 var SCHEDULER_MYSLOT = "scheduler/myslot/";
 var SCHEDULER_SLOT = "scheduler/slot/";
 var SCHEDULER_SLOT_BOOKED = "scheduler/slot/booked/";
+var SCHEDULER_SLOT_CONFIRMED = "scheduler/slot/confirmed/";
 var SCHEDULER_SLOT_STATUS = "scheduler/slot/status/";
 
-var USER = "user/";
+var USER = "user/anthropometry/";
+var USER_ANTHROPOMETRY = "user/";
 var USER_CITY = "user/city/";
 var USER_FULL = "user/full/";
 var USER_LOGOUT = "user/logout/";

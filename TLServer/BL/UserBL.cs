@@ -229,6 +229,46 @@ namespace TLServer.BL
             }
         }
 
+        public RESTListResult GetAnthropometries(string email)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetAnthropometries(email).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
+        public RESTObjectResult NewAnthropometry(Anthropometry anthropometry)
+        {
+            try
+            {
+                BODB.NewAnthropometry(anthropometry);
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult UpdateAnthropometry(Anthropometry anthropometry)
+        {
+            try
+            {
+                BODB.UpdateAnthropometry(anthropometry);
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
     }
 }
 

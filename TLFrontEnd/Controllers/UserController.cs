@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TLServer.BL;
 using TLServer.BO;
+using TLServer.DAO;
 
 namespace TLFrontEnd.Controllers
 {
@@ -73,6 +74,17 @@ namespace TLFrontEnd.Controllers
         [Route("user/pass")]
         public RESTObjectResult ChangePass([FromBody] ChangePassData changePassData) => UserBL.Instance.ChangePass(changePassData);
 
+        [HttpGet]
+        [Route("user/anthropometry/{email}")]
+        public RESTListResult GetAnthropometries(string email) => UserBL.Instance.GetAnthropometries(email);
+
+        [HttpPost]
+        [Route("user/anthropometry")]
+        public RESTObjectResult NewAnthropometry([FromBody] Anthropometry anthropometry) => UserBL.Instance.NewAnthropometry(anthropometry);
+
+        [HttpPatch]
+        [Route("user/anthropometry")]
+        public RESTObjectResult UpdateAnthropometry([FromBody] Anthropometry anthropometry) => UserBL.Instance.UpdateAnthropometry(anthropometry);
 
     }
 }

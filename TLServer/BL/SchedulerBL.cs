@@ -215,13 +215,13 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetBookedSlots()
+        public RESTListResult GetSlotsByStatus(string status)
         {
             try
             {
                 DateTimeInterval interval = new DateTimeInterval { Start = DateTime.Now, End = DateTime.Now.AddYears(100) };
                 List<FullSlotView> slots = BODB.GetSlotByInterval(interval);
-                return MakeRestListResponse(slots.FindAll(x => x.Status == SlotStatusEnum.BOOKED).Cast<BasicObject>().ToList());
+                return MakeRestListResponse(slots.FindAll(x => x.Status == status).Cast<BasicObject>().ToList());
             }
             catch (Exception ex)
             {
