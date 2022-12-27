@@ -16,6 +16,7 @@ namespace TLServer.BO
         public string Role { set; get; }
 		public string RoleDesc { set; get; }
 		public DateTime BirthDate { set; get; }
+        public int? Age { set; get; }
         public string AddressStreet { set; get; }
         public string AddressStreetNumber { set; get; }
         public string Region { set; get; }

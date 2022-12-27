@@ -12,7 +12,6 @@ namespace TLServer.BO
         public DateTime BirthDate { set; get; }
         public string Sex { set; get; }
         public float? Height { set; get; }
-        public int? Age { set; get; }
     }
 }
 
