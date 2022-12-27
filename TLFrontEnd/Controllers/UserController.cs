@@ -78,13 +78,17 @@ namespace TLFrontEnd.Controllers
         [Route("user/anthropometry/{email}")]
         public RESTListResult GetAnthropometries(string email) => UserBL.Instance.GetAnthropometries(email);
 
+        [HttpGet]
+        [Route("user/anthropometry/{email}/{id}")]
+        public RESTObjectResult GetAnthropometryById(string email, int id) => UserBL.Instance.GetAnthropometryById(id);
+
         [HttpPost]
         [Route("user/anthropometry")]
-        public RESTObjectResult NewAnthropometry([FromBody] Anthropometry anthropometry) => UserBL.Instance.NewAnthropometry(anthropometry);
+        public RESTObjectResult NewAnthropometry([FromBody] FullAnthropometryView anthropometry) => UserBL.Instance.NewAnthropometry(anthropometry);
 
         [HttpPatch]
         [Route("user/anthropometry")]
-        public RESTObjectResult UpdateAnthropometry([FromBody] Anthropometry anthropometry) => UserBL.Instance.UpdateAnthropometry(anthropometry);
+        public RESTObjectResult UpdateAnthropometry([FromBody] FullAnthropometryView anthropometry) => UserBL.Instance.UpdateAnthropometry(anthropometry);
 
     }
 }

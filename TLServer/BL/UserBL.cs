@@ -6,6 +6,7 @@ using TLServer.Logging;
 using RMLibs.basic;
 using TLServer.DAO;
 using RMLibs.Utilities;
+using System.Transactions;
 
 namespace TLServer.BL
 {
@@ -242,12 +243,11 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult NewAnthropometry(Anthropometry anthropometry)
+        public RESTObjectResult GetAnthropometryById(int id)
         {
             try
             {
-                BODB.NewAnthropometry(anthropometry);
-                return MakeRestObjectResponse(null);
+                return MakeRestObjectResponse(BODB.GetAnthropometryById(id));
             }
             catch (Exception ex)
             {
@@ -256,12 +256,46 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult UpdateAnthropometry(Anthropometry anthropometry)
+        public RESTObjectResult NewAnthropometry(FullAnthropometryView anthropometry)
         {
             try
             {
-                BODB.UpdateAnthropometry(anthropometry);
-                return MakeRestObjectResponse(null);
+                using (TransactionScope ts = BODB.CreateTransactionScope())
+                {
+                    anthropometry.Date = anthropometry.Date.ToLocalTime();
+                    UserData userData = BODB.GetUserDataByEmail(anthropometry.Email);
+                    userData.Height = anthropometry.Height;
+                    userData.LastUpdateDateTime = DateTime.Now;
+                    anthropometry.LastUpdateDateTime = DateTime.Now;
+                    BODB.UpdateUserData(userData);
+                    BODB.NewAnthropometry((Anthropometry)anthropometry);
+                    ts.Complete();
+                    return MakeRestObjectResponse(null);
+                }
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult UpdateAnthropometry(FullAnthropometryView anthropometry)
+        {
+            try
+            {
+                using (TransactionScope ts = BODB.CreateTransactionScope())
+                {
+                    anthropometry.Date = anthropometry.Date.ToLocalTime();
+                    UserData userData = BODB.GetUserDataByEmail(anthropometry.Email);
+                    userData.Height = anthropometry.Height;
+                    userData.LastUpdateDateTime = DateTime.Now;
+                    anthropometry.LastUpdateDateTime = DateTime.Now;
+                    BODB.UpdateUserData(userData);
+                    BODB.UpdateAnthropometry((Anthropometry)anthropometry);
+                    ts.Complete();
+                    return MakeRestObjectResponse(null);
+                }
             }
             catch (Exception ex)
             {

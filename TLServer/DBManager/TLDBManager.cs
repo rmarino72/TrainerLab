@@ -292,6 +292,19 @@ namespace TLServer.DBManager
             }
         }
 
+        public void UpdateUserData(UserData userData)
+        {
+            try
+            {
+                conn.Update(userData);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
         public List<SlotStatus> GetSlotStatuses()
         {
             try
@@ -403,12 +416,26 @@ namespace TLServer.DBManager
             }
         }
 
-        public List<Anthropometry> GetAnthropometries(string email)
+        public List<FullAnthropometryView> GetAnthropometries(string email)
         {
             try
             {
-                string query = string.Format("SELECT * FROM anthropometry WHERE Email = {0} ORDER BY Date", Apex(email));
-                return conn.Query<Anthropometry>(query).ToList();
+                string query = string.Format("SELECT * FROM fullanthropometryview WHERE Email = {0}", Apex(email));
+                return conn.Query<FullAnthropometryView>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public FullAnthropometryView GetAnthropometryById(int id)
+        {
+            try
+            {
+                string query = string.Format("SELECT * FROM fullanthropometryview where Id = {0}", id);
+                return conn.Query<FullAnthropometryView>(query).FirstOrDefault();
             }
             catch (Exception ex)
             {

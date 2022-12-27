@@ -14,8 +14,8 @@ var SCHEDULER_SLOT_BOOKED = "scheduler/slot/booked/";
 var SCHEDULER_SLOT_CONFIRMED = "scheduler/slot/confirmed/";
 var SCHEDULER_SLOT_STATUS = "scheduler/slot/status/";
 
-var USER = "user/anthropometry/";
-var USER_ANTHROPOMETRY = "user/";
+var USER = "user/";
+var USER_ANTHROPOMETRY = "user/anthropometry/";
 var USER_CITY = "user/city/";
 var USER_FULL = "user/full/";
 var USER_LOGOUT = "user/logout/";

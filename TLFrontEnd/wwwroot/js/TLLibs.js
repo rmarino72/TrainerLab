@@ -41,3 +41,47 @@ function iAmAdmin()
         window.location.href = "Error";
     }
 }
+
+function fillChart(elem, title, labels, data)
+{
+    var chart = new Chart($('#'+elem), {
+        type: 'line',
+        options: {
+            
+            legend: {
+                display: false,
+            },
+        },
+        data: {
+
+            labels: labels,
+            datasets: [
+                {
+                    fill: true,
+                    lineTension: 0.3,
+                    backgroundColor: "transparent",
+                    borderColor: "#CF53F9",
+                    pointBorderColor: "#CF53F9",
+                    pointHoverBackgroundColor: "#CF53F9",
+                    borderCapStyle: "butt",
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: "miter",
+                    borderWidth: 2,
+                    pointBackgroundColor: "#CF53F9",
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 4,
+                    pointHoverBorderColor: "#fff",
+                    pointHoverBorderWidth: 0,
+                    pointRadius: 1,
+                    pointHitRadius: 0,
+                    label: title,
+                    spanGaps: false,
+                    data: data
+                }
+
+            ]
+        }
+
+    });
+}

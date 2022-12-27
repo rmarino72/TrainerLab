@@ -62,8 +62,6 @@ function _success(data, status, xhr)
     _success_func(_success_data);    
 }
 
-
-
 function ajaxCall(api, type, data, success, error = _error) {
     var url = api;
     var token = getFromStorage("tlab_token");
@@ -222,6 +220,9 @@ function formatPrice(value) {
     }
 }
 
+function nullable(v) {
+    return isEmpty(v) ? null : v;
+}
 
 //************************************* DATE TIME
 
