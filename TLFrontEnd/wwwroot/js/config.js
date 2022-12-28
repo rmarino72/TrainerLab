@@ -20,6 +20,7 @@ var USER_CITY = "user/city/";
 var USER_FULL = "user/full/";
 var USER_LOGOUT = "user/logout/";
 var USER_PASS = "user/pass/";
+var USER_PLICOMETRY = "user/plicometry/";
 var USER_PROVINCE = "user/province/";
 var USER_REGION = "user/region/";
 var USER_ROLE = "user/role/";

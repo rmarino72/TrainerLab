@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -90,6 +91,21 @@ namespace TLFrontEnd.Controllers
         [Route("user/anthropometry")]
         public RESTObjectResult UpdateAnthropometry([FromBody] FullAnthropometryView anthropometry) => UserBL.Instance.UpdateAnthropometry(anthropometry);
 
+        [HttpGet]
+        [Route("user/plicometry/{email}")]
+        public RESTListResult GetPlicometries(string email) => UserBL.Instance.GetPlicometry(email);
+
+        [HttpGet]
+        [Route("user/plicometry/{email}/{id}")]
+        public RESTObjectResult GetPlicometryById(string email, int id) => UserBL.Instance.GetPlicometryById(id);
+
+        [HttpPost]
+        [Route("user/plicometry")]
+        public RESTObjectResult NewPlicometry([FromBody]Plicometry plicometry) => UserBL.Instance.NewPlicometry(plicometry);
+
+        [HttpPatch]
+        [Route("user/plicometry")]
+        public RESTObjectResult UpdatePlicometry([FromBody] Plicometry plicometry) => UserBL.Instance.UpdatePlicometry(plicometry);
     }
 }
 

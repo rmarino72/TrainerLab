@@ -303,6 +303,60 @@ namespace TLServer.BL
                 return HandleObjectException(ex);
             }
         }
+
+        public RESTListResult GetPlicometry(string email)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetPlicometries(email).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
+        public RESTObjectResult GetPlicometryById(int id)
+        {
+            try
+            {
+                return MakeRestObjectResponse(BODB.GetPlicometryById(id));
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult NewPlicometry(Plicometry plicometry)
+        {
+            try
+            {
+                BODB.NewPlicometry(plicometry);
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RESTObjectResult UpdatePlicometry(Plicometry plicometry)
+        {
+            try
+            {
+                BODB.UpdatePlicometry(plicometry);
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
     }
 }
 

@@ -470,6 +470,59 @@ namespace TLServer.DBManager
             }
         }
 
+        public List<Plicometry> GetPlicometries(string email)
+        {
+            try
+            {
+                string query = string.Format("SELECT * FROM plicometry WHERE Email = {0}", Apex(email));
+                return conn.Query<Plicometry>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public Plicometry GetPlicometryById(int id)
+        {
+            try
+            {
+                return conn.Get<Plicometry>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void NewPlicometry(Plicometry plicometry)
+        {
+            try
+            {
+                conn.Insert(plicometry);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void UpdatePlicometry(Plicometry plicometry)
+        {
+            try
+            {
+                conn.Update(plicometry);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
     }
 }
 
