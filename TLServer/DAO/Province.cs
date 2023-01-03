@@ -1,5 +1,4 @@
-﻿
-using Dapper;
+﻿using Dapper;
 using RMLibs.basic;
 
 namespace TLServer.DAO

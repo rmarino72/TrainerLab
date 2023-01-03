@@ -5,3 +5,10 @@ TLFrontEnd/bin/
 TLFrontEnd/obj/
 Test/
 *.log
+.vs/
+RMLibs/bin/Debug/netcoreapp3.1/RMLibs.deps.json
+RMLibs/bin/
+RMLibs/obj/project.assets.json
+RMLibs/obj/project.nuget.cache
+RMLibs/obj/
+TLFrontEnd/Properties/launchSettings.json

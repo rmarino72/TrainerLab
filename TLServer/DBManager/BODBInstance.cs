@@ -1,6 +1,4 @@
-﻿using System;
-
-using TLServer.Logging;
+﻿using TLServer.Logging;
 
 namespace TLServer.DBManager
 {

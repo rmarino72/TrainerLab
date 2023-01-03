@@ -48,7 +48,7 @@ namespace RMLibs.SQLDBManager.MySql
                         string msg = "DBPassword property cannot be null or empty!";
                         throw new Exception(msg);
                     }
-                    string connectionString = String.Format("SERVER={0};database={1};uid={2};pwd={3};port={4};SslMode=none;",
+                    string connectionString = String.Format("SERVER={0};database={1};uid={2};pwd={3};port={4};SslMode=Required;",
                         DBHost,
                         DBName,
                         DBUser,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace RMLibs.Logging
 {
@@ -11,6 +12,7 @@ namespace RMLibs.Logging
         public const int ERROR = 3;
 
         private int level;
+        private Mutex mutex;
 
         public string LogName { set; get; }
         public string LogPath { set; get; }
@@ -25,6 +27,7 @@ namespace RMLibs.Logging
             level = VERBOSE;
             LogName = String.Empty;
             LogPath = String.Empty;
+            mutex = new Mutex(false);
         }
 
         public Logger(string logName)
@@ -32,7 +35,7 @@ namespace RMLibs.Logging
             level = VERBOSE;
             LogName = logName;
             LogPath = String.Empty;
-
+            mutex = new Mutex(false); 
         }
 
         public Logger(string logName, int level)
@@ -40,6 +43,7 @@ namespace RMLibs.Logging
             Level = level;
             LogName = logName;
             LogPath = String.Empty;
+            mutex = new Mutex(false);
         }
 
         public int Level
@@ -60,10 +64,13 @@ namespace RMLibs.Logging
             string pathLog = error ?
                 String.Format("{0}{1}ErrorLog_{2}.log", LogPath, LogName, DateTime.Now.ToString("yyyyMMdd")) :
                 String.Format("{0}{1}GeneralLog_{2}.log", LogPath, LogName, DateTime.Now.ToString("yyyyMMdd"));
+            
+            mutex.WaitOne();
             using (StreamWriter sw = new StreamWriter(pathLog, true))
             {
                 sw.WriteLine(msg);
             }
+            mutex.ReleaseMutex();
         }
 
         public void DebugVerbose(string msg)

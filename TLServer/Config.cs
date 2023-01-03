@@ -1,6 +1,4 @@
-﻿using System;
-using System.Configuration;
-namespace TLServer
+﻿namespace TLServer
 {
 	public class Config
 	{

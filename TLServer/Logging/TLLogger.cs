@@ -1,5 +1,4 @@
-﻿using System;
-using RMLibs.Logging;
+﻿using RMLibs.Logging;
 
 namespace TLServer.Logging
 {

@@ -5,8 +5,6 @@ using TLServer.BO;
 using TLServer.DAO;
 using TLServer.Enums;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace TLFrontEnd.Controllers
 {
     [Authorize]

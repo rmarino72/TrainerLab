@@ -1,5 +1,4 @@
-﻿using System;
-namespace TLServer.Enums
+﻿namespace TLServer.Enums
 {
 	public class SlotStatusEnum
 	{
