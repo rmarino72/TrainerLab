@@ -6,29 +6,25 @@ using TLServer.Logging;
 
 namespace TLServer.BL
 {
-    public class AuthBL : GenericBL
+    public class AuthBl : GenericBl
     {
         #region Singleton
 
-        private static AuthBL instance = null;
-        private static readonly object padlock = new object();
+        private static AuthBl _instance;
+        private static readonly object Padlock = new object();
 
-        public static AuthBL Instance
+        public static AuthBl Instance
         {
             get
             {
-                lock (padlock)
+                lock (Padlock)
                 {
-                    if (instance == null)
-                    {
-                        instance = new AuthBL();
-                    }
-                    return instance;
+                    return _instance ??= new AuthBl();
                 }
             }
         }
 
-        private AuthBL() : base(TLLogger.Instance)
+        private AuthBl() : base(TlLogger.Instance)
         {
         }
 
@@ -75,14 +71,14 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult Login(string email, string password)
+        public RestObjectResult Login(string email, string password)
         {
             try
             {
                 User user = BODB.GetUserByEmail(email);
                 if (user == null)
                 {
-                    return MakeRestObjectResponse(null, false, 1, "user not foud");
+                    return MakeRestObjectResponse(null, false, 1, "user not found");
                 }
                 if (StringUtils.DecodeBase64(user.Password) != password)
                 {
@@ -97,14 +93,14 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult Logout(string email)
+        public RestObjectResult Logout(string email)
         {
             try
             {
                 User user = BODB.GetUserByEmail(email);
                 if (user == null)
                 {
-                    return MakeRestObjectResponse(null, false, 1, "user not foud");
+                    return MakeRestObjectResponse(null, false, 1, "user not found");
                 }
                 user.Token = String.Empty;
                 user.ValidTokenDateTime = null;

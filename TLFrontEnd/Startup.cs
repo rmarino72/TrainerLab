@@ -42,16 +42,16 @@ namespace TLFrontEnd
             Config.Debug = Configuration.GetValue<bool>("Log:Debug");
             Config.Verbose = Configuration.GetValue<bool>("Log:Verbose");
             
-            Config.DBHost = Configuration.GetValue<string>("LocalDatabase:DBHost");
-            Config.DBName = Configuration.GetValue<string>("LocalDatabase:DBName");
-            Config.DBPort = Configuration.GetValue<int>("LocalDatabase:DBPort");
-            Config.DBUser = Configuration.GetValue<string>("LocalDatabase:DBUser");
-            Config.DBPassword = Configuration.GetValue<string>("LocalDatabase:DBPassword");
+            Config.DbHost = Configuration.GetValue<string>("LocalDatabase:DBHost");
+            Config.DbName = Configuration.GetValue<string>("LocalDatabase:DBName");
+            Config.DbPort = Configuration.GetValue<int>("LocalDatabase:DBPort");
+            Config.DbUser = Configuration.GetValue<string>("LocalDatabase:DBUser");
+            Config.DbPassword = Configuration.GetValue<string>("LocalDatabase:DBPassword");
 
-            TLLogger.Instance.Info("Starting TrainerLab...");
+            TlLogger.Instance.Info("Starting TrainerLab...");
 
 
-            Config.DismissTolerance = BODBInstance.Instance.GetConfig().DismissTolerance;
+            Config.DismissTolerance = BoDbInstance.Instance.GetConfig().DismissTolerance;
 
             services.AddSwaggerGen();
 

@@ -11,14 +11,14 @@ using TLServer.DAO;
 
 namespace TLServer.DBManager
 {
-	public class TLDBManager : MySqlDapperManager
+	public class TlDbManager : MySqlDapperManager
 	{
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="logger"></param>
-		protected TLDBManager(Logger logger = null):base(logger)
+		protected TlDbManager(Logger logger = null):base(logger)
 		{ 
 		}
 
@@ -26,7 +26,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                return conn.GetList<TLServer.DAO.Config>().First();
+                return Conn.GetList<TLServer.DAO.Config>().First();
             }
             catch(Exception ex)
             {
@@ -40,7 +40,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Update(config);
+                Conn.Update(config);
             }
             catch (Exception ex)
             {
@@ -53,22 +53,21 @@ namespace TLServer.DBManager
 		{
             try
             {
-                string query = String.Format("SELECT DISTINCT Region AS Value FROM province ORDER BY Region");
-				return conn.Query<StringValue>(query).ToList();
+                const string query = "SELECT DISTINCT Region AS Value FROM province ORDER BY Region";
+                return Conn.Query<StringValue>(query).ToList();
             }
             catch (Exception ex)
             {
                 Error(ex);
                 throw;
             }
-
         }
 
 		public List<Province> GetProvinces()
 		{
 			try
 			{
-				return conn.GetList<Province>().ToList();
+				return Conn.GetList<Province>().ToList();
 			}
 			catch (Exception ex)
 			{
@@ -81,8 +80,8 @@ namespace TLServer.DBManager
         {
             try
             {
-                string query = string .Format("SELECT * FROM province WHERE region = {0} ORDER BY Name", Apex(region));
-                return conn.Query<Province>(query).ToList();
+                string query = $"SELECT * FROM province WHERE region = {Apex(region)} ORDER BY Name";
+                return Conn.Query<Province>(query).ToList();
             }
             catch (Exception ex)
             {
@@ -95,7 +94,7 @@ namespace TLServer.DBManager
 		{
             try
             {
-                return conn.GetList<City>().ToList();
+                return Conn.GetList<City>().ToList();
             }
             catch (Exception ex)
             {
@@ -108,8 +107,8 @@ namespace TLServer.DBManager
         {
             try
             {
-                string query = string.Format("SELECT * FROM city WHERE Province = {0} ORDER BY Name", Apex(province));
-                return conn.Query<City>(query).ToList();
+                string query = $"SELECT * FROM city WHERE Province = {Apex(province)} ORDER BY Name";
+                return Conn.Query<City>(query).ToList();
             }
             catch (Exception ex)
             {
@@ -122,7 +121,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                return conn.GetList<Role>().ToList();
+                return Conn.GetList<Role>().ToList();
             }
             catch (Exception ex)
             {
@@ -136,7 +135,7 @@ namespace TLServer.DBManager
 		{
             try
             {
-                return conn.GetList<Sex>().ToList();
+                return Conn.GetList<Sex>().ToList();
             }
             catch (Exception ex)
             {
@@ -145,12 +144,12 @@ namespace TLServer.DBManager
             }
         }
 
-		public User GetUserByEmail(string Email)
+		public User GetUserByEmail(string email)
 		{
 			try
 			{
-				string query = String.Format("SELECT * FROM user WHERE Email = {0}", Apex(Email));
-				return conn.Query<User>(query).FirstOrDefault();
+				string query = $"SELECT * FROM user WHERE Email = {Apex(email)}";
+				return Conn.Query<User>(query).FirstOrDefault();
 			}
 			catch (Exception ex)
 			{
@@ -164,7 +163,7 @@ namespace TLServer.DBManager
 			try
 			{
 				user.LastUpdateDateTime = DateTime.Now;
-				conn.Update(user);
+				Conn.Update(user);
 			}
             catch (Exception ex)
             {
@@ -177,7 +176,7 @@ namespace TLServer.DBManager
 		{
 			try
 			{
-				return conn.GetList<FullUserView>().ToList();
+				return Conn.GetList<FullUserView>().ToList();
 			}
             catch (Exception ex)
             {
@@ -186,12 +185,12 @@ namespace TLServer.DBManager
             }
         }
 
-		public FullUserView GetFullUserByEmail(string Email)
+		public FullUserView GetFullUserByEmail(string email)
 		{
             try
             {
-                string query = String.Format("SELECT * FROM fulluserview WHERE Email = {0}", Apex(Email));
-                return conn.Query<FullUserView>(query).FirstOrDefault();
+                string query = $"SELECT * FROM fulluserview WHERE Email = {Apex(email)}";
+                return Conn.Query<FullUserView>(query).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -212,7 +211,7 @@ namespace TLServer.DBManager
                     user.Role = fullUser.Role;
                     user.CreationDateTime = DateTime.Now;
                     user.LastUpdateDateTime = DateTime.Now;
-                    conn.Insert(user);
+                    Conn.Insert(user);
 
                     UserData userData = new UserData();
                     userData.AddressStreet = fullUser.AddressStreet;
@@ -228,7 +227,7 @@ namespace TLServer.DBManager
                     userData.Province = string.IsNullOrEmpty(fullUser.Province) ? null : fullUser.Province;
                     userData.Region = fullUser.Region;
                     userData.Sex = fullUser.Sex;
-                    conn.Insert(userData);
+                    Conn.Insert(userData);
 
                     ts.Complete();
                 }
@@ -240,12 +239,12 @@ namespace TLServer.DBManager
             }
         }
 
-        public UserData GetUserDataByEmail(string Email)
+        public UserData GetUserDataByEmail(string email)
         {
             try
             {
-                string query = String.Format("SELECT * FROM userdata WHERE Email = {0}", Apex(Email));
-                return conn.Query<UserData>(query).FirstOrDefault();
+                string query = $"SELECT * FROM userdata WHERE Email = {Apex(email)}";
+                return Conn.Query<UserData>(query).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -279,8 +278,8 @@ namespace TLServer.DBManager
 
                 using (TransactionScope ts = CreateTransactionScope())
                 {
-                    conn.Update(user);
-                    conn.Update(userData);
+                    Conn.Update(user);
+                    Conn.Update(userData);
                     ts.Complete();
                 }
 
@@ -296,7 +295,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Update(userData);
+                Conn.Update(userData);
             }
             catch (Exception ex)
             {
@@ -309,7 +308,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                return conn.GetList<SlotStatus>().ToList();
+                return Conn.GetList<SlotStatus>().ToList();
             }
             catch (Exception ex)
             {
@@ -328,7 +327,7 @@ namespace TLServer.DBManager
                     Apex(DateTimeUtils.DateTimeToMySqlString(interval.End))
                     );
 
-                return conn.Query<FullSlotView>(query).ToList();
+                return Conn.Query<FullSlotView>(query).ToList();
             }
             catch (Exception ex)
             {
@@ -353,7 +352,7 @@ namespace TLServer.DBManager
 
                 string fullQuery = string.Format(query, slot.Id, Apex(stdt), Apex(stdt), Apex(eddt), Apex(eddt));
 
-                List<Slot> slots = conn.Query<Slot>(fullQuery).ToList();
+                List<Slot> slots = Conn.Query<Slot>(fullQuery).ToList();
                 return slots.Count == 0;
             }
             catch (Exception ex)
@@ -367,7 +366,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Insert(slot);
+                Conn.Insert(slot);
             }
             catch (Exception ex)
             {
@@ -380,7 +379,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                return conn.Get<Slot>(id);
+                return Conn.Get<Slot>(id);
             }
             catch(Exception ex)
             {
@@ -394,7 +393,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Update(slot);
+                Conn.Update(slot);
             }
             catch (Exception ex)
             {
@@ -407,7 +406,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Delete<Slot>(id);
+                Conn.Delete<Slot>(id);
             }
             catch (Exception ex)
             {
@@ -420,8 +419,8 @@ namespace TLServer.DBManager
         {
             try
             {
-                string query = string.Format("SELECT * FROM fullanthropometryview WHERE Email = {0}", Apex(email));
-                return conn.Query<FullAnthropometryView>(query).ToList();
+                string query = $"SELECT * FROM fullanthropometryview WHERE Email = {Apex(email)}";
+                return Conn.Query<FullAnthropometryView>(query).ToList();
             }
             catch (Exception ex)
             {
@@ -434,8 +433,8 @@ namespace TLServer.DBManager
         {
             try
             {
-                string query = string.Format("SELECT * FROM fullanthropometryview where Id = {0}", id);
-                return conn.Query<FullAnthropometryView>(query).FirstOrDefault();
+                string query = $"SELECT * FROM fullanthropometryview where Id = {id}";
+                return Conn.Query<FullAnthropometryView>(query).FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -448,7 +447,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Insert(anthropometry);
+                Conn.Insert(anthropometry);
             }
             catch (Exception ex)
             {
@@ -461,7 +460,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Update(anthropometry);
+                Conn.Update(anthropometry);
             }
             catch (Exception ex)
             {
@@ -474,8 +473,8 @@ namespace TLServer.DBManager
         {
             try
             {
-                string query = string.Format("SELECT * FROM plicometry WHERE Email = {0}", Apex(email));
-                return conn.Query<Plicometry>(query).ToList();
+                string query = $"SELECT * FROM plicometry WHERE Email = {Apex(email)}";
+                return Conn.Query<Plicometry>(query).ToList();
             }
             catch (Exception ex)
             {
@@ -488,7 +487,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                return conn.Get<Plicometry>(id);
+                return Conn.Get<Plicometry>(id);
             }
             catch (Exception ex)
             {
@@ -501,7 +500,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Insert(plicometry);
+                Conn.Insert(plicometry);
             }
             catch (Exception ex)
             {
@@ -514,7 +513,7 @@ namespace TLServer.DBManager
         {
             try
             {
-                conn.Update(plicometry);
+                Conn.Update(plicometry);
             }
             catch (Exception ex)
             {

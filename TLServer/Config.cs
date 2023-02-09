@@ -1,6 +1,6 @@
 ﻿namespace TLServer
 {
-	public class Config
+	public static class Config
 	{
         public static string Version { set; get; }
         public static string Name { set; get; }
@@ -9,11 +9,11 @@
 
         public static string BaseDir { set; get; }
 
-        public static string DBHost { set; get; }
-        public static int DBPort { set; get; }
-        public static string DBName { set; get; }
-        public static string DBUser { set; get; }
-        public static string DBPassword { set; get; }
+        public static string DbHost { set; get; }
+        public static int DbPort { set; get; }
+        public static string DbName { set; get; }
+        public static string DbUser { set; get; }
+        public static string DbPassword { set; get; }
 
         public static string LogName { set; get; }
         public static string LogPath { set; get; }

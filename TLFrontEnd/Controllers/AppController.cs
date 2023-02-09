@@ -11,11 +11,11 @@ namespace TLFrontEnd.Controllers
     {
         [Route("app/config")]
         [HttpGet]
-        public RESTObjectResult GetConfig() => TLAppBL.Instance.GetConfig();
+        public RestObjectResult GetConfig() => TLAppBL.Instance.GetConfig();
 
         [Route("app/config")]
         [HttpPatch]
-        public RESTObjectResult UpdateConfig([FromBody] TLServer.DAO.Config config) => TLAppBL.Instance.UpdateConfig(config);
+        public RestObjectResult UpdateConfig([FromBody] TLServer.DAO.Config config) => TLAppBL.Instance.UpdateConfig(config);
     }
 }
 

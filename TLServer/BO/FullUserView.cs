@@ -24,7 +24,6 @@ namespace TLServer.BO
         public string Province { set; get; }
         public string CAP { set; get; }
         public float? Height { set; get; }
-
-    }
+	}
 }
 

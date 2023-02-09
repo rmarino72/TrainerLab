@@ -2,14 +2,14 @@
 
 namespace TLServer.DBManager
 {
-	public class BODBInstance: TLDBManager
+	public class BoDbInstance: TlDbManager
 	{
         #region Singleton
 
-        private static BODBInstance instance = null;
+        private static BoDbInstance instance = null;
         private static readonly object padlock = new object();
 
-        public static BODBInstance Instance
+        public static BoDbInstance Instance
         {
             get
             {
@@ -17,20 +17,20 @@ namespace TLServer.DBManager
                 {
                     if (instance == null)
                     {
-                        instance = new BODBInstance();
+                        instance = new BoDbInstance();
                     }
                     return instance;
                 }
             }
         }
 
-        private BODBInstance() : base(TLLogger.Instance)
+        private BoDbInstance() : base(TlLogger.Instance)
         {
-            DBHost = Config.DBHost;
-            TCPPort = Config.DBPort;
-            DBUser = Config.DBUser;
-            DBPassword = Config.DBPassword;
-            DBName = Config.DBName;
+            DbHost = Config.DbHost;
+            TcpPort = Config.DbPort;
+            DbUser = Config.DbUser;
+            DbPassword = Config.DbPassword;
+            DbName = Config.DbName;
             OpenConnection();
             CloseConnection();
         }

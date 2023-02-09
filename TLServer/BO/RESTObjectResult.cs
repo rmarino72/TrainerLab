@@ -2,7 +2,7 @@
 
 namespace TLServer.BO
 {
-	public class RESTObjectResult: BasicObject
+	public class RestObjectResult: BasicObject
 	{
 		
         public bool Outcome { set; get; }

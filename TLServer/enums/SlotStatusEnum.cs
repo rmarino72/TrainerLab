@@ -1,6 +1,6 @@
 ﻿namespace TLServer.Enums
 {
-	public class SlotStatusEnum
+	public static class SlotStatusEnum
 	{
         public const string BOOKED = "BOOKED";
         public const string BUSY = "BUSY";

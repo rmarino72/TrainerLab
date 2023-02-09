@@ -2,29 +2,25 @@
 
 namespace TLServer.Logging
 {
-	public class TLLogger: Logger
+	public class TlLogger: Logger
 	{
         #region Singleton
 
-        private static TLLogger instance = null;
-        private static readonly object padlock = new object();
+        private static TlLogger _instance;
+        private static readonly object Padlock = new object();
 
-        public static TLLogger Instance
+        public static TlLogger Instance
         {
             get
             {
-                lock (padlock)
+                lock (Padlock)
                 {
-                    if (instance == null)
-                    {
-                        instance = new TLLogger();
-                    }
-                    return instance;
+                    return _instance ??= new TlLogger();
                 }
             }
         }
 
-        private TLLogger() : base(Config.LogName)
+        private TlLogger() : base(Config.LogName)
         {            
             LogPath = Config.LogPath;
             if (Config.Verbose) Level = Logger.VERBOSE;

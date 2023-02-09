@@ -10,35 +10,31 @@ using TLServer.Logging;
 
 namespace TLServer.BL
 {
-	public class SchedulerBL: GenericBL
+	public class SchedulerBl: GenericBl
 	{
         #region Singleton
 
-        private static SchedulerBL instance = null;
-        private static readonly object padlock = new object();
+        private static SchedulerBl _instance;
+        private static readonly object Padlock = new object();
 
-        public static SchedulerBL Instance
+        public static SchedulerBl Instance
         {
             get
             {
-                lock (padlock)
+                lock (Padlock)
                 {
-                    if (instance == null)
-                    {
-                        instance = new SchedulerBL();
-                    }
-                    return instance;
+                    return _instance ??= new SchedulerBl();
                 }
             }
         }
 
-        private SchedulerBL() : base(TLLogger.Instance)
+        private SchedulerBl() : base(TlLogger.Instance)
         {
         }
 
         #endregion
 
-        public RESTListResult GetSlotByInterval(DateTimeInterval interval)
+        public RestListResult GetSlotByInterval(DateTimeInterval interval)
         {
             try
             {
@@ -50,7 +46,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetSlotStatuses()
+        public RestListResult GetSlotStatuses()
         {
             try
             {
@@ -62,7 +58,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult NewSlot(Slot slot)
+        public RestObjectResult NewSlot(Slot slot)
         {
             try
             {
@@ -86,7 +82,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult GetSlotById(int id)
+        public RestObjectResult GetSlotById(int id)
         {
             try
             {
@@ -99,7 +95,7 @@ namespace TLServer.BL
 
         }
 
-        public RESTObjectResult UpdateSlot(Slot slot)
+        public RestObjectResult UpdateSlot(Slot slot)
         {
             try
             {
@@ -131,7 +127,7 @@ namespace TLServer.BL
 
         }
 
-        public RESTObjectResult DeleteSlot(int id)
+        public RestObjectResult DeleteSlot(int id)
         {
             try
             {
@@ -154,7 +150,7 @@ namespace TLServer.BL
 
         }
 
-        public RESTListResult GetMySlots(string email, DateTimeInterval interval)
+        public RestListResult GetMySlots(string email, DateTimeInterval interval)
         {
             try
             {
@@ -167,7 +163,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult BookSlot(string email, int id)
+        public RestObjectResult BookSlot(string email, int id)
         {
             try
             {
@@ -191,7 +187,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult FreeSlot(int id)
+        public RestObjectResult FreeSlot(int id)
         {
             try
             {
@@ -214,7 +210,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetSlotsByStatus(string status)
+        public RestListResult GetSlotsByStatus(string status)
         {
             try
             {

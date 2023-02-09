@@ -4,7 +4,7 @@ using TLServer.Logging;
 
 namespace TLServer.BL
 {
-	public class TLAppBL:GenericBL
+	public class TLAppBL:GenericBl
 	{
         #region Singleton
 
@@ -26,13 +26,13 @@ namespace TLServer.BL
             }
         }
 
-        private TLAppBL() : base(TLLogger.Instance)
+        private TLAppBL() : base(TlLogger.Instance)
         {
         }
 
         #endregion
 
-        public RESTObjectResult GetConfig()
+        public RestObjectResult GetConfig()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult UpdateConfig(DAO.Config config)
+        public RestObjectResult UpdateConfig(DAO.Config config)
         {
             try
             {

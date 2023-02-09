@@ -9,23 +9,23 @@ using RMLibs.Logging;
 
 namespace RMLibs.SQLDBManager
 {
-	public class SQLDBManager: BasicObject
+	public class SqlDbManager: BasicObject
 	{
 
-        protected IDbConnection conn;
-        protected IDbTransaction transaction;
+        protected IDbConnection Conn;
+        protected IDbTransaction Transaction;
 
 
-        public string DBHost { get; set; }
-        public string DBName { get; set; }
-        public int TCPPort { get; set; }
-        public string DBPassword { get; set; }
-        public string DBUser { get; set; }
+        public string DbHost { get; set; }
+        public string DbName { get; set; }
+        public int TcpPort { get; set; }
+        public string DbPassword { get; set; }
+        public string DbUser { get; set; }
 
 
         //********** METHODS TO BE IMPLEMENTED IN SUB CLASSES **********
 
-        protected SQLDBManager(Logger logger = null)
+        protected SqlDbManager(Logger logger = null)
         {
             Logger = logger;
         }
@@ -65,10 +65,10 @@ namespace RMLibs.SQLDBManager
         {
             try
             {
-                if (transaction != null) throw new Exception("There is a pending transaction");
-                if (conn == null) throw new Exception("The connection does not exist");
-                if (conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
-                conn.Close();
+                if (Transaction != null) throw new Exception("There is a pending transaction");
+                if (Conn == null) throw new Exception("The connection does not exist");
+                if (Conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
+                Conn.Close();
             }
             catch (Exception ex)
             {
@@ -86,8 +86,8 @@ namespace RMLibs.SQLDBManager
         {
             try
             {
-                if (conn == null) throw new Exception("The connection does not exist");
-                if (conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
+                if (Conn == null) throw new Exception("The connection does not exist");
+                if (Conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
                 IDbCommand cmd = GetCommand(query);
                 IDataAdapter dataAdapter = GetAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -128,8 +128,8 @@ namespace RMLibs.SQLDBManager
         {
             try
             {
-                if (conn == null) throw new Exception("The connection does not exist");
-                if (conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
+                if (Conn == null) throw new Exception("The connection does not exist");
+                if (Conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
                 IDbCommand cmd = GetCommand(sqlCommand);
                 return cmd.ExecuteNonQuery();
             }
@@ -157,10 +157,10 @@ namespace RMLibs.SQLDBManager
         {
             try
             {
-                if (conn == null) throw new Exception("The connection does not exist");
-                if (conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
-                if (transaction != null) throw new Exception("Error Transaction: another transaction is already running");
-                transaction = conn.BeginTransaction();
+                if (Conn == null) throw new Exception("The connection does not exist");
+                if (Conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
+                if (Transaction != null) throw new Exception("Error Transaction: another transaction is already running");
+                Transaction = Conn.BeginTransaction();
             }
             catch (Exception ex)
             {
@@ -177,12 +177,12 @@ namespace RMLibs.SQLDBManager
         {
             try
             {
-                if (conn == null) throw new Exception("The connection does not exist");
-                if (conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
-                if (transaction == null) throw new Exception("There is no pending transaction");
-                transaction.Commit();
-                transaction.Dispose();
-                transaction = null;
+                if (Conn == null) throw new Exception("The connection does not exist");
+                if (Conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
+                if (Transaction == null) throw new Exception("There is no pending transaction");
+                Transaction.Commit();
+                Transaction.Dispose();
+                Transaction = null;
             }
             catch (Exception ex)
             {
@@ -199,12 +199,12 @@ namespace RMLibs.SQLDBManager
         {
             try
             {
-                if (conn == null) throw new Exception("The connection does not exist");
-                if (conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
-                if (transaction == null) throw new Exception("There is no pending transaction");
-                transaction.Rollback();
-                transaction.Dispose();
-                transaction = null;
+                if (Conn == null) throw new Exception("The connection does not exist");
+                if (Conn.State != ConnectionState.Open) throw new Exception("The connection is not open");
+                if (Transaction == null) throw new Exception("There is no pending transaction");
+                Transaction.Rollback();
+                Transaction.Dispose();
+                Transaction = null;
             }
             catch (Exception ex)
             {

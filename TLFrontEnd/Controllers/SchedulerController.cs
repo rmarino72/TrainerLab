@@ -12,47 +12,47 @@ namespace TLFrontEnd.Controllers
     {
         [HttpPost]
         [Route("scheduler/slot")]
-        public RESTListResult GetSlotByInterval([FromBody] DateTimeInterval interval) => SchedulerBL.Instance.GetSlotByInterval(interval);
+        public RestListResult GetSlotByInterval([FromBody] DateTimeInterval interval) => SchedulerBl.Instance.GetSlotByInterval(interval);
 
         [HttpPost]
         [Route("scheduler/myslot/{email}")]
-        public RESTListResult GetMySlots(string email, [FromBody] DateTimeInterval interval) => SchedulerBL.Instance.GetMySlots(email, interval);
+        public RestListResult GetMySlots(string email, [FromBody] DateTimeInterval interval) => SchedulerBl.Instance.GetMySlots(email, interval);
 
         [HttpPost]
         [Route("scheduler/book/{email}/{id}")]
-        public RESTObjectResult BookSlot(string email, int id) => SchedulerBL.Instance.BookSlot(email, id);
+        public RestObjectResult BookSlot(string email, int id) => SchedulerBl.Instance.BookSlot(email, id);
 
         [HttpPost]
         [Route("scheduler/free/{id}")]
-        public RESTObjectResult FreeSlot(int id) => SchedulerBL.Instance.FreeSlot(id);
+        public RestObjectResult FreeSlot(int id) => SchedulerBl.Instance.FreeSlot(id);
 
         [HttpPut]
         [Route("scheduler/slot")]
-        public RESTObjectResult NewSlot([FromBody] Slot slot) => SchedulerBL.Instance.NewSlot(slot);
+        public RestObjectResult NewSlot([FromBody] Slot slot) => SchedulerBl.Instance.NewSlot(slot);
 
         [HttpPatch]
         [Route("scheduler/slot")]
-        public RESTObjectResult UpdateSlot([FromBody] Slot slot) => SchedulerBL.Instance.UpdateSlot(slot);
+        public RestObjectResult UpdateSlot([FromBody] Slot slot) => SchedulerBl.Instance.UpdateSlot(slot);
 
         [HttpGet]
         [Route("scheduler/slot/{id}")]
-        public RESTObjectResult GetSlotById(int id) => SchedulerBL.Instance.GetSlotById(id);
+        public RestObjectResult GetSlotById(int id) => SchedulerBl.Instance.GetSlotById(id);
 
         [HttpDelete]
         [Route("scheduler/slot/{id}")]
-        public RESTObjectResult DeleteSlot(int id) => SchedulerBL.Instance.DeleteSlot(id);
+        public RestObjectResult DeleteSlot(int id) => SchedulerBl.Instance.DeleteSlot(id);
 
         [HttpGet]
         [Route("scheduler/slot/booked")]
-        public RESTListResult GetBookedSlots() => SchedulerBL.Instance.GetSlotsByStatus(SlotStatusEnum.BOOKED);
+        public RestListResult GetBookedSlots() => SchedulerBl.Instance.GetSlotsByStatus(SlotStatusEnum.BOOKED);
 
         [HttpGet]
         [Route("scheduler/slot/confirmed")]
-        public RESTListResult GetConfirmedSlots() => SchedulerBL.Instance.GetSlotsByStatus(SlotStatusEnum.CONFIRMED);
+        public RestListResult GetConfirmedSlots() => SchedulerBl.Instance.GetSlotsByStatus(SlotStatusEnum.CONFIRMED);
 
         [HttpGet]
         [Route("scheduler/slot/status")]
-        public RESTListResult GetSlotStatuses() => SchedulerBL.Instance.GetSlotStatuses();
+        public RestListResult GetSlotStatuses() => SchedulerBl.Instance.GetSlotStatuses();
 
     }
 }

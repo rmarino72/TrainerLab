@@ -7,12 +7,12 @@ using TLServer.DBManager;
 
 namespace TLServer.BL
 {
-	public class GenericBL: BasicObject
+	public class GenericBl: BasicObject
 	{
 
-		protected RESTListResult MakeRestListResponse(List<BasicObject> data, bool outcome=true, int code = 0, string message = "")
+		protected RestListResult MakeRestListResponse(List<BasicObject> data, bool outcome=true, int code = 0, string message = "")
 		{
-			RESTListResult result = new RESTListResult();
+			RestListResult result = new RestListResult();
 			result.Outcome = outcome;
 			result.Data = data;
 			result.Message = message;
@@ -20,9 +20,9 @@ namespace TLServer.BL
 			return result;
 		}
 
-        protected RESTObjectResult MakeRestObjectResponse(BasicObject data, bool outcome = true, int code = 0, string message = "")
+        protected RestObjectResult MakeRestObjectResponse(BasicObject data, bool outcome = true, int code = 0, string message = "")
         {
-            RESTObjectResult result = new RESTObjectResult();
+            RestObjectResult result = new RestObjectResult();
             result.Outcome = outcome;
             result.Data = data;
             result.Message = message;
@@ -30,10 +30,10 @@ namespace TLServer.BL
             return result;
         }
 
-		protected RESTListResult HandleListException(Exception ex, int code = 0)
+		protected RestListResult HandleListException(Exception ex, int code = 0)
 		{
             Error(ex);
-            RESTListResult result = new RESTListResult();
+            RestListResult result = new RestListResult();
             result.Outcome = false;
             result.Data = null;
             result.Message = ex.Message;
@@ -41,10 +41,10 @@ namespace TLServer.BL
             return result;
         }
 
-        protected RESTObjectResult HandleObjectException(Exception ex, int code = 0)
+        protected RestObjectResult HandleObjectException(Exception ex, int code = 0)
         {
             Error(ex);
-            RESTObjectResult result = new RESTObjectResult();
+            RestObjectResult result = new RestObjectResult();
             result.Outcome = false;
             result.Data = null;
             result.Message = ex.Message;
@@ -52,16 +52,10 @@ namespace TLServer.BL
             return result;
         }
 
-        protected TLDBManager BODB
-		{
-			get
-			{
-				return BODBInstance.Instance;
-			}
-		}
+        protected TlDbManager BODB => BoDbInstance.Instance;
 
-		protected GenericBL(Logger logger = null):base()
-		{
+        protected GenericBl(Logger logger = null)
+        {
 			this.Logger = logger;
 		}
 	}
