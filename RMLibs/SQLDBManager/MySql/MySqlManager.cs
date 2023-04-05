@@ -12,53 +12,53 @@ using RMLibs.SQLDBManager.DAO;
 
 namespace RMLibs.SQLDBManager.MySql
 {
-	public class MySqlManager: SQLDBManager
+	public class MySqlManager: SqlDbManager
 	{
 
         public const int MYSQL_DEFAULT_PORT = 3306;
 
         public MySqlManager(Logger logger) : base(logger)
         {
-            TCPPort = MySqlManager.MYSQL_DEFAULT_PORT;
+            TcpPort = MySqlManager.MYSQL_DEFAULT_PORT;
         }
 
         public override void OpenConnection()
         {
             try
             {
-                if (conn == null)
+                if (Conn == null)
                 {
-                    if (string.IsNullOrEmpty(DBHost))
+                    if (string.IsNullOrEmpty(DbHost))
                     {
                         string msg = "DBHost property cannot be null or empty!";
                         throw new Exception(msg);
                     }
-                    if (string.IsNullOrEmpty(DBName))
+                    if (string.IsNullOrEmpty(DbName))
                     {
                         string msg = "DBName property cannot be null or empty!";
                         throw new Exception(msg);
                     }
-                    if (string.IsNullOrEmpty(DBUser))
+                    if (string.IsNullOrEmpty(DbUser))
                     {
                         string msg = "DBUser property cannot be null or empty!";
                         throw new Exception(msg);
                     }
-                    if (string.IsNullOrEmpty(DBPassword))
+                    if (string.IsNullOrEmpty(DbPassword))
                     {
                         string msg = "DBPassword property cannot be null or empty!";
                         throw new Exception(msg);
                     }
                     string connectionString = String.Format("SERVER={0};database={1};uid={2};pwd={3};port={4};SslMode=Required;",
-                        DBHost,
-                        DBName,
-                        DBUser,
-                        DBPassword,
-                        TCPPort.ToString());
+                        DbHost,
+                        DbName,
+                        DbUser,
+                        DbPassword,
+                        TcpPort.ToString());
 
-                    this.conn = new MySqlConnection(connectionString);
+                    this.Conn = new MySqlConnection(connectionString);
                 }
-                if (conn.State == ConnectionState.Open) throw new Exception("This connection is open yet");
-                conn.Open();
+                if (Conn.State == ConnectionState.Open) throw new Exception("This connection is open yet");
+                Conn.Open();
             }
             catch (Exception ex)
             {
@@ -69,8 +69,8 @@ namespace RMLibs.SQLDBManager.MySql
 
         protected override IDbCommand GetCommand(string query)
         {
-            if (conn == null) throw new Exception("No connection object instance");
-            return transaction == null ? new MySqlCommand(query, (MySqlConnection)conn) : new MySqlCommand(query, (MySqlConnection)conn, (MySqlTransaction)transaction);
+            if (Conn == null) throw new Exception("No connection object instance");
+            return Transaction == null ? new MySqlCommand(query, (MySqlConnection)Conn) : new MySqlCommand(query, (MySqlConnection)Conn, (MySqlTransaction)Transaction);
         }
 
         protected override IDbDataAdapter GetAdapter(IDbCommand cmd)

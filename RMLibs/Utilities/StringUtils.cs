@@ -3,7 +3,7 @@ using System.Text;
 
 namespace RMLibs.Utilities
 {
-	public class StringUtils
+	public static class StringUtils
 	{
         public static string EncodeBase64(string value)
         {
@@ -25,7 +25,7 @@ namespace RMLibs.Utilities
 
         public static string[] Split(string s, string separator)
         {
-            return s.Split(new string[] { separator }, StringSplitOptions.None);
+            return s.Split(new[] { separator }, StringSplitOptions.None);
         }
     }
 }

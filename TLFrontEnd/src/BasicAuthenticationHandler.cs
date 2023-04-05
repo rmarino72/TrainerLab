@@ -28,7 +28,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         {
             return "OK";
         }
-        return AuthBL.Instance.VerifyToken(user, password);
+        return AuthBl.Instance.VerifyToken(user, password);
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()

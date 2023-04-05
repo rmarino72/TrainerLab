@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace TLServer.BL
 {
-	public class UserBL: GenericBL
+	public class UserBL: GenericBl
 	{
 
         #region Singleton
@@ -32,13 +32,13 @@ namespace TLServer.BL
             }
         }
 
-        private UserBL() : base(TLLogger.Instance)
+        private UserBL() : base(TlLogger.Instance)
         {
         }
 
         #endregion
 
-        public RESTListResult GetRegions()
+        public RestListResult GetRegions()
         {
             try
             {
@@ -51,7 +51,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetProvinces()
+        public RestListResult GetProvinces()
 		{
 			try
 			{
@@ -64,7 +64,7 @@ namespace TLServer.BL
 			}
 		}
 
-        public RESTListResult GetProvincesByRegion(string region)
+        public RestListResult GetProvincesByRegion(string region)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetCities()
+        public RestListResult GetCities()
         {
             try
             {
@@ -90,7 +90,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetCitiesByProvince(string province)
+        public RestListResult GetCitiesByProvince(string province)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetRoles()
+        public RestListResult GetRoles()
         {
             try
             {
@@ -116,7 +116,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetSexes()
+        public RestListResult GetSexes()
         {
             try
             {
@@ -129,7 +129,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult GetUserByEmail(string email)
+        public RestObjectResult GetUserByEmail(string email)
         {
             try
             {
@@ -142,7 +142,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetFullUsers()
+        public RestListResult GetFullUsers()
         {
             try
             {
@@ -155,7 +155,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult GetFullUserByEmail(string email)
+        public RestObjectResult GetFullUserByEmail(string email)
         {
             try
             {
@@ -168,7 +168,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult NewUser(FullUserView fullUser)
+        public RestObjectResult NewUser(FullUserView fullUser)
         {
             try
             {
@@ -187,7 +187,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult UpdateUser(FullUserView fullUser)
+        public RestObjectResult UpdateUser(FullUserView fullUser)
         {
             try
             {
@@ -201,7 +201,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult ChangePass(ChangePassData changePassData)
+        public RestObjectResult ChangePass(ChangePassData changePassData)
         {
             try
             {
@@ -229,7 +229,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetAnthropometries(string email)
+        public RestListResult GetAnthropometries(string email)
         {
             try
             {
@@ -242,7 +242,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult GetAnthropometryById(int id)
+        public RestObjectResult GetAnthropometryById(int id)
         {
             try
             {
@@ -255,7 +255,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult NewAnthropometry(FullAnthropometryView anthropometry)
+        public RestObjectResult NewAnthropometry(FullAnthropometryView anthropometry)
         {
             try
             {
@@ -279,7 +279,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult UpdateAnthropometry(FullAnthropometryView anthropometry)
+        public RestObjectResult UpdateAnthropometry(FullAnthropometryView anthropometry)
         {
             try
             {
@@ -303,7 +303,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTListResult GetPlicometry(string email)
+        public RestListResult GetPlicometry(string email)
         {
             try
             {
@@ -316,7 +316,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult GetPlicometryById(int id)
+        public RestObjectResult GetPlicometryById(int id)
         {
             try
             {
@@ -329,7 +329,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult NewPlicometry(Plicometry plicometry)
+        public RestObjectResult NewPlicometry(Plicometry plicometry)
         {
             try
             {
@@ -343,7 +343,7 @@ namespace TLServer.BL
             }
         }
 
-        public RESTObjectResult UpdatePlicometry(Plicometry plicometry)
+        public RestObjectResult UpdatePlicometry(Plicometry plicometry)
         {
             try
             {

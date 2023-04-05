@@ -3,7 +3,7 @@ using RMLibs.basic;
 
 namespace TLServer.BO
 {
-	public class RESTListResult:BasicObject
+	public class RestListResult:BasicObject
 	{
 		public bool Outcome { set; get; }
 		public int Code { set; get; }

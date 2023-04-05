@@ -2,7 +2,6 @@
 using RMLibs.Logging;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
-using System.Text.Json;
 
 namespace RMLibs.basic
 {
@@ -13,7 +12,7 @@ namespace RMLibs.basic
 
         private string FormatLogMsg(string msg, string method)
         {
-            return String.Format("{0}.{1} - {2}", GetType(), method, msg);
+            return $"{GetType()}.{method} - {msg}";
         }
 
         protected void DebugVerbose(string msg, [CallerMemberName] string method = "")
@@ -36,14 +35,14 @@ namespace RMLibs.basic
 
         protected void Error(string msg, string stackTrace = null, [CallerMemberName] string method = "")
         {
-            string message = string.IsNullOrEmpty(stackTrace) ? msg : string.Format("{0} - {1}", msg, stackTrace);
+            string message = string.IsNullOrEmpty(stackTrace) ? msg : $"{msg} - {stackTrace}";
             if (Logger != null) Logger.Error(FormatLogMsg(message, method));
             Console.WriteLine(FormatLogMsg(message, method));
         }
 
         protected void Error(Exception ex, [CallerMemberName] string method = "")
         {
-            string message = string.IsNullOrEmpty(ex.StackTrace) ? ex.Message : string.Format("{0} - {1}", ex.Message, ex.StackTrace);
+            string message = string.IsNullOrEmpty(ex.StackTrace) ? ex.Message : $"{ex.Message} - {ex.StackTrace}";
             if (Logger != null) Logger.Error(FormatLogMsg(message, method));
             Console.WriteLine(FormatLogMsg(message, method));
         }
