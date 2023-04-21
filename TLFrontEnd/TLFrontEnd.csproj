@@ -25,7 +25,6 @@
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="wwwroot\img\" />
-    <Folder Include="Pages\" />
     <Folder Include="Log\" />
     <Folder Include="wwwroot\fullcalendar\" />
   </ItemGroup>

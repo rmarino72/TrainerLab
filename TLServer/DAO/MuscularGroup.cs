@@ -1,7 +1,14 @@
-﻿namespace TLServer.DAO
+﻿using Dapper;
+using RMLibs.basic;
+
+namespace TLServer.DAO
 {
-    public class MuscularGroup
+    [Table("musculargroup")]
+    public class MuscularGroup: BasicObject
     {
-        
+        [Key]
+        public int Id { set; get; }
+        public string Name { set; get; }
+        public string Description { set; get; }
     }
 }

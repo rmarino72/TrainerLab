@@ -522,6 +522,85 @@ namespace TLServer.DBManager
             }
         }
 
+        public List<MuscularGroup> GetMuscularGroups()
+        {
+            try
+            {
+                return Conn.GetList<MuscularGroup>().ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public MuscularGroup GetMuscularGroupById(int id)
+        {
+            try
+            {
+                return Conn.Get<MuscularGroup>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public MuscularGroup GetMuscularGroupByName(string name)
+        {
+            try
+            {
+                string query = string.Format("SELECT * FROM musculargroup WHERE name = {0}", Apex(name));
+                return Conn.Query<MuscularGroup>(query).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void NewMuscularGroup(MuscularGroup muscularGroup)
+        {
+            try
+            {
+                Conn.Insert(muscularGroup);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public void UpdateMuscularGroup(MuscularGroup muscularGroup)
+        {
+            try
+            {
+                Conn.Update(muscularGroup);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public void DeleteMuscularGroup(int Id)
+        {
+            try
+            {
+                Conn.Delete<MuscularGroup>(Id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
     }
 }
 

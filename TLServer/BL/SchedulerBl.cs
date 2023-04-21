@@ -12,27 +12,27 @@ namespace TLServer.BL
 {
 	public class SchedulerBl: GenericBl
 	{
-        #region Singleton
+            #region Singleton
 
-        private static SchedulerBl _instance;
-        private static readonly object Padlock = new object();
+            private static SchedulerBl _instance;
+            private static readonly object Padlock = new object();
 
-        public static SchedulerBl Instance
-        {
-            get
+            public static SchedulerBl Instance
             {
-                lock (Padlock)
+                get
                 {
-                    return _instance ??= new SchedulerBl();
+                    lock (Padlock)
+                    {
+                        return _instance ??= new SchedulerBl();
+                    }
                 }
             }
-        }
 
-        private SchedulerBl() : base(TlLogger.Instance)
-        {
-        }
+            private SchedulerBl() : base(TlLogger.Instance)
+            {
+            }
 
-        #endregion
+            #endregion
 
         public RestListResult GetSlotByInterval(DateTimeInterval interval)
         {

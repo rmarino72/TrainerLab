@@ -25,3 +25,5 @@ var USER_PROVINCE = "user/province/";
 var USER_REGION = "user/region/";
 var USER_ROLE = "user/role/";
 var USER_SEX = "user/sex";
+
+var EXERCISEPLAN_MUSCULARGROUP = "/exerciseplan/musculargroup/";

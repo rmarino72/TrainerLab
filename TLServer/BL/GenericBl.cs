@@ -52,8 +52,15 @@ namespace TLServer.BL
             return result;
         }
 
+        /// <summary>
+        /// Database Manager Instance
+        /// </summary>
         protected TlDbManager BODB => BoDbInstance.Instance;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger"></param>
         protected GenericBl(Logger logger = null)
         {
 			this.Logger = logger;
