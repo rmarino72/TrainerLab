@@ -42,11 +42,11 @@ namespace TLFrontEnd
             Config.Debug = Configuration.GetValue<bool>("Log:Debug");
             Config.Verbose = Configuration.GetValue<bool>("Log:Verbose");
             
-            Config.DbHost = Configuration.GetValue<string>("LocalDatabase:DBHost");
-            Config.DbName = Configuration.GetValue<string>("LocalDatabase:DBName");
-            Config.DbPort = Configuration.GetValue<int>("LocalDatabase:DBPort");
-            Config.DbUser = Configuration.GetValue<string>("LocalDatabase:DBUser");
-            Config.DbPassword = Configuration.GetValue<string>("LocalDatabase:DBPassword");
+            Config.DbHost = Configuration.GetValue<string>("DevDatabase:DBHost");
+            Config.DbName = Configuration.GetValue<string>("DevDatabase:DBName");
+            Config.DbPort = Configuration.GetValue<int>("DevDatabase:DBPort");
+            Config.DbUser = Configuration.GetValue<string>("DevDatabase:DBUser");
+            Config.DbPassword = Configuration.GetValue<string>("DevDatabase:DBPassword");
 
             TlLogger.Instance.Info("Starting TrainerLab...");
 

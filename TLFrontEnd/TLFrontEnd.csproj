@@ -16,6 +16,8 @@
     <None Remove="Swashbuckle.AspNetCore" />
     <None Remove="Pages\" />
     <None Remove="Log\" />
+    <None Remove="Properties\launchSettings.json" />
+    <None Remove="Properties\PublishProfiles\IISProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
@@ -23,6 +25,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="src\" />
     <Folder Include="wwwroot\img\" />
     <Folder Include="Log\" />

@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA6EF5F8-7F8E-4AFA-A37C-4964FB211D5A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TrainerLab</RootNamespace>
+    <AssemblyName>TrainerLab</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44334</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.4.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\alertify\alertify.js" />
+    <Content Include="assets\alertify\alertify.min.js" />
+    <Content Include="assets\alertify\css\alertify.css" />
+    <Content Include="assets\alertify\css\alertify.min.css" />
+    <Content Include="assets\alertify\css\alertify.rtl.css" />
+    <Content Include="assets\alertify\css\alertify.rtl.min.css" />
+    <Content Include="assets\alertify\css\themes\bootstrap.css" />
+    <Content Include="assets\alertify\css\themes\bootstrap.min.css" />
+    <Content Include="assets\alertify\css\themes\bootstrap.rtl.css" />
+    <Content Include="assets\alertify\css\themes\bootstrap.rtl.min.css" />
+    <Content Include="assets\alertify\css\themes\default.css" />
+    <Content Include="assets\alertify\css\themes\default.min.css" />
+    <Content Include="assets\alertify\css\themes\default.rtl.css" />
+    <Content Include="assets\alertify\css\themes\default.rtl.min.css" />
+    <Content Include="assets\alertify\css\themes\semantic.css" />
+    <Content Include="assets\alertify\css\themes\semantic.min.css" />
+    <Content Include="assets\alertify\css\themes\semantic.rtl.css" />
+    <Content Include="assets\alertify\css\themes\semantic.rtl.min.css" />
+    <Content Include="assets\bootstrap-table\bootstrap-table-locale-all.js" />
+    <Content Include="assets\bootstrap-table\bootstrap-table-locale-all.min.js" />
+    <Content Include="assets\bootstrap-table\bootstrap-table-vue.esm.js" />
+    <Content Include="assets\bootstrap-table\bootstrap-table-vue.esm.min.js" />
+    <Content Include="assets\bootstrap-table\bootstrap-table-vue.js" />
+    <Content Include="assets\bootstrap-table\bootstrap-table-vue.min.js" />
+    <Content Include="assets\bootstrap-table\bootstrap-table.css" />
+    <Content Include="assets\bootstrap-table\bootstrap-table.js" />
+    <Content Include="assets\bootstrap-table\bootstrap-table.min.css" />
+    <Content Include="assets\bootstrap-table\bootstrap-table.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\addrbar\bootstrap-table-addrbar.js" />
+    <Content Include="assets\bootstrap-table\extensions\addrbar\bootstrap-table-addrbar.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\auto-refresh\bootstrap-table-auto-refresh.js" />
+    <Content Include="assets\bootstrap-table\extensions\auto-refresh\bootstrap-table-auto-refresh.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\cookie\bootstrap-table-cookie.js" />
+    <Content Include="assets\bootstrap-table\extensions\cookie\bootstrap-table-cookie.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\copy-rows\bootstrap-table-copy-rows.js" />
+    <Content Include="assets\bootstrap-table\extensions\copy-rows\bootstrap-table-copy-rows.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\custom-view\bootstrap-table-custom-view.js" />
+    <Content Include="assets\bootstrap-table\extensions\custom-view\bootstrap-table-custom-view.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\defer-url\bootstrap-table-defer-url.js" />
+    <Content Include="assets\bootstrap-table\extensions\defer-url\bootstrap-table-defer-url.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\editable\bootstrap-table-editable.js" />
+    <Content Include="assets\bootstrap-table\extensions\editable\bootstrap-table-editable.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\export\bootstrap-table-export.js" />
+    <Content Include="assets\bootstrap-table\extensions\export\bootstrap-table-export.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\filter-control\bootstrap-table-filter-control.css" />
+    <Content Include="assets\bootstrap-table\extensions\filter-control\bootstrap-table-filter-control.js" />
+    <Content Include="assets\bootstrap-table\extensions\filter-control\bootstrap-table-filter-control.min.css" />
+    <Content Include="assets\bootstrap-table\extensions\filter-control\bootstrap-table-filter-control.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\filter-control\utils.js" />
+    <Content Include="assets\bootstrap-table\extensions\filter-control\utils.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\fixed-columns\bootstrap-table-fixed-columns.css" />
+    <Content Include="assets\bootstrap-table\extensions\fixed-columns\bootstrap-table-fixed-columns.js" />
+    <Content Include="assets\bootstrap-table\extensions\fixed-columns\bootstrap-table-fixed-columns.min.css" />
+    <Content Include="assets\bootstrap-table\extensions\fixed-columns\bootstrap-table-fixed-columns.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\group-by-v2\bootstrap-table-group-by.css" />
+    <Content Include="assets\bootstrap-table\extensions\group-by-v2\bootstrap-table-group-by.js" />
+    <Content Include="assets\bootstrap-table\extensions\group-by-v2\bootstrap-table-group-by.min.css" />
+    <Content Include="assets\bootstrap-table\extensions\group-by-v2\bootstrap-table-group-by.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\i18n-enhance\bootstrap-table-i18n-enhance.js" />
+    <Content Include="assets\bootstrap-table\extensions\i18n-enhance\bootstrap-table-i18n-enhance.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\key-events\bootstrap-table-key-events.js" />
+    <Content Include="assets\bootstrap-table\extensions\key-events\bootstrap-table-key-events.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\mobile\bootstrap-table-mobile.js" />
+    <Content Include="assets\bootstrap-table\extensions\mobile\bootstrap-table-mobile.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\multiple-sort\bootstrap-table-multiple-sort.js" />
+    <Content Include="assets\bootstrap-table\extensions\multiple-sort\bootstrap-table-multiple-sort.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\page-jump-to\bootstrap-table-page-jump-to.css" />
+    <Content Include="assets\bootstrap-table\extensions\page-jump-to\bootstrap-table-page-jump-to.js" />
+    <Content Include="assets\bootstrap-table\extensions\page-jump-to\bootstrap-table-page-jump-to.min.css" />
+    <Content Include="assets\bootstrap-table\extensions\page-jump-to\bootstrap-table-page-jump-to.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\pipeline\bootstrap-table-pipeline.js" />
+    <Content Include="assets\bootstrap-table\extensions\pipeline\bootstrap-table-pipeline.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\print\bootstrap-table-print.js" />
+    <Content Include="assets\bootstrap-table\extensions\print\bootstrap-table-print.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\reorder-columns\bootstrap-table-reorder-columns.js" />
+    <Content Include="assets\bootstrap-table\extensions\reorder-columns\bootstrap-table-reorder-columns.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\reorder-rows\bootstrap-table-reorder-rows.css" />
+    <Content Include="assets\bootstrap-table\extensions\reorder-rows\bootstrap-table-reorder-rows.js" />
+    <Content Include="assets\bootstrap-table\extensions\reorder-rows\bootstrap-table-reorder-rows.min.css" />
+    <Content Include="assets\bootstrap-table\extensions\reorder-rows\bootstrap-table-reorder-rows.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\resizable\bootstrap-table-resizable.js" />
+    <Content Include="assets\bootstrap-table\extensions\resizable\bootstrap-table-resizable.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\sticky-header\bootstrap-table-sticky-header.css" />
+    <Content Include="assets\bootstrap-table\extensions\sticky-header\bootstrap-table-sticky-header.js" />
+    <Content Include="assets\bootstrap-table\extensions\sticky-header\bootstrap-table-sticky-header.min.css" />
+    <Content Include="assets\bootstrap-table\extensions\sticky-header\bootstrap-table-sticky-header.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\toolbar\bootstrap-table-toolbar.js" />
+    <Content Include="assets\bootstrap-table\extensions\toolbar\bootstrap-table-toolbar.min.js" />
+    <Content Include="assets\bootstrap-table\extensions\treegrid\bootstrap-table-treegrid.js" />
+    <Content Include="assets\bootstrap-table\extensions\treegrid\bootstrap-table-treegrid.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-af-ZA.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-af-ZA.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ar-SA.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ar-SA.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-bg-BG.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-bg-BG.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ca-ES.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ca-ES.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-cs-CZ.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-cs-CZ.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-da-DK.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-da-DK.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-de-DE.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-de-DE.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-el-GR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-el-GR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-en-US.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-en-US.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-AR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-AR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-CL.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-CL.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-CR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-CR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-ES.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-ES.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-MX.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-MX.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-NI.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-NI.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-SP.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-es-SP.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-et-EE.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-et-EE.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-eu-EU.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-eu-EU.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fa-IR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fa-IR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fi-FI.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fi-FI.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-BE.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-BE.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-CH.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-CH.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-FR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-FR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-LU.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-fr-LU.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-he-IL.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-he-IL.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-hi-IN.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-hi-IN.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-hr-HR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-hr-HR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-hu-HU.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-hu-HU.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-id-ID.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-id-ID.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-it-IT.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-it-IT.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ja-JP.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ja-JP.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ka-GE.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ka-GE.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ko-KR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ko-KR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-lb-LU.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-lb-LU.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ms-MY.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ms-MY.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-nb-NO.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-nb-NO.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-nl-BE.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-nl-BE.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-nl-NL.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-nl-NL.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-pl-PL.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-pl-PL.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-pt-BR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-pt-BR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-pt-PT.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-pt-PT.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ro-RO.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ro-RO.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ru-RU.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ru-RU.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sk-SK.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sk-SK.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sr-Cyrl-RS.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sr-Cyrl-RS.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sr-Latn-RS.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sr-Latn-RS.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sv-SE.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-sv-SE.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-th-TH.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-th-TH.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-tr-TR.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-tr-TR.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-uk-UA.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-uk-UA.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ur-PK.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-ur-PK.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-uz-Latn-UZ.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-uz-Latn-UZ.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-vi-VN.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-vi-VN.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-zh-CN.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-zh-CN.min.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-zh-TW.js" />
+    <Content Include="assets\bootstrap-table\locale\bootstrap-table-zh-TW.min.js" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\bootstrap-table.css" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\bootstrap-table.js" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\bootstrap-table.min.css" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\bootstrap-table.min.js" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\fonts\bootstrap-table.eot" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\fonts\bootstrap-table.svg" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\fonts\bootstrap-table.ttf" />
+    <Content Include="assets\bootstrap-table\themes\bootstrap-table\fonts\bootstrap-table.woff" />
+    <Content Include="assets\bootstrap-table\themes\bulma\bootstrap-table-bulma.css" />
+    <Content Include="assets\bootstrap-table\themes\bulma\bootstrap-table-bulma.js" />
+    <Content Include="assets\bootstrap-table\themes\bulma\bootstrap-table-bulma.min.css" />
+    <Content Include="assets\bootstrap-table\themes\bulma\bootstrap-table-bulma.min.js" />
+    <Content Include="assets\bootstrap-table\themes\foundation\bootstrap-table-foundation.css" />
+    <Content Include="assets\bootstrap-table\themes\foundation\bootstrap-table-foundation.js" />
+    <Content Include="assets\bootstrap-table\themes\foundation\bootstrap-table-foundation.min.css" />
+    <Content Include="assets\bootstrap-table\themes\foundation\bootstrap-table-foundation.min.js" />
+    <Content Include="assets\bootstrap-table\themes\materialize\bootstrap-table-materialize.css" />
+    <Content Include="assets\bootstrap-table\themes\materialize\bootstrap-table-materialize.js" />
+    <Content Include="assets\bootstrap-table\themes\materialize\bootstrap-table-materialize.min.css" />
+    <Content Include="assets\bootstrap-table\themes\materialize\bootstrap-table-materialize.min.js" />
+    <Content Include="assets\bootstrap-table\themes\semantic\bootstrap-table-semantic.css" />
+    <Content Include="assets\bootstrap-table\themes\semantic\bootstrap-table-semantic.js" />
+    <Content Include="assets\bootstrap-table\themes\semantic\bootstrap-table-semantic.min.css" />
+    <Content Include="assets\bootstrap-table\themes\semantic\bootstrap-table-semantic.min.js" />
+    <Content Include="assets\css\custom.css" />
+    <Content Include="assets\css\select2.css" />
+    <Content Include="assets\css\select2.min.css" />
+    <Content Include="assets\css\style.blue.css" />
+    <Content Include="assets\css\style.blue.min.css" />
+    <Content Include="assets\css\style.blue.min.css.map" />
+    <Content Include="assets\css\style.default.css" />
+    <Content Include="assets\css\style.default.min.css" />
+    <Content Include="assets\css\style.default.min.css.map" />
+    <Content Include="assets\css\style.green.css" />
+    <Content Include="assets\css\style.green.min.css" />
+    <Content Include="assets\css\style.green.min.css.map" />
+    <Content Include="assets\css\style.pink.css" />
+    <Content Include="assets\css\style.pink.min.css" />
+    <Content Include="assets\css\style.pink.min.css.map" />
+    <Content Include="assets\css\style.red.css" />
+    <Content Include="assets\css\style.red.min.css" />
+    <Content Include="assets\css\style.red.min.css.map" />
+    <Content Include="assets\css\style.sea.css" />
+    <Content Include="assets\css\style.sea.min.css" />
+    <Content Include="assets\css\style.sea.min.css.map" />
+    <Content Include="assets\css\style.violet.css" />
+    <Content Include="assets\css\style.violet.min.css" />
+    <Content Include="assets\css\style.violet.min.css.map" />
+    <Content Include="assets\fullcalendar\index.global.js" />
+    <Content Include="assets\fullcalendar\index.global.min.js" />
+    <Content Include="assets\img\f&amp;f.ico" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\logo_mini.png" />
+    <Content Include="assets\img\user.png" />
+    <Content Include="assets\js\charts-custom.js" />
+    <Content Include="assets\js\charts-home.js" />
+    <Content Include="assets\js\component-gallery.js" />
+    <Content Include="assets\js\config.js" />
+    <Content Include="assets\js\front.js" />
+    <Content Include="assets\js\jquery-3.6.1.min.js" />
+    <Content Include="assets\js\libs.js" />
+    <Content Include="assets\js\select2.js" />
+    <Content Include="assets\js\select2.min.js" />
+    <Content Include="assets\js\site.js" />
+    <Content Include="assets\js\TLLibs.js" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-grid.css" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-grid.min.css" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-reboot.css" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="assets\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="assets\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <Content Include="assets\lib\bootstrap\LICENSE" />
+    <Content Include="assets\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Include="assets\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="assets\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <Content Include="assets\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Include="assets\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Include="assets\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Include="assets\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Include="assets\lib\jquery-validation\LICENSE.md" />
+    <Content Include="assets\lib\jquery\dist\jquery.js" />
+    <Content Include="assets\lib\jquery\dist\jquery.min.js" />
+    <Content Include="assets\lib\jquery\dist\jquery.min.map" />
+    <Content Include="assets\lib\jquery\LICENSE.txt" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.esm.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\vendor\chart.js\Chart.bundle.js" />
+    <Content Include="assets\vendor\chart.js\Chart.bundle.min.js" />
+    <Content Include="assets\vendor\chart.js\Chart.css" />
+    <Content Include="assets\vendor\chart.js\Chart.js" />
+    <Content Include="assets\vendor\chart.js\Chart.min.css" />
+    <Content Include="assets\vendor\chart.js\Chart.min.js" />
+    <Content Include="assets\vendor\choices.js\public\assets\scripts\choices.js" />
+    <Content Include="assets\vendor\choices.js\public\assets\scripts\choices.min.js" />
+    <Content Include="assets\vendor\choices.js\public\assets\styles\base.css" />
+    <Content Include="assets\vendor\choices.js\public\assets\styles\base.min.css" />
+    <Content Include="assets\vendor\choices.js\public\assets\styles\choices.css" />
+    <Content Include="assets\vendor\choices.js\public\assets\styles\choices.min.css" />
+    <Content Include="assets\vendor\imagesloaded\assets\2D333F_0_0.woff" />
+    <Content Include="assets\vendor\imagesloaded\assets\2D333F_0_0.woff2" />
+    <Content Include="assets\vendor\imagesloaded\assets\2D333F_1_0.woff" />
+    <Content Include="assets\vendor\imagesloaded\assets\2D333F_1_0.woff2" />
+    <Content Include="assets\vendor\imagesloaded\assets\2D333F_2_0.woff" />
+    <Content Include="assets\vendor\imagesloaded\assets\2D333F_2_0.woff2" />
+    <Content Include="assets\vendor\imagesloaded\imagesloaded.js" />
+    <Content Include="assets\vendor\imagesloaded\imagesloaded.pkgd.js" />
+    <Content Include="assets\vendor\imagesloaded\imagesloaded.pkgd.min.js" />
+    <Content Include="assets\vendor\imagesloaded\sandbox\background\css\background.css" />
+    <Content Include="assets\vendor\imagesloaded\sandbox\background\index.html" />
+    <Content Include="assets\vendor\imagesloaded\sandbox\progress\index.html" />
+    <Content Include="assets\vendor\imagesloaded\sandbox\progress\progress.js" />
+    <Content Include="assets\vendor\just-validate\css\justValidateTooltip.css" />
+    <Content Include="assets\vendor\just-validate\css\justValidateTooltip.min.css" />
+    <Content Include="assets\vendor\just-validate\index.html" />
+    <Content Include="assets\vendor\just-validate\js\just-validate.js" />
+    <Content Include="assets\vendor\just-validate\js\just-validate.min.js" />
+    <Content Include="assets\vendor\just-validate\tooltip.html" />
+    <Content Include="Components\Foot.ascx" />
+    <Content Include="Components\Head.ascx" />
+    <Content Include="Default.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <Content Include="Properties\PublishProfiles\IISProfile.pubxml.user" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Components\Foot.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Foot.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Foot.ascx.designer.cs">
+      <DependentUpon>Foot.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Head.ascx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Head.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Head.ascx.designer.cs">
+      <DependentUpon>Head.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62151</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44334/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -13,3 +13,9 @@ RMLibs/obj/project.nuget.cache
 RMLibs/obj/
 TLFrontEnd/Properties/launchSettings.json
 .idea/
+packages/
+TLFrontEnd/.config/
+TLFrontEnd/Properties/PublishProfiles/FolderProfile.pubxml
+TrainerLab/bin/Antlr3.Runtime.dll
+TrainerLab/bin/
+TrainerLab/obj/
