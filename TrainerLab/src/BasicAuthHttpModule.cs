@@ -104,7 +104,7 @@ namespace TrainerLab
             if (response.StatusCode == 401)
             {
                 //Remove this to avoid Chrome prompt and force error handling by JQuery
-                //response.Headers.Add("WWW-Authenticate", string.Format("Basic realm=\"{0}\"", Realm));
+                response.Headers.Add("WWW-Authenticate", string.Format("Basic realm=\"{0}\"", Realm));
             }
         }
 
