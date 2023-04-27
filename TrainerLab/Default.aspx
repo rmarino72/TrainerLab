@@ -1,4 +1,6 @@
-﻿<%@ Register Src="~/Components/Head.ascx" TagPrefix="uc1" TagName="Head" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TrainerLab.Default" %>
+
+<%@ Register Src="~/Components/Head.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/Foot.ascx" TagPrefix="uc1" TagName="Foot" %>
 
 

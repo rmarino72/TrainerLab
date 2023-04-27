@@ -1,6 +1,6 @@
 ﻿function refreshUserName(){
     var user = getFromStorage(STORAGE_USER);
-    ajaxCall(USER_FULL + user, 'GET', null, gotMyUser);
+    ajaxCall(USER_FULL + encodeURIComponent(user) + "/", 'GET', null, gotMyUser);
 }
 
 function gotMyUser(data) {

@@ -1,4 +1,5 @@
 ﻿using RMLibs.Logging;
+using System.IO;
 
 namespace TLServer.Logging
 {
@@ -22,7 +23,7 @@ namespace TLServer.Logging
 
         private TlLogger() : base(Config.LogName)
         {            
-            LogPath = Config.LogPath;
+            LogPath = Path.Combine(Config.BaseDir,  Config.LogPath);
             if (Config.Verbose) Level = Logger.VERBOSE;
             else if (Config.Debug) Level = Logger.DEBUG;
             else Level = Logger.INFO;

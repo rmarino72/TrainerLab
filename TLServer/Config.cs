@@ -2,6 +2,7 @@
 {
 	public static class Config
 	{
+        public static bool Local { set; get; }
         public static string Version { set; get; }
         public static string Name { set; get; }
         public static string DisplayName { set; get; }
