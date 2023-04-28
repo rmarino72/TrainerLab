@@ -11,8 +11,7 @@
     <br/>
     <br/>
     <br/>
-    <!--a class="btn btn-danger" href="/Login">[ENTRA]</a-->
-    <h3>Coming soon!</h3>
+    <a class="btn btn-danger" href="/web/Login">[AREA PERSONALE]</a>
 </div>
 
 
