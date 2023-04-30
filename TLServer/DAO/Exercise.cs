@@ -8,8 +8,9 @@ namespace TLServer.DAO
     {
         [Key]
         public int Id { set; get; }
+        public string Name { set; get; }
         public string Description { set; get; }
         public string MuscularGroup { set; get; }
-        public int Image { set; get; }
+        public int ?Image { set; get; }
     }
 }

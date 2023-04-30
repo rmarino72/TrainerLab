@@ -21,7 +21,6 @@ function urlencodeFormData(fd) {
 
 function _error(data) {
     if (data.status == 401) {
-
         storeData(STORAGE_ERROR, "Sessione scaduta!");
         window.location.href = "Error";
         return;
@@ -54,6 +53,46 @@ function _error(data) {
     }
 }
 
+function sendForm(api, method, formData, success) 
+{
+    var url = api;
+    var token = getFromStorage("tlab_token");
+    var user = getFromStorage("tlab_user");
+    _success_func = success;
+    var req = new XMLHttpRequest();
+    req.open(method, api);
+    req.setRequestHeader('Authorization', "Basic " + btoa(user + ":" + token));
+    req.onreadystatechange = function () 
+    {
+        if (req.readyState == 4) 
+        {
+            if (req.status == 401) 
+            {
+                storeData(STORAGE_ERROR, "Sessione scaduta!");
+                window.location.href = "Error";
+                return;
+            }
+            if (data.status == 404) {
+                storeData(STORAGE_ERROR, "pagina non trovata!");
+                window.location.href = "Error";
+                return;
+            }
+
+            if (data.status == 500) {
+                alertify.alert("An internal error has occurred.");
+                return;
+            }
+        }
+    }
+    req.onload = function (e) 
+    {
+        var data = JSON.parse(req.response);
+        var token = req.getResponseHeader('token');
+        storeData("tlab_token", token);
+        _success_func(data);
+    }
+    req.send(formData);
+}
 function _success(data, status, xhr)
 {
     _success_data = data;

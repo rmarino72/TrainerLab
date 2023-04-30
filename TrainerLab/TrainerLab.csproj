@@ -352,6 +352,7 @@
     <Content Include="assets\fullcalendar\index.global.js" />
     <Content Include="assets\fullcalendar\index.global.min.js" />
     <Content Include="assets\img\f&amp;f.ico" />
+    <Content Include="assets\img\fitness.png" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\logo_mini.png" />
     <Content Include="assets\img\user.png" />
@@ -440,6 +441,9 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\images.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Log\log.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -448,6 +452,7 @@
     <Content Include="web\Anthropometry.aspx" />
     <Content Include="web\ChangePass.aspx" />
     <Content Include="web\Error.aspx" />
+    <Content Include="web\Exercise.aspx" />
     <Content Include="web\History.aspx" />
     <Content Include="web\Login.aspx" />
     <Content Include="web\Logout.aspx" />
@@ -534,6 +539,13 @@
     <Compile Include="web\Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
+    <Compile Include="web\Exercise.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Exercise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\Exercise.aspx.designer.cs">
+      <DependentUpon>Exercise.aspx</DependentUpon>
+    </Compile>
     <Compile Include="web\History.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>History.aspx</DependentUpon>
@@ -598,7 +610,6 @@
       <DependentUpon>User.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="assets\bootstrap-table\themes\bootstrap-table\fonts\bootstrap-table.eot" />
     <Content Include="assets\bootstrap-table\themes\bootstrap-table\fonts\bootstrap-table.ttf" />

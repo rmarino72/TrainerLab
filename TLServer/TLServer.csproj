@@ -84,6 +84,7 @@
     <Compile Include="BO\ChangePassData.cs" />
     <Compile Include="BO\DateTimeInterval.cs" />
     <Compile Include="BO\FullAnthropometryView.cs" />
+    <Compile Include="BO\FullExerciseView.cs" />
     <Compile Include="BO\FullSlotView.cs" />
     <Compile Include="BO\FullUserView.cs" />
     <Compile Include="BO\LoginCredentials.cs" />

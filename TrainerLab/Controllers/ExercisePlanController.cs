@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Net.Http;
+using System.Web;
+using System.Web.Http;
 using TLServer.BL;
 using TLServer.BO;
 using TLServer.DAO;
@@ -34,5 +37,22 @@ namespace TrainerLab.Controllers
         [Route("exerciseplan/musculargroup/{id:int}")]
         public RestObjectResult DeleteMuscularGroup(int id) =>
             ExercisePlanBl.Instance.DeleteMuscularGroup(id);
+
+        [HttpGet]
+        [Route("exerciseplan/exercise")]
+        public RestListResult GetFullExercises() => ExercisePlanBl.Instance.GetFullExercises();
+
+        [HttpGet]
+        [Route("exerciseplan/exercise/{id:int}")]
+        public RestObjectResult GetFullExerciseById(int id) => ExercisePlanBl.Instance.GetFullExerciseById(id);
+
+        [HttpPost]
+        [Route("exerciseplan/exercise")]
+        public RestObjectResult NewExercise() => ExercisePlanBl.Instance.NewExercise(HttpContext.Current.Request);
+        
+        [HttpPatch]
+        [Route("exerciseplan/exercise")]
+        public RestObjectResult UpdateExercise() => ExercisePlanBl.Instance.UpdateExercise(HttpContext.Current.Request);
+
     }
 }

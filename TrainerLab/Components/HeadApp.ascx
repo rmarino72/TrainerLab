@@ -184,6 +184,15 @@
                             </a>
                         </li>
                         
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="Exercise">
+                                <span class="material-symbols-outlined">
+                                    body_system
+                                </span>
+                                &nbsp; Esercizi
+                            </a>
+                        </li>
+                        
                         
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="Setup">

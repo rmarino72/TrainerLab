@@ -20,6 +20,8 @@
         public static string LogPath { set; get; }
         public static bool Debug { set; get; }
         public static bool Verbose { set; get; }
+        
+        public static string ImagesPath { set; get; }
 
         /*Config table*/
         public static int DismissTolerance { set; get; }

@@ -601,6 +601,110 @@ namespace TLServer.DBManager
             }
         }
 
+        public List<FullExerciseView> GetFullExercises()
+        {
+            try
+            {
+                return Conn.GetList<FullExerciseView>().ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public FullExerciseView GetFullExerciseById(int id)
+        {
+            try
+            {
+                return Conn.Get<FullExerciseView>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public Exercise GetExerciseById(int id)
+        {
+            try
+            {
+                return Conn.Get<Exercise>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public int? NewExercise(Exercise exercise)
+        {
+            try
+            {
+                return Conn.Insert(exercise);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public int? UpdateExercise(Exercise exercise)
+        {
+            try
+            {
+                return Conn.Update(exercise);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public int? NewImage(Image image)
+        {
+            try
+            {
+                return Conn.Insert(image);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public Image GetImageById(int? id)
+        {
+            try
+            {
+                return id==null?null:Conn.Get<Image>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void DeleteImage(int? id)
+        {
+            try
+            {
+                Conn.Delete<Image>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
     }
 }
 

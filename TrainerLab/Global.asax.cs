@@ -24,6 +24,7 @@ namespace TrainerLab
             Config.Name = ConfigurationManager.AppSettings.Get("AppName");
             Config.Debug = bool.Parse(ConfigurationManager.AppSettings.Get("Debug"));
             Config.Verbose = bool.Parse(ConfigurationManager.AppSettings.Get("Verbose"));
+            Config.ImagesPath = ConfigurationManager.AppSettings.Get("ImagePath");
             TLServer.Logging.TlLogger.Instance.Info("Trainer Lab Started!");
         }
         protected void Application_BeginRequest(object source, EventArgs e)

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Web;
 using RMLibs.basic;
+using RMLibs.Utilities;
 using TLServer.BO;
 using TLServer.DAO;
 using TLServer.Logging;
@@ -102,6 +105,127 @@ namespace TLServer.BL
             }
             catch (Exception ex)
             {
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RestListResult GetFullExercises()
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetFullExercises().Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                return HandleListException(ex);
+            }
+        }
+
+        public RestObjectResult GetFullExerciseById(int id)
+        {
+            try
+            {
+                return MakeRestObjectResponse(BODB.GetFullExerciseById(id));
+            }
+            catch (Exception ex)
+            {
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RestObjectResult NewExercise(HttpRequest request)
+        {
+            try
+            {
+                Image image = null;
+                Exercise exercise = new Exercise()
+                {
+                    Name = request.Form.Get("Name"),
+                    MuscularGroup = request.Form.Get("MuscularGroup"),
+                    Description = request.Form.Get("Description")
+                };
+                if (request.Files.Count > 0)
+                {
+                    string uid = SecurityUtils.GetNewGuid();
+                    HttpPostedFile postedFile = request.Files[0];
+                    if (postedFile != null)
+                    {
+                        string[] fileNameParts = postedFile.FileName.Split('.');
+                        string fileName = uid + "." + fileNameParts.Last();
+                        image = new Image()
+                        {
+                            Path = fileName
+                        };
+                        string filePath = Path.Combine(Config.BaseDir, Config.ImagesPath, fileName);
+                        postedFile.SaveAs(filePath);
+                    }
+                }
+                using (var ts = BODB.CreateTransactionScope())
+                {
+                    var imageId = image != null ? BODB.NewImage(image) : null;
+                    exercise.Image = imageId;
+                    BODB.NewExercise(exercise);
+                    ts.Complete();
+                    ts.Dispose();
+                }
+
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleObjectException(ex);
+            }
+        }
+
+        public RestObjectResult UpdateExercise(HttpRequest request)
+        {
+            try
+            {
+                Image image = null;
+                int id = int.Parse(request.Form.Get("Id"));
+                var exercise = BODB.GetExerciseById(id);
+                exercise.Name = request.Form.Get("Name");
+                exercise.MuscularGroup = request.Form.Get("MuscularGroup");
+                exercise.Description = request.Form.Get("Description");
+                if (request.Files.Count > 0)
+                {
+                    if (exercise.Image != null)
+                    {
+                        Image oldImg = BODB.GetImageById(exercise.Image);
+                        var path = Path.Combine(Config.BaseDir, Config.ImagesPath, oldImg.Path);
+                        File.Delete(path);
+                    }
+
+                    string uid = SecurityUtils.GetNewGuid();
+                    HttpPostedFile postedFile = request.Files[0];
+                    if (postedFile != null)
+                    {
+                        string[] fileNameParts = postedFile.FileName.Split('.');
+                        string fileName = uid + "." + fileNameParts.Last();
+                        image = new Image()
+                        {
+                            Path = fileName
+                        };
+                        var filePath = Path.Combine(Config.BaseDir, Config.ImagesPath, fileName);
+                        postedFile.SaveAs(filePath);
+                    }
+                    
+                }
+                using (var ts = BODB.CreateTransactionScope())
+                {
+                    int? oldId = exercise.Image;
+                    if (image != null) exercise.Image = BODB.NewImage(image);
+                    BODB.UpdateExercise(exercise);
+                    if (oldId != null && image != null) BODB.DeleteImage(oldId);
+                    ts.Complete();
+                    ts.Dispose();
+                }
+                return MakeRestObjectResponse(null);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
                 return HandleObjectException(ex);
             }
         }
