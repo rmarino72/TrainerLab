@@ -453,6 +453,7 @@
     <Content Include="web\ChangePass.aspx" />
     <Content Include="web\Error.aspx" />
     <Content Include="web\Exercise.aspx" />
+    <Content Include="web\ExerciseSheet.aspx" />
     <Content Include="web\History.aspx" />
     <Content Include="web\Login.aspx" />
     <Content Include="web\Logout.aspx" />
@@ -545,6 +546,13 @@
     </Compile>
     <Compile Include="web\Exercise.aspx.designer.cs">
       <DependentUpon>Exercise.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\ExerciseSheet.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>ExerciseSheet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\ExerciseSheet.aspx.designer.cs">
+      <DependentUpon>ExerciseSheet.aspx</DependentUpon>
     </Compile>
     <Compile Include="web\History.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>

@@ -131,6 +131,14 @@
                         &nbsp; Anamnesi Personale
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="ExerciseSheet">
+                        <span class="material-symbols-outlined">
+                            assignment
+                        </span>
+                        &nbsp; Schede Esercizi
+                    </a>
+                </li>
             </ul>
 
 
