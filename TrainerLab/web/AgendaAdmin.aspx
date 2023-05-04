@@ -453,7 +453,7 @@
         if (!editing)
         {
             
-            ajaxCall(SCHEDULER_SLOT, 'PUT', JSON.stringify(slot), done);
+            ajaxCall(SCHEDULER_SLOT + "new/", 'POST', JSON.stringify(slot), done);
         }
         else
         {
