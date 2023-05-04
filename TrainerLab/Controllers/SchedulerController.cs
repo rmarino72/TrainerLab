@@ -25,12 +25,12 @@ namespace TrainerLab.Controllers
         [Route("scheduler/free/{id}")]
         public RestObjectResult FreeSlot(int id) => SchedulerBl.Instance.FreeSlot(id);
 
-        [HttpPut]
-        [Route("scheduler/slot")]
+        [HttpPost]
+        [Route("scheduler/slot/new/")]
         public RestObjectResult NewSlot([FromBody] Slot slot) => SchedulerBl.Instance.NewSlot(slot);
 
         [HttpPatch]
-        [Route("scheduler/slot")]
+        [Route("scheduler/slot/")]
         public RestObjectResult UpdateSlot([FromBody] Slot slot) => SchedulerBl.Instance.UpdateSlot(slot);
 
         [HttpGet]
