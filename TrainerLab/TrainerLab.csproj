@@ -54,6 +54,9 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -79,6 +82,9 @@
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -462,10 +468,12 @@
     <Content Include="web\MuscularGroup.aspx" />
     <Content Include="web\Setup.aspx" />
     <Content Include="web\Template.aspx" />
+    <Content Include="web\TrainingPlanManager.aspx" />
     <Content Include="web\User.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Components\Foot.ascx.cs">
       <DependentUpon>Foot.ascx</DependentUpon>
@@ -512,6 +520,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\BasicAuthHttpModule.cs" />
+    <Compile Include="src\SwaggerConfig.cs" />
     <Compile Include="web\AgendaAdmin.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>AgendaAdmin.aspx</DependentUpon>
@@ -609,6 +618,13 @@
     </Compile>
     <Compile Include="web\Template.aspx.designer.cs">
       <DependentUpon>Template.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\TrainingPlanManager.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>TrainingPlanManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\TrainingPlanManager.aspx.designer.cs">
+      <DependentUpon>TrainingPlanManager.aspx</DependentUpon>
     </Compile>
     <Compile Include="web\User.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>

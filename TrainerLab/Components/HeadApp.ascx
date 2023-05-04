@@ -201,6 +201,14 @@
                             </a>
                         </li>
                         
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="TrainingPlanManager">
+                                <span class="material-symbols-outlined">
+                                    clinical_notes
+                                </span>
+                                &nbsp; Schede Allenamento
+                            </a>
+                        </li>
                         
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="Setup">

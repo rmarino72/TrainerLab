@@ -54,5 +54,10 @@ namespace TrainerLab.Controllers
         [Route("exerciseplan/exercise")]
         public RestObjectResult UpdateExercise() => ExercisePlanBl.Instance.UpdateExercise(HttpContext.Current.Request);
 
+        [HttpGet]
+        [Route("exerciseplan/trainingplan/{id:int}/")]
+        public RestListResult GetTrainingPlanByUserId(int id) =>
+            ExercisePlanBl.Instance.GetTrainingPlansByUserId(id);
+
     }
 }

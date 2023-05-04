@@ -28,3 +28,4 @@ var USER_SEX = "/user/sex";
 
 var EXERCISEPLAN_MUSCULARGROUP = "/exerciseplan/musculargroup/";
 var EXERCISEPLAN_EXERCISE = "/exerciseplan/exercise/";
+var EXERCISEPLAN_TRAININGPLAN = "/exerciseplan/trainingplan/";

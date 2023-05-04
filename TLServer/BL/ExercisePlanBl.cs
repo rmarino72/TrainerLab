@@ -230,5 +230,29 @@ namespace TLServer.BL
             }
         }
 
+        public RestListResult GetTrainingPlansByUserId(int id)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetTrainingPlansByUserId(id).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                return HandleListException(ex);
+            }
+        }
+
+        public RestListResult GetFullTrainingPlanByUserEmail(string email)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetFullTrainingPlansByUserEmail(email).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                return HandleListException(ex);
+            }
+        }
+
     }
 }

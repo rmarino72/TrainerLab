@@ -705,6 +705,125 @@ namespace TLServer.DBManager
             }
         }
 
+        public List<TrainingPlan> GetTrainingPlansByUserId(int id)
+        {
+            try
+            {
+                var query = string.Format("SELECT * FROM trainingplan WHERE USER = {0} ORDER BY Date DESC", id);
+                return Conn.Query<TrainingPlan>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public List<FullTrainingPlanView> GetFullTrainingPlans()
+        {
+            try
+            {
+                return Conn.GetList<FullTrainingPlanView>().ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public List<FullTrainingPlanView> GetFullTrainingPlansByUserEmail(string email)
+        {
+            try
+            {
+                var query = $@"SELECT * FROM fulltrainingplanview WHERE Email = {Apex(email)}";
+                return Conn.Query<FullTrainingPlanView>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public FullTrainingPlanView GetFullTrainingPlanById(int id)
+        {
+            try
+            {
+                return Conn.Get<FullTrainingPlanView>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void NewTrainingPlan(TrainingPlan trainingPlan)
+        {
+            try
+            {
+                Conn.Insert(trainingPlan);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public void UpdateTrainingPlan(TrainingPlan trainingPlan)
+        {
+            try
+            {
+                Conn.Update(trainingPlan);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void NewTrainingPlanDetail(TrainingPlanDetail trainingPlanDetail)
+        {
+            try
+            {
+                Conn.Insert(trainingPlanDetail);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public void UpdateTrainingPlanDetail(TrainingPlanDetail trainingPlanDetail)
+        {
+            try
+            {
+                Conn.Update(trainingPlanDetail);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
+        public void DeleteTrainingPlanDetail(int id)
+        {
+            try
+            {
+                Conn.Delete<TrainingPlanDetail>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
     }
 }
 

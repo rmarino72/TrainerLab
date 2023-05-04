@@ -86,6 +86,7 @@
     <Compile Include="BO\FullAnthropometryView.cs" />
     <Compile Include="BO\FullExerciseView.cs" />
     <Compile Include="BO\FullSlotView.cs" />
+    <Compile Include="BO\FullTrainingPlanView.cs" />
     <Compile Include="BO\FullUserView.cs" />
     <Compile Include="BO\LoginCredentials.cs" />
     <Compile Include="BO\RESTListResult.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="DAO\Sex.cs" />
     <Compile Include="DAO\Slot.cs" />
     <Compile Include="DAO\SlotStatus.cs" />
+    <Compile Include="DAO\TrainingPlan.cs" />
+    <Compile Include="DAO\TrainingPlanDetail.cs" />
     <Compile Include="DAO\User.cs" />
     <Compile Include="DAO\UserData.cs" />
     <Compile Include="DBManager\BoDbInstance.cs" />
