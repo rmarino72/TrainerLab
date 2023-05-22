@@ -24,7 +24,7 @@
     <link href="/assets/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Favicon-->
-    <link rel="shortcut icon" href="/assets/img/f&f.ico">
+    <link rel="shortcut icon" href="/assets/img/fef.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
 

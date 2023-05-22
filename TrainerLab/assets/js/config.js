@@ -2,6 +2,7 @@
 var STORAGE_USER = "tlab_user";
 var STORAGE_USER_DATA = "tlab_user_data";
 var STORAGE_ERROR = "tlab_error";
+var STORAGE_TRAININGPLANDETAIL = "tlab_tpdetail";
 
 /****************** ENDPOINTS */
 var APP_CONFIG = "/app/config/";
@@ -28,4 +29,7 @@ var USER_SEX = "/user/sex";
 
 var EXERCISEPLAN_MUSCULARGROUP = "/exerciseplan/musculargroup/";
 var EXERCISEPLAN_EXERCISE = "/exerciseplan/exercise/";
+var EXERCISEPLAN_EXERCISE_BYMUSCULARGROUP = "/exerciseplan/exercise/bymusculargroup/";
 var EXERCISEPLAN_TRAININGPLAN = "/exerciseplan/trainingplan/";
+var EXERCISEPLAN_TRAININGPLAN_BYUSER = "/exerciseplan/trainingplan/user/";
+

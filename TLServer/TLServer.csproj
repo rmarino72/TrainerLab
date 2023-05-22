@@ -82,6 +82,7 @@
     <Compile Include="BL\TLAppBL.cs" />
     <Compile Include="BL\UserBL.cs" />
     <Compile Include="BO\ChangePassData.cs" />
+    <Compile Include="BO\CompleteTrainingPlan.cs" />
     <Compile Include="BO\DateTimeInterval.cs" />
     <Compile Include="BO\FullAnthropometryView.cs" />
     <Compile Include="BO\FullExerciseView.cs" />

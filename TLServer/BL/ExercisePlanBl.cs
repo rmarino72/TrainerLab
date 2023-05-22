@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Web;
 using RMLibs.basic;
@@ -7,6 +6,7 @@ using RMLibs.Utilities;
 using TLServer.BO;
 using TLServer.DAO;
 using TLServer.Logging;
+using Exception = System.Exception;
 
 namespace TLServer.BL
 {
@@ -133,6 +133,18 @@ namespace TLServer.BL
             }
         }
 
+        public RestListResult GetFullExerciseByMuscularGroup(string muscularGroup)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetFullExerciseByMuscularGroup(muscularGroup).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                return HandleListException(ex);
+            }
+        }
+
         public RestObjectResult NewExercise(HttpRequest request)
         {
             try
@@ -251,6 +263,79 @@ namespace TLServer.BL
             catch (Exception ex)
             {
                 return HandleListException(ex);
+            }
+        }
+
+        public RestListResult GetFullTrainingPlanById(int id)
+        {
+            try
+            {
+                return MakeRestListResponse(BODB.GetFullTrainingPlanById(id).Cast<BasicObject>().ToList());
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                return HandleListException(ex);
+            }
+        }
+
+        public RestObjectResult NewTrainingPlan(CompleteTrainingPlan completeTrainingPlan)
+        {
+            if (completeTrainingPlan.Details.Count == 0)
+            {
+                return HandleObjectException(new Exception("Non sono stati inseriti esercizi per questo piano!"));
+            }
+
+            using (var ts = BODB.CreateTransactionScope())
+            {
+                try
+                {
+                    var id= BODB.NewTrainingPlan(completeTrainingPlan);
+                    foreach (var detail in completeTrainingPlan.Details)
+                    {
+                        detail.TrainingPlanId = id;
+                        BODB.NewTrainingPlanDetail(detail);
+                    }
+
+                    ts.Complete();
+                    ts.Dispose();
+                    return MakeRestObjectResponse(null);
+                }
+                catch (Exception ex)
+                {
+                    ts.Dispose();
+                    return HandleObjectException(ex);
+                }
+            }
+        }
+
+        public RestObjectResult UpdateTrainingPlan(CompleteTrainingPlan completeTrainingPlan)
+        {
+            if (completeTrainingPlan.Details.Count == 0)
+            {
+                return HandleObjectException(new Exception("Non sono stati inseriti esercizi per questo piano!"));
+            }
+            using (var ts = BODB.CreateTransactionScope())
+            {
+                try
+                {
+                    var id = completeTrainingPlan.Id;
+                    BODB.DeleteTrainingPlanDetailByTrainingPlanId((int)id);
+                    foreach (var detail in completeTrainingPlan.Details)
+                    {
+                        detail.TrainingPlanId = id;
+                        BODB.NewTrainingPlanDetail(detail);
+                    }
+                    BODB.UpdateTrainingPlan(completeTrainingPlan);
+                    ts.Complete();
+                    ts.Dispose();
+                    return MakeRestObjectResponse(null);
+                }
+                catch (Exception ex)
+                {
+                    ts.Dispose();
+                    return HandleObjectException(ex);
+                }
             }
         }
 

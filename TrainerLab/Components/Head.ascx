@@ -26,7 +26,7 @@
     <link href="/assets/css/select2.css" rel="stylesheet" />
 
     <!-- Favicon-->
-    <link rel="shortcut icon" href="/assets/img/f&f.ico">
+    <link rel="shortcut icon" href="/assets/img/fef.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
 

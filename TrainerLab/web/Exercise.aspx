@@ -142,7 +142,6 @@
                 text: e.Description
             }));
         });
-
     }
     
     function edit(row)

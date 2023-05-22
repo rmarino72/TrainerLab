@@ -26,7 +26,7 @@
     <link href="/assets/css/select2.css" rel="stylesheet" />
 
     <!-- Favicon-->
-    <link rel="shortcut icon" href="/assets/img/f&f.ico">
+    <link rel="shortcut icon" href="/assets/img/fef.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
 
@@ -131,12 +131,22 @@
                         &nbsp; Anamnesi Personale
                     </a>
                 </li>
+                
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="ExerciseSheet">
                         <span class="material-symbols-outlined">
                             assignment
                         </span>
                         &nbsp; Schede Esercizi
+                    </a>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="PersonalPlan">
+                        <span class="material-symbols-outlined">
+                            body_system
+                        </span>
+                        &nbsp; Le Tue Schede Allenamento
                     </a>
                 </li>
             </ul>

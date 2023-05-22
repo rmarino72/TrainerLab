@@ -21,7 +21,7 @@
     <link href="/assets/alertify/css/themes/bootstrap.css" rel="stylesheet" type="text/css" />
 
     <!-- Favicon-->
-    <link rel="shortcut icon" href="/assets/img/F&f.ico">
+    <link rel="shortcut icon" href="/assets/img/fef.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>

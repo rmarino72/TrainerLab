@@ -8,7 +8,7 @@ namespace TLServer.DAO;
 public class TrainingPlan: BasicObject
 {
     [Key]
-    public int Id { set; get; }
+    public int? Id { set; get; }
     public string Name { set; get; }
     public string Description { set; get; }
     public DateTime Date { set; get; }

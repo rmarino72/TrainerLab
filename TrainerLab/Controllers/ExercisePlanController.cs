@@ -45,6 +45,10 @@ namespace TrainerLab.Controllers
         [HttpGet]
         [Route("exerciseplan/exercise/{id:int}")]
         public RestObjectResult GetFullExerciseById(int id) => ExercisePlanBl.Instance.GetFullExerciseById(id);
+        
+        [HttpGet]
+        [Route("exerciseplan/exercise/bymusculargroup/{musculargroup}/")]
+        public RestListResult GetFullExerciseByMuscularGroup(string muscularGroup) => ExercisePlanBl.Instance.GetFullExerciseByMuscularGroup(muscularGroup);
 
         [HttpPost]
         [Route("exerciseplan/exercise")]
@@ -56,8 +60,21 @@ namespace TrainerLab.Controllers
 
         [HttpGet]
         [Route("exerciseplan/trainingplan/{id:int}/")]
+        public RestListResult GetFullTrainingPlanById(int id) => ExercisePlanBl.Instance.GetFullTrainingPlanById(id);
+        
+        [HttpGet]
+        [Route("exerciseplan/trainingplan/user/{id:int}/")]
         public RestListResult GetTrainingPlanByUserId(int id) =>
             ExercisePlanBl.Instance.GetTrainingPlansByUserId(id);
 
+        [HttpPost]
+        [Route("exerciseplan/trainingplan/")]
+        public RestObjectResult NewTrainingPlan([FromBody] CompleteTrainingPlan completeTrainingPlan) =>
+            ExercisePlanBl.Instance.NewTrainingPlan(completeTrainingPlan);
+        
+        [HttpPatch]
+        [Route("exerciseplan/trainingplan/")]
+        public RestObjectResult UpdateTrainingPlan([FromBody] CompleteTrainingPlan completeTrainingPlan) =>
+            ExercisePlanBl.Instance.UpdateTrainingPlan(completeTrainingPlan);
     }
 }

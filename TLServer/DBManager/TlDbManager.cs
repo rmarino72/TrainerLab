@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Transactions;
 using Dapper;
@@ -627,6 +628,20 @@ namespace TLServer.DBManager
             }
         }
         
+        public List<FullExerciseView> GetFullExerciseByMuscularGroup(string muscularGroup)
+        {
+            try
+            {
+                var query = string.Format("SELECT * FROM fullexerciseview WHERE MuscularGroup = {0} ORDER BY Name", Apex(muscularGroup));
+                return Conn.Query<FullExerciseView>(query).ToList();
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+        
         public Exercise GetExerciseById(int id)
         {
             try
@@ -746,11 +761,12 @@ namespace TLServer.DBManager
             }
         }
 
-        public FullTrainingPlanView GetFullTrainingPlanById(int id)
+        public List<FullTrainingPlanView> GetFullTrainingPlanById(int id)
         {
             try
             {
-                return Conn.Get<FullTrainingPlanView>(id);
+                var query = string.Format("SELECT * FROM fulltrainingplanview WHERE TrainingPlanId = {0}", id);
+                return Conn.Query<FullTrainingPlanView>(query).ToList();
             }
             catch (Exception ex)
             {
@@ -759,11 +775,12 @@ namespace TLServer.DBManager
             }
         }
 
-        public void NewTrainingPlan(TrainingPlan trainingPlan)
+        public int? NewTrainingPlan(TrainingPlan trainingPlan)
         {
             try
             {
                 Conn.Insert(trainingPlan);
+                return GetLastInsertedId().lastId;
             }
             catch (Exception ex)
             {
@@ -816,6 +833,20 @@ namespace TLServer.DBManager
             try
             {
                 Conn.Delete<TrainingPlanDetail>(id);
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                throw;
+            }
+        }
+
+        public void DeleteTrainingPlanDetailByTrainingPlanId(int trainingPlanId)
+        {
+            try
+            {
+                var sql = $"DELETE FROM TrainingPlanDetail WHERE TrainingPlanId = {trainingPlanId}";
+                Conn.Execute(sql);
             }
             catch (Exception ex)
             {

@@ -1,6 +1,9 @@
-﻿namespace TLServer.BO;
+﻿using System.Collections.Generic;
+using TLServer.DAO;
 
-public class CompleteTrainingPlan
+namespace TLServer.BO;
+
+public class CompleteTrainingPlan: TrainingPlan
 {
-    
+    public List<TrainingPlanDetail>Details { set; get; }
 }

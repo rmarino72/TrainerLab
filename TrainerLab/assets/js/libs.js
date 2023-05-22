@@ -152,14 +152,14 @@ function clearStorage() {
 
 //********************************* BOOTSTRAP TABLE
 
-function fillDataTable(tableId, data, onClickCB = null, showHeader = false) {
+function fillDataTable(tableId, data, onClickCB = null, showHeader = false, search = true) {
     $('#' + tableId).bootstrapTable('destroy');
     var tableOptions = {
         data: data,
         cardView: false,
         trimOnSearch: false,
         pagination: true,
-        search: true,
+        search: search,
         pageLength: 25,
         showHeader: showHeader,
     };
@@ -197,6 +197,10 @@ function resetSelect(selectId) {
 * @returns {boolean} 
 */
 function isEmpty(str) {
+    if(str === null)
+    {
+        return true;    
+    }    
     return (!str || 0 === str.length);
 }
 

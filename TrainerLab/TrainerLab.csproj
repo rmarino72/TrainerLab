@@ -357,7 +357,7 @@
     <Content Include="assets\css\style.violet.min.css" />
     <Content Include="assets\fullcalendar\index.global.js" />
     <Content Include="assets\fullcalendar\index.global.min.js" />
-    <Content Include="assets\img\f&amp;f.ico" />
+    <Content Include="assets\img\fef.ico" />
     <Content Include="assets\img\fitness.png" />
     <Content Include="assets\img\logo.png" />
     <Content Include="assets\img\logo_mini.png" />
@@ -466,6 +466,7 @@
     <Content Include="web\Main.aspx" />
     <Content Include="web\Me.aspx" />
     <Content Include="web\MuscularGroup.aspx" />
+    <Content Include="web\PersonalPlan.aspx" />
     <Content Include="web\Setup.aspx" />
     <Content Include="web\Template.aspx" />
     <Content Include="web\TrainingPlanManager.aspx" />
@@ -604,6 +605,13 @@
     </Compile>
     <Compile Include="web\MuscularGroup.aspx.designer.cs">
       <DependentUpon>MuscularGroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\PersonalPlan.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>PersonalPlan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\PersonalPlan.aspx.designer.cs">
+      <DependentUpon>PersonalPlan.aspx</DependentUpon>
     </Compile>
     <Compile Include="web\Setup.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
