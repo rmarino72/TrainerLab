@@ -22,7 +22,7 @@
 }
 
 .select2-container--default .select2-selection--single {
-    border: 0px solid;  
+    border: 0px solid;
     border-radius: 0px !important;
     width: 100%;
 }

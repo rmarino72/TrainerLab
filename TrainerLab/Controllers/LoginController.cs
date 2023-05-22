@@ -2,22 +2,21 @@
 using TLServer.BL;
 using TLServer.BO;
 
+namespace TrainerLab.Controllers;
 
-namespace TrainerLab.Controllers
+public class LoginController : ApiController
 {
-    public class LoginController : ApiController
+    [HttpPost]
+    [Route("login")]
+    public RestObjectResult Login([FromBody] LoginCredentials loginCredentials)
     {
-        [HttpPost]
-        [Route("login")]
-        public RestObjectResult Login([FromBody] LoginCredentials loginCredentials) => AuthBl.Instance.Login(loginCredentials.Email, loginCredentials.Password);
+        return AuthBl.Instance.Login(loginCredentials.Email, loginCredentials.Password);
+    }
 
-        [HttpGet]
-        [Route("test")]
-        public string test()
-        {
-            return "hello";
-        }
-        
-
+    [HttpGet]
+    [Route("test")]
+    public string test()
+    {
+        return "hello";
     }
 }

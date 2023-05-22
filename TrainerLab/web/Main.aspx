@@ -1,18 +1,18 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
-<br />
-<br />
+<uc1:Head runat="server" id="Head"/>
+<br/>
+<br/>
 
 <div class="col-lg-12">
     <div class="container">
         <div class="card mb-0">
             <a name="top"></a>
             <div class="card-body pt-0">
-                <input type="hidden" id="slot-id" />
+                <input type="hidden" id="slot-id"/>
                 <div class="alert alert-success" role="alert" id="eventDetail">
                     <strong class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Dettaglio evento</strong>
-                    <hr />
+                    <hr/>
                     <div class="row">
                         <div class="col-lg-6">
                             Data: <span id="date-txt">12/12/2022</span>
@@ -29,7 +29,7 @@
                             Ora fine: <span id="end-txt">10:00</span>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button type="button" class="btn btn-success" id="book-btn">Prenota</button>
                     <button type="button" class="btn btn-secondary" id="delbooking-btn">Disdici</button>
                     <button type="button" class="btn btn-primary" id="closeevent-btn">Chiudi</button>
@@ -46,7 +46,7 @@
             <div class="card-header">
                 <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; La Tua Agenda</h3>
             </div>
-            <div class="card-body pt-0">                
+            <div class="card-body pt-0">
                 <div class="row">
                     <div id="calendar" class="col-lg-12">
 
@@ -106,7 +106,7 @@
 
         var user = getFromStorage(STORAGE_USER);
 
-        var interval = new Object();
+        var interval = {};
 
         interval.Start = dateForCSharp(e.start);
         interval.End = dateForCSharp(e.end);
@@ -124,7 +124,7 @@
         {
             data.Data.forEach(e => {
 
-                var event = new Object();
+                var event = {};
                 event.id = e.Id;
                 event.start = e.StartDateTime;
                 event.end = e.EndDateTime;
@@ -252,4 +252,4 @@
     }
 </script>
 
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

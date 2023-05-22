@@ -1,36 +1,33 @@
-﻿using RMLibs.Logging;
-using System.IO;
+﻿using System.IO;
+using RMLibs.Logging;
 
-namespace TLServer.Logging
+namespace TLServer.Logging;
+
+public class TlLogger : Logger
 {
-	public class TlLogger: Logger
-	{
-        #region Singleton
+    #region Singleton
 
-        private static TlLogger _instance;
-        private static readonly object Padlock = new object();
+    private static TlLogger _instance;
+    private static readonly object Padlock = new();
 
-        public static TlLogger Instance
+    public static TlLogger Instance
+    {
+        get
         {
-            get
+            lock (Padlock)
             {
-                lock (Padlock)
-                {
-                    return _instance ??= new TlLogger();
-                }
+                return _instance ??= new TlLogger();
             }
         }
-
-        private TlLogger() : base(Config.LogName)
-        {            
-            LogPath = Path.Combine(Config.BaseDir,  Config.LogPath);
-            if (Config.Verbose) Level = Logger.VERBOSE;
-            else if (Config.Debug) Level = Logger.DEBUG;
-            else Level = Logger.INFO;
-        }
-
-
-        #endregion
     }
-}
 
+    private TlLogger() : base(Config.LogName)
+    {
+        LogPath = Path.Combine(Config.BaseDir, Config.LogPath);
+        if (Config.Verbose) Level = VERBOSE;
+        else if (Config.Debug) Level = DEBUG;
+        else Level = INFO;
+    }
+
+    #endregion
+}

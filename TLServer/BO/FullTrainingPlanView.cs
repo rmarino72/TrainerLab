@@ -5,10 +5,10 @@ using RMLibs.basic;
 namespace TLServer.BO;
 
 [Table("fulltrainingplanview")]
-public class FullTrainingPlanView: BasicObject
+public class FullTrainingPlanView : BasicObject
 {
-    [Key]
-    public int Id { set; get; }
+    [Key] public int Id { set; get; }
+
     public string FirstName { set; get; }
     public string LastName { set; get; }
     public string Email { set; get; }
@@ -28,5 +28,4 @@ public class FullTrainingPlanView: BasicObject
     public string MuscularGroupName { set; get; }
     public string ExerciseDescription { set; get; }
     public string Image { set; get; }
-
 }

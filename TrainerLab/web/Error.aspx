@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it-it">
 <head>
     <meta charset="utf-8">
@@ -16,20 +15,20 @@
     <link rel="stylesheet" href="/assets/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/assets/css/custom.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
     <!-- https://fonts.google.com/icons -->
 
-    <link href="/assets/alertify/css/alertify.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/alertify/css/themes/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/alertify/css/alertify.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/alertify/css/themes/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- Favicon-->
     <link rel="shortcut icon" href="/assets/img/fef.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
 
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 
 
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -51,31 +50,31 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <div class="card mb-0">
-            <div class="card-header">
-                <h1><span class="material-symbols-outlined">error</span>&nbsp; Si è verificato un errore</h1>
-            </div>
-            <br />
-            <br />
-            <div class="card-body pt-0">
-                <div class="text-center">
-                    <h3 id="message">Messaggio di errore</h3>
-                    <br />
-                    <br />
-                    <button class="btn btn-primary" type="button" onclick="goLogin();"><span class="material-symbols-outlined">done</span>&nbsp; Torna al Login</button>
-                    
-                </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="card mb-0">
+        <div class="card-header">
+            <h1><span class="material-symbols-outlined">error</span>&nbsp; Si è verificato un errore</h1>
+        </div>
+        <br/>
+        <br/>
+        <div class="card-body pt-0">
+            <div class="text-center">
+                <h3 id="message">Messaggio di errore</h3>
+                <br/>
+                <br/>
+                <button class="btn btn-primary" type="button" onclick="goLogin();"><span class="material-symbols-outlined">done</span>&nbsp; Torna al Login</button>
+
             </div>
         </div>
     </div>
+</div>
 
-    <script>
+<script>
 
 
         function goLogin() {

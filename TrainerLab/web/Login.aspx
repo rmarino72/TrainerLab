@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -17,71 +16,71 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/assets/css/custom.css">
 
-    <link href="/assets/alertify/css/alertify.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/alertify/css/themes/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/alertify/css/alertify.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/alertify/css/themes/bootstrap.css" rel="stylesheet" type="text/css"/>
 
     <!-- Favicon-->
     <link rel="shortcut icon" href="/assets/img/fef.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <body>
-    <div class="login-page">
-        <div class="container d-flex align-items-center position-relative py-5">
-            <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
-                <div class="card-body p-0">
-                    <div class="row gx-0 align-items-stretch">
-                        <!-- Logo & Information Panel-->
-                        <div class="col-lg-6">
-                            <div class="d-flex justify-content-center flex-column p-4 h-100">
-                                <img src="/assets/img/logo.png" />
-                            </div>
+<div class="login-page">
+    <div class="container d-flex align-items-center position-relative py-5">
+        <div class="card shadow-sm w-100 rounded overflow-hidden bg-none">
+            <div class="card-body p-0">
+                <div class="row gx-0 align-items-stretch">
+                    <!-- Logo & Information Panel-->
+                    <div class="col-lg-6">
+                        <div class="d-flex justify-content-center flex-column p-4 h-100">
+                            <img src="/assets/img/logo.png"/>
                         </div>
-                        <!-- Form Panel    -->
-                        <div class="col-lg-6 bg-white">
-                            <div class="d-flex align-items-center px-4 px-lg-5 h-100 bg-dash-dark-2">
-                                <form class="login-form py-5 w-100" method="get" action="javascript:login();">
-                                    <h1>Login</h1>
-                                    <div class="input-material-group mb-3">
-                                        <input class="input-material" id="login-username" type="email" name="loginUsername" autocomplete="off" required data-validate-field="loginUsername">
-                                        <label class="label-material" for="login-username">Email</label>
-                                    </div>
-                                    <div class="input-material-group mb-4">
-                                        <input class="input-material" id="login-password" type="password" name="loginPassword" required data-validate-field="loginPassword">
-                                        <label class="label-material" for="login-password">Password</label>
-                                    </div>
-                                    <button class="btn btn-primary mb-3" id="login" type="submit">Login</button>
-                                </form>
-                            </div>
+                    </div>
+                    <!-- Form Panel    -->
+                    <div class="col-lg-6 bg-white">
+                        <div class="d-flex align-items-center px-4 px-lg-5 h-100 bg-dash-dark-2">
+                            <form class="login-form py-5 w-100" method="get" action="javascript:login();">
+                                <h1>Login</h1>
+                                <div class="input-material-group mb-3">
+                                    <input class="input-material" id="login-username" type="email" name="loginUsername" autocomplete="off" required data-validate-field="loginUsername">
+                                    <label class="label-material" for="login-username">Email</label>
+                                </div>
+                                <div class="input-material-group mb-4">
+                                    <input class="input-material" id="login-password" type="password" name="loginPassword" required data-validate-field="loginPassword">
+                                    <label class="label-material" for="login-password">Password</label>
+                                </div>
+                                <button class="btn btn-primary mb-3" id="login" type="submit">Login</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="login-footer text-center position-absolute bottom-0 start-0 w-100">
-
-            <p class="mb-0 text-dash-gray">Trainer Lab - 2022 &copy; RM.</p>
-
-        </div>
     </div>
-    <!-- JavaScript files-->
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/assets/vendor/just-validate/js/just-validate.min.js"></script>
-    <script src="/assets/vendor/chart.js/Chart.min.js"></script>
-    <script src="/assets/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
-    <script src="/assets/js/jquery-3.6.1.min.js" type="text/javascript"></script>
-    <script src="/assets/alertify/alertify.js" type="text/javascript"></script>
-    <script src="/assets/js/libs.js" type="text/javascript"></script>
-    <script src="/assets/js/config.js" type="text/javascript"></script>
-    <script src="/assets/js/TLLibs.js" type="text/javascript"></script>
-    <!-- Main File-->
-    <script src="/assets/js/front.js"></script>
+    <div class="login-footer text-center position-absolute bottom-0 start-0 w-100">
 
-    <script>var user = null;
+        <p class="mb-0 text-dash-gray">Trainer Lab - 2022 &copy; RM.</p>
+
+    </div>
+</div>
+<!-- JavaScript files-->
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/just-validate/js/just-validate.min.js"></script>
+<script src="/assets/vendor/chart.js/Chart.min.js"></script>
+<script src="/assets/vendor/choices.js/public/assets/scripts/choices.min.js"></script>
+<script src="/assets/js/jquery-3.6.1.min.js" type="text/javascript"></script>
+<script src="/assets/alertify/alertify.js" type="text/javascript"></script>
+<script src="/assets/js/libs.js" type="text/javascript"></script>
+<script src="/assets/js/config.js" type="text/javascript"></script>
+<script src="/assets/js/TLLibs.js" type="text/javascript"></script>
+<!-- Main File-->
+<script src="/assets/js/front.js"></script>
+
+<script>var user = null;
         function login() {
-            var o = new Object();
+            var o = {};
 
             user = $('#login-username').val();
             o.Email = user;
@@ -119,7 +118,7 @@
                 alertify.alert("Error", "Session expired!", function () {
                     clearStorage();
                     window.location = "index.php";
-                    return;
+                    
                 });
             }
 
@@ -129,7 +128,7 @@
 
             if (data.status == 500) {
                 alertify.alert("An internal error has occurred.");
-                return;
+                
             }
             else {
                 var err_code = "ERROR " + data.status + ": ";
@@ -171,7 +170,7 @@
         // while using file:// protocol
         // pls don't forget to change to your domain :)
         injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');</script>
-    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </body>
 </html>

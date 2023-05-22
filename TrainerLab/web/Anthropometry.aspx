@@ -1,6 +1,6 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
 
 <br/>
@@ -16,14 +16,14 @@
                 <div class="table-responsive">
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="dataTable">
                         <thead>
-                            <tr>
-                                <th data-field="Id" data-visible="false">#</th>
-                                <th data-field="FirstName">Nome</th>
-                                <th data-field="LastName">Cognome</th>
-                                <th data-field="Email">Email</th>
-                                <th data-field="BirthDate">Data di nascita</th>
-                                <th data-field="City">Citt&agrave;</th>
-                            </tr>
+                        <tr>
+                            <th data-field="Id" data-visible="false">#</th>
+                            <th data-field="FirstName">Nome</th>
+                            <th data-field="LastName">Cognome</th>
+                            <th data-field="Email">Email</th>
+                            <th data-field="BirthDate">Data di nascita</th>
+                            <th data-field="City">Citt&agrave;</th>
+                        </tr>
                         </thead>
                         <tbody role="button"></tbody>
                     </table>
@@ -38,12 +38,14 @@
 
 
         <button type="button" class="btn btn-primary" id="cancel-list-btn"><span class="material-symbols-outlined">arrow_back_ios</span>&nbsp; Indietro</button>
-        <hr />
-        <h2><span id="user-txt"></span></h2>
-        <br />
+        <hr/>
+        <h2>
+            <span id="user-txt"></span>
+        </h2>
+        <br/>
         <div class="row">
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
 
                 <div class="card mb-0">
                     <div class="card-header">
@@ -52,14 +54,14 @@
 
                     <div class="card-body pt-0">
                         <button type="button" class="btn btn-primary" id="new-btn"><span class="material-symbols-outlined">add</span>&nbsp; Nuovo</button> &nbsp;
-                        <hr />
+                        <hr/>
                         <div class="table-responsive">
                             <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="listTable">
                                 <thead>
-                                    <tr>
-                                        <th data-field="Id" data-visible="false">#</th>
-                                        <th data-field="Date">Data e Ora</th>
-                                    </tr>
+                                <tr>
+                                    <th data-field="Id" data-visible="false">#</th>
+                                    <th data-field="Date">Data e Ora</th>
+                                </tr>
                                 </thead>
                                 <tbody role="button"></tbody>
                             </table>
@@ -69,7 +71,7 @@
             </div>
 
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
 
                 <div class="card mb-0">
                     <div class="card-header">
@@ -77,14 +79,14 @@
                     </div>
                     <div class="card-body pt-0">
                         <button type="button" class="btn btn-primary" id="new-btn-plico"><span class="material-symbols-outlined">add</span>&nbsp; Nuovo</button> &nbsp;
-                        <hr />
+                        <hr/>
                         <div class="table-responsive">
                             <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="plicoTable">
                                 <thead>
-                                    <tr>
-                                        <th data-field="Id" data-visible="false">#</th>
-                                        <th data-field="Date">Data e Ora</th>
-                                    </tr>
+                                <tr>
+                                    <th data-field="Id" data-visible="false">#</th>
+                                    <th data-field="Date">Data e Ora</th>
+                                </tr>
                                 </thead>
                                 <tbody role="button"></tbody>
                             </table>
@@ -94,7 +96,7 @@
             </div>
 
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="h4 mb-0">Peso kg.</h3>
@@ -106,12 +108,12 @@
             </div>
         </div>
 
-        <hr />
+        <hr/>
 
         <h3> Misura circonferenze in cm.</h3>
         <div class="row">
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Spalle</strong>
@@ -120,7 +122,7 @@
                 </div>
             </div>
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Torace</strong>
@@ -129,7 +131,7 @@
                 </div>
             </div>
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Vita</strong>
@@ -140,7 +142,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Fianchi</strong>
@@ -149,7 +151,7 @@
                 </div>
             </div>
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Braccio sinistro</strong>
@@ -158,7 +160,7 @@
                 </div>
             </div>
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Braccio destro</strong>
@@ -169,7 +171,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Coscia sinistra</strong>
@@ -178,7 +180,7 @@
                 </div>
             </div>
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Coscia destra</strong>
@@ -187,7 +189,7 @@
                 </div>
             </div>
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Poplaccio sinistro</strong>
@@ -199,7 +201,7 @@
 
         <div class="row">
             <div class="col-lg-4 container-fluid">
-                <br />
+                <br/>
                 <div class="card">
                     <div class="card-body">
                         <strong>Polpaccio Destro</strong>
@@ -222,7 +224,7 @@
             <div class="card-body pt-0">
 
                 <form id="editForm" action="javascript:update();" method="get">
-                    <input type="hidden" id="anthropometry-id" />
+                    <input type="hidden" id="anthropometry-id"/>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
@@ -328,7 +330,7 @@
                         </div>
 
                     </div>
-           
+
                     <div class="row">
 
                         <div class="col-lg-12">
@@ -338,7 +340,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
                     <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
@@ -355,7 +357,7 @@
             </div>
             <div class="card-body pt-0">
                 <form id="plicoForm" action="javascript:updateplico();" method="get">
-                    <input type="hidden" id="plicometry-id" />
+                    <input type="hidden" id="plicometry-id"/>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
@@ -434,7 +436,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="button" id="plico-cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
                     <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
@@ -728,14 +730,14 @@
             alertify.error(data.Message);
             return;
         }
-        var r = new Object();
+        var r = {};
         r.Email = currentUser;
         updateListPage(r);
     }
 
     function formToObj(withId=false)
     {
-        var o = new Object();
+        var o = {};
         o.Id = withId ? parseInt($('#anthropometry-id').val()) : -1;
         o.FirstName = "";
         o.LastName = "";
@@ -762,7 +764,7 @@
     }
 
     function plicoformToObj(withId = false) {
-        var o = new Object();
+        var o = {};
         o.Id = withId ? $('#plicometry-id').val() : -1;
         o.Date = dateForCSharp(new Date($('#plicodate-txt').val()));
         o.Email = currentUser;
@@ -780,4 +782,4 @@
 
 </script>
 
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

@@ -1,118 +1,109 @@
 ﻿using System;
 using RMLibs.Utilities;
 using TLServer.BO;
-using TLServer.DAO;
 using TLServer.Logging;
 
-namespace TLServer.BL
+namespace TLServer.BL;
+
+public class AuthBl : GenericBl
 {
-    public class AuthBl : GenericBl
+    private string RenewToken(string email)
     {
-        #region Singleton
-
-        private static AuthBl _instance;
-        private static readonly object Padlock = new object();
-
-        public static AuthBl Instance
+        try
         {
-            get
-            {
-                lock (Padlock)
-                {
-                    return _instance ??= new AuthBl();
-                }
-            }
+            var user = BODB.GetUserByEmail(email);
+            user.Token = SecurityUtils.GetNewGuid();
+            user.ValidTokenDateTime = DateTime.Now.AddMinutes(Config.Session);
+            BODB.UpdateUser(user);
+            return user.Token;
         }
-
-        private AuthBl() : base(TlLogger.Instance)
+        catch (Exception ex)
         {
+            Error(ex);
+            throw;
         }
+    }
 
-        #endregion
-
-        private string RenewToken(string email)
+    public string VerifyToken(string email, string token)
+    {
+        try
         {
-            try
+            var user = BODB.GetUserByEmail(email);
+            if (user.Token != token)
             {
-                User user = BODB.GetUserByEmail(email);
-                user.Token = SecurityUtils.GetNewGuid();
-                user.ValidTokenDateTime = DateTime.Now.AddMinutes(Config.Session);
-                BODB.UpdateUser(user);
-                return user.Token;
+                Debug("Wrong token");
+                return string.Empty;
             }
-            catch (Exception ex)
+
+            if (DateTime.Now > user.ValidTokenDateTime)
             {
-                Error(ex);
-                throw;
+                Debug("Token Expired");
+                return string.Empty;
             }
+
+            return RenewToken(email);
         }
-
-        public string VerifyToken(string email, string token)
+        catch (Exception ex)
         {
-            try
-            {
-                User user = BODB.GetUserByEmail(email);
-                if (user.Token != token)
-                {
-                    Debug("Wrong token");
-                    return string.Empty;
-                }
-                if (DateTime.Now > user.ValidTokenDateTime)
-                {
-                    Debug("Token Expired");
-                    return string.Empty;
-                }
-                return RenewToken(email);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return String.Empty;
-            }
+            Error(ex);
+            return string.Empty;
         }
+    }
 
-        public RestObjectResult Login(string email, string password)
+    public RestObjectResult Login(string email, string password)
+    {
+        try
         {
-            try
-            {
-                User user = BODB.GetUserByEmail(email);
-                if (user == null)
-                {
-                    return MakeRestObjectResponse(null, false, 1, "user not found");
-                }
-                if (StringUtils.DecodeBase64(user.Password) != password)
-                {
-                    return MakeRestObjectResponse(null, false, 2, "wrong password");
-                }
-                return MakeRestObjectResponse(new StringValue { Value=RenewToken(email)});
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            var user = BODB.GetUserByEmail(email);
+            if (user == null) return MakeRestObjectResponse(null, false, 1, "user not found");
+            if (StringUtils.DecodeBase64(user.Password) != password)
+                return MakeRestObjectResponse(null, false, 2, "wrong password");
+            return MakeRestObjectResponse(new StringValue { Value = RenewToken(email) });
         }
-
-        public RestObjectResult Logout(string email)
+        catch (Exception ex)
         {
-            try
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult Logout(string email)
+    {
+        try
+        {
+            var user = BODB.GetUserByEmail(email);
+            if (user == null) return MakeRestObjectResponse(null, false, 1, "user not found");
+            user.Token = string.Empty;
+            user.ValidTokenDateTime = null;
+            BODB.UpdateUser(user);
+            return MakeRestObjectResponse(null);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    #region Singleton
+
+    private static AuthBl _instance;
+    private static readonly object Padlock = new();
+
+    public static AuthBl Instance
+    {
+        get
+        {
+            lock (Padlock)
             {
-                User user = BODB.GetUserByEmail(email);
-                if (user == null)
-                {
-                    return MakeRestObjectResponse(null, false, 1, "user not found");
-                }
-                user.Token = String.Empty;
-                user.ValidTokenDateTime = null;
-                BODB.UpdateUser(user);
-                return MakeRestObjectResponse(null);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
+                return _instance ??= new AuthBl();
             }
         }
     }
-}
 
+    private AuthBl() : base(TlLogger.Instance)
+    {
+    }
+
+    #endregion
+}

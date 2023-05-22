@@ -4,10 +4,10 @@ using RMLibs.basic;
 namespace TLServer.DAO;
 
 [Table("trainingplandetail")]
-public class TrainingPlanDetail: BasicObject
+public class TrainingPlanDetail : BasicObject
 {
-    [Key]
-    public int Id { set; get; }
+    [Key] public int Id { set; get; }
+
     public int? TrainingPlanId { set; get; }
     public int Day { set; get; }
     public int SeqNumber { set; get; }

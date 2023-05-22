@@ -17,21 +17,21 @@
     <link rel="stylesheet" href="/assets/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="/assets/css/custom.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
     <!-- https://fonts.google.com/icons -->
 
-    <link href="/assets/alertify/css/alertify.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/alertify/css/themes/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/css/select2.css" rel="stylesheet" />
+    <link href="/assets/alertify/css/alertify.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/alertify/css/themes/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/assets/css/select2.css" rel="stylesheet"/>
 
     <!-- Favicon-->
     <link rel="shortcut icon" href="/assets/img/fef.ico">
     <!-- Tweaks for older IEs-->
     <!--[if lt IE 9]>
 
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 
 
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -50,13 +50,12 @@
     <script src="/assets/js/select2.js"></script>
 
 
-
     <script src="/assets/js/libs.js" type="text/javascript"></script>
     <script src="/assets/js/config.js" type="text/javascript"></script>
     <script src="/assets/js/TLLibs.js" type="text/javascript"></script>
 
 </head>
 <body>
-    
-    <div class="container">
-        <main role="main" class="pb-3">
+
+<div class="container">
+<main role="main" class="pb-3">

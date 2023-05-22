@@ -1,5 +1,4 @@
-﻿
-//*************************** AJAX
+﻿//*************************** AJAX
 
 var _success_func = null;
 var _success_data = null;
@@ -8,6 +7,7 @@ var refreshed_yet = false;
 function encode(s) {
     return encodeURIComponent(s).replace(/%20/g, '+');
 }
+
 function urlencodeFormData(fd) {
     var s = '';
 
@@ -34,9 +34,8 @@ function _error(data) {
 
     if (data.status == 500) {
         alertify.alert("An internal error has occurred.");
-        return;
-    }
-    else {
+
+    } else {
         var err_code = "ERROR " + data.status + ": ";
         var resp = JSON.parse(data.responseText);
         if (resp.detail) {
@@ -53,8 +52,7 @@ function _error(data) {
     }
 }
 
-function sendForm(api, method, formData, success) 
-{
+function sendForm(api, method, formData, success) {
     var url = api;
     var token = getFromStorage("tlab_token");
     var user = getFromStorage("tlab_user");
@@ -62,12 +60,9 @@ function sendForm(api, method, formData, success)
     var req = new XMLHttpRequest();
     req.open(method, api);
     req.setRequestHeader('Authorization', "Basic " + btoa(user + ":" + token));
-    req.onreadystatechange = function () 
-    {
-        if (req.readyState == 4) 
-        {
-            if (req.status == 401) 
-            {
+    req.onreadystatechange = function () {
+        if (req.readyState == 4) {
+            if (req.status == 401) {
                 storeData(STORAGE_ERROR, "Sessione scaduta!");
                 window.location.href = "Error";
                 return;
@@ -80,12 +75,11 @@ function sendForm(api, method, formData, success)
 
             if (data.status == 500) {
                 alertify.alert("An internal error has occurred.");
-                return;
+
             }
         }
     }
-    req.onload = function (e) 
-    {
+    req.onload = function (e) {
         var data = JSON.parse(req.response);
         var token = req.getResponseHeader('token');
         storeData("tlab_token", token);
@@ -93,12 +87,12 @@ function sendForm(api, method, formData, success)
     }
     req.send(formData);
 }
-function _success(data, status, xhr)
-{
+
+function _success(data, status, xhr) {
     _success_data = data;
     var token = xhr.getResponseHeader('token');
     localStorage["tlab_token"] = token;
-    _success_func(_success_data);    
+    _success_func(_success_data);
 }
 
 function ajaxCall(api, type, data, success, error = _error) {
@@ -193,39 +187,38 @@ function resetSelect(selectId) {
 }
 
 /**
-* @param {string} str
-* @returns {boolean} 
-*/
+ * @param {string} str
+ * @returns {boolean}
+ */
 function isEmpty(str) {
-    if(str === null)
-    {
-        return true;    
-    }    
+    if (str === null) {
+        return true;
+    }
     return (!str || 0 === str.length);
 }
 
 /**
-* @param {string} str 
-* @returns {boolean}
-*/
+ * @param {string} str
+ * @returns {boolean}
+ */
 function isBlank(str) {
     return (!str || /^\s*$/.test(str));
 }
 
 /**
-* returns true if email is a valid mail address
-* @param {string} email
-* @returns {Boolean} 
-*/
+ * returns true if email is a valid mail address
+ * @param {string} email
+ * @returns {Boolean}
+ */
 function validateEmail(email) {
     return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email));
 }
 
 /**
-* returns true if value is a valid phone number
-* @param {string} value
-* @returns {Boolean}
-*/
+ * returns true if value is a valid phone number
+ * @param {string} value
+ * @returns {Boolean}
+ */
 function validatePhoneNumber(value) {
     var phoneno = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
     return phoneno.test(value);
@@ -257,8 +250,7 @@ function formatPrice(value) {
     }
     if (isNaN(v)) {
         return "0.00";
-    }
-    else {
+    } else {
         return "" + parseFloat(v).toFixed(2);
     }
 }
@@ -269,13 +261,11 @@ function nullable(v) {
 
 //************************************* DATE TIME
 
-function getLocalDate()
-{
+function getLocalDate() {
     return DateTimeUtils.convertUTCDateToLocalDate(new Date());
 }
 
-function convertUTCDateToLocalDate(date)
-{
+function convertUTCDateToLocalDate(date) {
     var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
     var offset = date.getTimezoneOffset() / 60;
     var hours = date.getHours();
@@ -283,41 +273,49 @@ function convertUTCDateToLocalDate(date)
     return newDate;
 }
 
-function dateForCSharp(date)
-{
+function dateForCSharp(date) {
     return date.toJSON();
 }
 
-function italianFormatFullDateTime(date)
-{
-    var options = { 'weekday': 'long', 'month': '2-digit', 'year': 'numeric', 'day': '2-digit', 'hour': '2-digit', 'minute': '2-digit' };
+function italianFormatFullDateTime(date) {
+    var options = {
+        'weekday': 'long',
+        'month': '2-digit',
+        'year': 'numeric',
+        'day': '2-digit',
+        'hour': '2-digit',
+        'minute': '2-digit'
+    };
     return date.toLocaleString('it-IT', options);
 }
 
 function italianFormatDateTime(date) {
-    var options = { 'day': 'numeric', 'month': '2-digit', 'year': 'numeric', 'day': '2-digit', 'hour': '2-digit', 'minute': '2-digit' };
+    var options = {
+        'day': 'numeric',
+        'month': '2-digit',
+        'year': 'numeric',
+        'day': '2-digit',
+        'hour': '2-digit',
+        'minute': '2-digit'
+    };
     return date.toLocaleString('it-IT', options);
 }
 
-function italianFormatDate(date)
-{
-    var options = { 'day': 'numeric', 'month': '2-digit', 'year': 'numeric', 'day': '2-digit' };
+function italianFormatDate(date) {
+    var options = {'day': 'numeric', 'month': '2-digit', 'year': 'numeric', 'day': '2-digit'};
     return date.toLocaleString('it-IT', options);
 }
 
-function formatTime(date)
-{
-    var options = { 'hour': '2-digit', 'minute': '2-digit' };
+function formatTime(date) {
+    var options = {'hour': '2-digit', 'minute': '2-digit'};
     return date.toLocaleString('it-IT', options);
 }
 
-function dateForInput(dt)
-{
+function dateForInput(dt) {
     var date = new Date(dt);
     return "" + date.getFullYear() + "-" + pad(date.getMonth() + 1, 2) + "-" + pad(date.getDate(), 2);
 }
 
-function splitDateFormat(dateStr)
-{
+function splitDateFormat(dateStr) {
     return dateStr.split("/").reverse().join("/");
 }

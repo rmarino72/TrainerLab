@@ -2,61 +2,56 @@
 using TLServer.BO;
 using TLServer.Logging;
 
-namespace TLServer.BL
+namespace TLServer.BL;
+
+public class TLAppBL : GenericBl
 {
-	public class TLAppBL:GenericBl
-	{
-        #region Singleton
-
-        private static TLAppBL instance = null;
-        private static readonly object padlock = new object();
-
-        public static TLAppBL Instance
+    public RestObjectResult GetConfig()
+    {
+        try
         {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new TLAppBL();
-                    }
-                    return instance;
-                }
-            }
+            return MakeRestObjectResponse(BODB.GetConfig());
         }
-
-        private TLAppBL() : base(TlLogger.Instance)
+        catch (Exception ex)
         {
+            return HandleObjectException(ex);
         }
+    }
 
-        #endregion
-
-        public RestObjectResult GetConfig()
+    public RestObjectResult UpdateConfig(DAO.Config config)
+    {
+        try
         {
-            try
-            {
-                return MakeRestObjectResponse(BODB.GetConfig());
-            }
-            catch (Exception ex)
-            {
-                return HandleObjectException(ex);
-            }
+            BODB.UpdateConfig(config);
+            Config.DismissTolerance = config.DismissTolerance;
+            return MakeRestObjectResponse(null);
         }
-
-        public RestObjectResult UpdateConfig(DAO.Config config)
+        catch (Exception ex)
         {
-            try
+            return HandleObjectException(ex);
+        }
+    }
+
+    #region Singleton
+
+    private static TLAppBL instance;
+    private static readonly object padlock = new();
+
+    public static TLAppBL Instance
+    {
+        get
+        {
+            lock (padlock)
             {
-                BODB.UpdateConfig(config);
-                TLServer.Config.DismissTolerance = config.DismissTolerance;
-                return MakeRestObjectResponse(null);
-            }
-            catch (Exception ex)
-            {
-                return HandleObjectException(ex);
+                if (instance == null) instance = new TLAppBL();
+                return instance;
             }
         }
     }
-}
 
+    private TLAppBL() : base(TlLogger.Instance)
+    {
+    }
+
+    #endregion
+}

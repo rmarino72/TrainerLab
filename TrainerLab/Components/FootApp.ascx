@@ -1,21 +1,21 @@
 ﻿<%@ Control Language="C#" CodeBehind="FootApp.ascx.cs" Inherits="TrainerLab.Components.FootApp" %>
 
-           
 
-        </div>
+
+</div>
+</div>
+<!--footer class="position-absolute bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer"-->
+<footer class="fixed-bottom bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer">
+    <div class="container-fluid text-center">
+        <p class="mb-0 text-dash-gray">FF Studio - Via Roma 94 - 84070 Trentinara (SA)</p>
+        <p class="mb-0 text-dash-gray">Trainer Lab - 2022 &copy; RM.</p>
     </div>
-    <!--footer class="position-absolute bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer"-->
-    <footer class="fixed-bottom bottom-0 bg-dash-dark-2 text-white text-center py-3 w-100 text-xs" id="footer">
-        <div class="container-fluid text-center">
-            <p class="mb-0 text-dash-gray">FF Studio - Via Roma 94 - 84070 Trentinara (SA)</p>
-            <p class="mb-0 text-dash-gray">Trainer Lab - 2022 &copy; RM.</p>
-        </div>
-    </footer>
+</footer>
 
-    <!-- JavaScript files-->
-    <!-- Main File-->
-    <script src="/assets/js/front.js"></script>
-    <script>// ------------------------------------------------------- //
+<!-- JavaScript files-->
+<!-- Main File-->
+<script src="/assets/js/front.js"></script>
+<script>// ------------------------------------------------------- //
         //   Inject SVG Sprite -
         //   see more here
         //   https://css-tricks.com/ajaxing-svg-sprite/
@@ -52,8 +52,7 @@
             ajaxStop: hideSpinner
         });
         refreshUserName();</script>
-    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </body>
 </html>
-

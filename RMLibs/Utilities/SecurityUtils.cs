@@ -1,12 +1,11 @@
 ﻿using System;
-namespace RMLibs.Utilities
+
+namespace RMLibs.Utilities;
+
+public class SecurityUtils
 {
-	public class SecurityUtils
-	{
-        public static string GetNewGuid()
-        {
-            return Guid.NewGuid().ToString();
-        }
+    public static string GetNewGuid()
+    {
+        return Guid.NewGuid().ToString();
     }
 }
-

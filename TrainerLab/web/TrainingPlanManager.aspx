@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" CodeBehind="TrainingPlanManager.aspx.cs" Inherits="TrainerLab.web.TrainingPlanManager" %>
 <%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 <br/>
 
 <div class="col-lg-12" id="mainPg">
@@ -15,14 +15,14 @@
                 <div class="table-responsive">
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="dataTable">
                         <thead>
-                            <tr>
-                                <th data-field="Id" data-visible="false">#</th>
-                                <th data-field="FirstName">Nome</th>
-                                <th data-field="LastName">Cognome</th>
-                                <th data-field="Email">Email</th>
-                                <th data-field="BirthDate">Data di nascita</th>
-                                <th data-field="City">Citt&agrave;</th>
-                            </tr>
+                        <tr>
+                            <th data-field="Id" data-visible="false">#</th>
+                            <th data-field="FirstName">Nome</th>
+                            <th data-field="LastName">Cognome</th>
+                            <th data-field="Email">Email</th>
+                            <th data-field="BirthDate">Data di nascita</th>
+                            <th data-field="City">Citt&agrave;</th>
+                        </tr>
                         </thead>
                         <tbody role="button"></tbody>
                     </table>
@@ -46,11 +46,11 @@
             <div class="table-responsive">
                 <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="listTable">
                     <thead>
-                        <tr>
-                            <th data-field="Id" data-visible="false">#</th>
-                            <th data-field="Date">Data</th>
-                            <th data-field="Name">Nome</th>
-                        </tr>
+                    <tr>
+                        <th data-field="Id" data-visible="false">#</th>
+                        <th data-field="Date">Data</th>
+                        <th data-field="Name">Nome</th>
+                    </tr>
                     </thead>
                     <tbody role="button"></tbody>
                 </table>
@@ -66,10 +66,10 @@
             </div>
         </div>
         <div class="card-body pt-0">
-        
+
             <form id="editForm" action="javascript:update();" method="get">
-                <input type="hidden" id="user-id" />
-                <input type="hidden" id="trainingplan-id" />
+                <input type="hidden" id="user-id"/>
+                <input type="hidden" id="trainingplan-id"/>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="input-material-group col-lg-12">
@@ -96,7 +96,7 @@
                                 <option value="4"> 4 </option>
                             </select>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 <hr/>
                 <div id="day1-div">
@@ -107,93 +107,93 @@
                     <br/>
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day1-tbl">
                         <thead>
-                            <tr>
-                                <th data-field="Id" data-visible="false">#</th>
-                                <th data-field="Day" data-visible="false">#</th>
-                                <th data-field="SeqNumber" data-visible="false">#</th>
-                                <th data-field="ExerciseId" data-visible="false">#</th>
-                                <th data-field="ExerciseName">Nome Esercizio</th>
-                                <th data-field="Time">Tempo</th>
-                                <th data-field="Sequences">Sequenze</th>
-                                <th data-field="Repetitions">Ripetizioni</th>
-                                <th data-field="ExerciseNotes" data-visible="false">#</th>
-                                <th data-field="MuscularGroupId" data-visible="false">#</th>
-                            </tr>
+                        <tr>
+                            <th data-field="Id" data-visible="false">#</th>
+                            <th data-field="Day" data-visible="false">#</th>
+                            <th data-field="SeqNumber" data-visible="false">#</th>
+                            <th data-field="ExerciseId" data-visible="false">#</th>
+                            <th data-field="ExerciseName">Nome Esercizio</th>
+                            <th data-field="Time">Tempo</th>
+                            <th data-field="Sequences">Sequenze</th>
+                            <th data-field="Repetitions">Ripetizioni</th>
+                            <th data-field="ExerciseNotes" data-visible="false">#</th>
+                            <th data-field="MuscularGroupId" data-visible="false">#</th>
+                        </tr>
                         </thead>
                         <tbody role="button"></tbody>
                     </table>
                     <hr/>
                 </div>
                 <div id="day2-div">
-                    <h5>Giorno 2</h5>    
+                    <h5>Giorno 2</h5>
                     <br/>
                     <button type="button" onclick="addExercise(2);" class="btn btn-primary" id="addday2-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day2-tbl">
                         <thead>
-                            <tr>
-                                <th data-field="Id" data-visible="false">#</th>
-                                <th data-field="Day" data-visible="false">#</th>
-                                <th data-field="SeqNumber" data-visible="false">#</th>
-                                <th data-field="ExerciseId" data-visible="false">#</th>
-                                <th data-field="ExerciseName">Nome Esercizio</th>
-                                <th data-field="Time">Tempo</th>
-                                <th data-field="Sequences">Sequenze</th>
-                                <th data-field="Repetitions">Ripetizioni</th>
-                                <th data-field="ExerciseNotes" data-visible="false">#</th>
-                                <th data-field="MuscularGroupId" data-visible="false">#</th>
-                            </tr>
+                        <tr>
+                            <th data-field="Id" data-visible="false">#</th>
+                            <th data-field="Day" data-visible="false">#</th>
+                            <th data-field="SeqNumber" data-visible="false">#</th>
+                            <th data-field="ExerciseId" data-visible="false">#</th>
+                            <th data-field="ExerciseName">Nome Esercizio</th>
+                            <th data-field="Time">Tempo</th>
+                            <th data-field="Sequences">Sequenze</th>
+                            <th data-field="Repetitions">Ripetizioni</th>
+                            <th data-field="ExerciseNotes" data-visible="false">#</th>
+                            <th data-field="MuscularGroupId" data-visible="false">#</th>
+                        </tr>
                         </thead>
                         <tbody role="button"></tbody>
                     </table>
                     <hr/>
                 </div>
                 <div id="day3-div">
-                    <h5>Giorno 3</h5>    
+                    <h5>Giorno 3</h5>
                     <br/>
                     <button type="button" onclick="addExercise(3);" class="btn btn-primary" id="addday3-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day3-tbl">
                         <thead>
-                            <tr>
-                                <th data-field="Id" data-visible="false">#</th>
-                                <th data-field="Day" data-visible="false">#</th>
-                                <th data-field="SeqNumber" data-visible="false">#</th>
-                                <th data-field="ExerciseId" data-visible="false">#</th>
-                                <th data-field="ExerciseName">Nome Esercizio</th>
-                                <th data-field="Time">Tempo</th>
-                                <th data-field="Sequences">Sequenze</th>
-                                <th data-field="Repetitions">Ripetizioni</th>
-                                <th data-field="ExerciseNotes" data-visible="false">#</th>
-                                <th data-field="MuscularGroupId" data-visible="false">#</th>
-                            </tr>
+                        <tr>
+                            <th data-field="Id" data-visible="false">#</th>
+                            <th data-field="Day" data-visible="false">#</th>
+                            <th data-field="SeqNumber" data-visible="false">#</th>
+                            <th data-field="ExerciseId" data-visible="false">#</th>
+                            <th data-field="ExerciseName">Nome Esercizio</th>
+                            <th data-field="Time">Tempo</th>
+                            <th data-field="Sequences">Sequenze</th>
+                            <th data-field="Repetitions">Ripetizioni</th>
+                            <th data-field="ExerciseNotes" data-visible="false">#</th>
+                            <th data-field="MuscularGroupId" data-visible="false">#</th>
+                        </tr>
                         </thead>
                         <tbody role="button"></tbody>
                     </table>
                     <hr/>
                 </div>
                 <div id="day4-div">
-                    <h5>Giorno 4</h5>    
+                    <h5>Giorno 4</h5>
                     <br/>
                     <button type="button" class="btn btn-primary" onclick="addExercise(4);" id="addday4-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day4-tbl">
                         <thead>
-                            <tr>
-                                <th data-field="Id" data-visible="false">#</th>
-                                <th data-field="Day" data-visible="false">#</th>
-                                <th data-field="SeqNumber" data-visible="false">#</th>
-                                <th data-field="ExerciseId" data-visible="false">#</th>
-                                <th data-field="ExerciseName">Nome Esercizio</th>
-                                <th data-field="Time">Tempo</th>
-                                <th data-field="Sequences">Sequenze</th>
-                                <th data-field="Repetitions">Ripetizioni</th>
-                                <th data-field="ExerciseNotes" data-visible="false">#</th>
-                                <th data-field="MuscularGroupId" data-visible="false">#</th>
-                            </tr>
+                        <tr>
+                            <th data-field="Id" data-visible="false">#</th>
+                            <th data-field="Day" data-visible="false">#</th>
+                            <th data-field="SeqNumber" data-visible="false">#</th>
+                            <th data-field="ExerciseId" data-visible="false">#</th>
+                            <th data-field="ExerciseName">Nome Esercizio</th>
+                            <th data-field="Time">Tempo</th>
+                            <th data-field="Sequences">Sequenze</th>
+                            <th data-field="Repetitions">Ripetizioni</th>
+                            <th data-field="ExerciseNotes" data-visible="false">#</th>
+                            <th data-field="MuscularGroupId" data-visible="false">#</th>
+                        </tr>
                         </thead>
                         <tbody role="button"></tbody>
                     </table>
@@ -222,7 +222,7 @@
             </div>
         </div>
         <div class="card-body pt-0">
-        
+
             <form id="editExerciseForm" action="javascript:updateExercise();" method="get">
                 <input type="hidden" id="editExerciseId"/>
                 <input type="hidden" id="editExerciseName"/>
@@ -232,25 +232,25 @@
                 <br/>
                 <br/>
                 <div class="row">
-                     <div class="row">
-                         <div class="col-lg-12">
-                             <div class="input-material-group col-lg-12">
-                                 <label class="form-label" for="MuscularGroup-cmb">Gruppo Muscolare *</label>
-                                 <select class="form-control" id="MuscularGroup-cmb" type="text" name="MuscularGroupTxt" required data-validate-field="MuscularGroupTxt">
-                                     <option value=""> - </option>
-                                 </select>
-                             </div>
-                         </div>
-                     </div>
                     <div class="row">
-                         <div class="col-lg-12">
-                             <div class="input-material-group col-lg-12">
-                                 <label class="form-label" for="Exercise-cmb">Esercizio *</label>
-                                 <select class="form-control" id="Exercise-cmb" type="text" name="ExerciseTxt" required data-validate-field="ExerciseTxt">
-                                     <option value=""> - </option>
-                                 </select>
-                             </div>
-                         </div>
+                        <div class="col-lg-12">
+                            <div class="input-material-group col-lg-12">
+                                <label class="form-label" for="MuscularGroup-cmb">Gruppo Muscolare *</label>
+                                <select class="form-control" id="MuscularGroup-cmb" type="text" name="MuscularGroupTxt" required data-validate-field="MuscularGroupTxt">
+                                    <option value=""> - </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-material-group col-lg-12">
+                                <label class="form-label" for="Exercise-cmb">Esercizio *</label>
+                                <select class="form-control" id="Exercise-cmb" type="text" name="ExerciseTxt" required data-validate-field="ExerciseTxt">
+                                    <option value=""> - </option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">&nbsp;</div>
                     <div class="row">
@@ -262,7 +262,7 @@
                             <textarea class="form-control" id="exercisedesc-txt" readonly="" rows="10"></textarea>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="input-material-group col-lg-12">
@@ -699,5 +699,4 @@
     }
     
 </script>
-<uc1:Foot runat="server" id="Foot" />
-
+<uc1:Foot runat="server" id="Foot"/>

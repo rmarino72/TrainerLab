@@ -1,6 +1,6 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
 <br/>
 <br/>
@@ -11,9 +11,9 @@
                 <h3 class="h4 mb-0"><span class="material-symbols-outlined">settings</span>&nbsp; Impostazioni</h3>
             </div>
             <div class="card-body pt-0">
-                <form action="javascript:update();" id="editForm"  method="get">
-                    <input type="hidden" id="config-id" />
-                     <div class="row">
+                <form action="javascript:update();" id="editForm" method="get">
+                    <input type="hidden" id="config-id"/>
+                    <div class="row">
                         <div class="input-material-group col-lg-12">
                             <label class="form-label" for="dismisstolerance-txt">Tolleranza disdetta appuntamento in ore *</label>
                             <input class="form-control" id="dismisstolerance-txt" type="number" name="dismisstoleranceTxt" autocomplete="off" required data-validate-field="dismisstoleranceTxt">
@@ -59,7 +59,7 @@
 
     function update()
     {
-        var config = new Object();
+        var config = {};
         config.Id = $('#config-id').val();
         config.DismissTolerance = $('#dismisstolerance-txt').val();
 
@@ -77,4 +77,4 @@
 
 
 </script>
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

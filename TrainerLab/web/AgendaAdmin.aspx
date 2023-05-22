@@ -1,6 +1,6 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
 <div class="col-lg-12" id="mainPg">
 
@@ -13,9 +13,9 @@
                         <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Gestione Agenda</h3>
                     </div>
                     <div class="card-body pt-0">
-                        <hr />
+                        <hr/>
                         <button class="btn btn-primary" id="new-btn"><span class="material-symbols-outlined">add</span>&nbsp;Nuovo</button>
-                        <hr />
+                        <hr/>
 
                         <div id="calendar" class="col-lg-12">
 
@@ -37,17 +37,17 @@
                                 <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Prossimi Appuntamenti</h3>
                             </div>
                             <div class="card-body pt-0">
-                                <hr />
+                                <hr/>
 
                                 <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="nextTable">
                                     <thead>
-                                        <tr>
-                                            <th data-field="Id" data-visible="false">#</th>
-                                            <th data-field="FirstName">Nome</th>
-                                            <th data-field="LastName">Cognome</th>
-                                            <th data-field="Email">Email</th>
-                                            <th data-field="StartDateTime">Data e Ora</th>
-                                        </tr>
+                                    <tr>
+                                        <th data-field="Id" data-visible="false">#</th>
+                                        <th data-field="FirstName">Nome</th>
+                                        <th data-field="LastName">Cognome</th>
+                                        <th data-field="Email">Email</th>
+                                        <th data-field="StartDateTime">Data e Ora</th>
+                                    </tr>
                                     </thead>
                                     <tbody role="button"></tbody>
                                 </table>
@@ -65,17 +65,17 @@
                                 <h3 class="h4 mb-0"><span class="material-symbols-outlined">calendar_month</span>&nbsp; Appuntamenti da confermare</h3>
                             </div>
                             <div class="card-body pt-0">
-                                <hr />
+                                <hr/>
 
                                 <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="dataTable">
                                     <thead>
-                                        <tr>
-                                            <th data-field="Id" data-visible="false">#</th>
-                                            <th data-field="FirstName">Nome</th>
-                                            <th data-field="LastName">Cognome</th>
-                                            <th data-field="Email">Email</th>
-                                            <th data-field="StartDateTime">Data e Ora</th>
-                                        </tr>
+                                    <tr>
+                                        <th data-field="Id" data-visible="false">#</th>
+                                        <th data-field="FirstName">Nome</th>
+                                        <th data-field="LastName">Cognome</th>
+                                        <th data-field="Email">Email</th>
+                                        <th data-field="StartDateTime">Data e Ora</th>
+                                    </tr>
                                     </thead>
                                     <tbody role="button"></tbody>
                                 </table>
@@ -96,10 +96,10 @@
             </div>
             <div class="card-body pt-0">
                 <form id="editForm" action="javascript:update();" method="get">
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="button" id="delete-btn"><span class="material-symbols-outlined">delete</span>&nbsp;Elimina</button>
-                    <hr />
-                    <input type="hidden" id="slot-id" />
+                    <hr/>
+                    <input type="hidden" id="slot-id"/>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
@@ -136,7 +136,7 @@
                             <textarea class="form-control" id="description-txt"></textarea>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
                     <button class="btn btn-primary" type="submit" id="ok-btn"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
@@ -277,7 +277,7 @@
         var events = calendar.getEvents();
         events.forEach(e => { e.remove(); });
 
-        var interval = new Object();
+        var interval = {};
 
         interval.Start = dateForCSharp(e.start);
         interval.End = dateForCSharp(e.end);
@@ -341,7 +341,7 @@
         
         data.Data.forEach(e => {
 
-            var event = new Object();
+            var event = {};
             event.id = e.Id;
             event.start = e.StartDateTime;
             event.end = e.EndDateTime;
@@ -432,7 +432,7 @@
     }
 
     function formToObj(withId = false) {
-        var o = new Object();
+        var o = {};
         o.Id = withId ? $('#slot-id').val() : -1;
         o.StartDateTime = dateForCSharp(new Date($('#start-txt').val()));
         o.EndDateTime = dateForCSharp(new Date($('#end-txt').val()));
@@ -485,4 +485,4 @@
 
 
 </script>
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

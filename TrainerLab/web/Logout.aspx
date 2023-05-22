@@ -1,17 +1,17 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
-<br />
-<br />
+<br/>
+<br/>
 <div class="container">
     <div class="col-lg-12">
         <div class="card mb-0">
             <div class="card-header">
                 <h3 class="h4 mb-0"><span class="material-symbols-outlined">logout</span>&nbsp; Logout</h3>
             </div>
-            <br />
-            <br />
+            <br/>
+            <br/>
             <div class="card-body pt-0">
                 <div class="text-center">
                     Vuoi davvero effettuare il logout?
@@ -52,4 +52,4 @@
 </script>
 
 
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

@@ -1,8 +1,8 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
-<br />
-<br />
+<uc1:Head runat="server" id="Head"/>
+<br/>
+<br/>
 <div class="col-lg-12" id="mainPg">
 
     <div class="container">
@@ -37,8 +37,8 @@
                 <h3 class="h4 mb-0"><span class="material-symbols-outlined">fitness_center</span>&nbsp; Dettaglio Gruppo Muscolare</h3>
             </div>
             <div class="card-body pt-0">
-                <form id="editForm" action="javascript:update();"  method="get">
-                    <input type="hidden" id="id-txt" />
+                <form id="editForm" action="javascript:update();" method="get">
+                    <input type="hidden" id="id-txt"/>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
@@ -53,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
                     <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
@@ -129,7 +129,7 @@
 
     function formToObj(withId = false)
     {
-        var obj = new Object();
+        var obj = {};
         obj.Id = withId ? $('#id-txt').val() : 0;
         obj.Name = $('#Name-txt').val();
         obj.Description = $('#Description-txt').val();
@@ -161,4 +161,4 @@
     }
 
 </script>
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

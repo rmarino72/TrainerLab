@@ -1,10 +1,10 @@
 ﻿<%@ Page Language="C#" CodeBehind="Exercise.aspx.cs" Inherits="TrainerLab.web.Exercise" %>
 <%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
-<br />
-<br />
+<br/>
+<br/>
 <div class="col-lg-12" id="mainPg">
     <div class="container">
         <div class="card mb-0">
@@ -40,11 +40,11 @@
             </div>
             <div class="card-body pt-0">
                 <form id="editForm" action="javascript:update();" enctype="multipart/form-data" method="get">
-                    <input type="hidden" id="id-txt" />
+                    <input type="hidden" id="id-txt"/>
                     <div class="row">
                         <div class="col-lg-6">&nbsp;</div>
                         <div class="col-lg-6">
-                            <img src="/assets/img/fitness.png" id="image-box" width="300" />
+                            <img src="/assets/img/fitness.png" id="image-box" width="300"/>
                         </div>
                     </div>
                     <div class="row">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
                     <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
@@ -214,4 +214,4 @@
     }
 </script>
 
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

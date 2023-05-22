@@ -1,9 +1,9 @@
 ﻿<%@ Page Language="C#" CodeBehind="ExerciseSheet.aspx.cs" Inherits="TrainerLab.web.ExerciseSheet" %>
 <%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
-<br />
-<br />
+<uc1:Head runat="server" id="Head"/>
+<br/>
+<br/>
 <div class="col-lg-12" id="mainPg">
     <div class="container">
         <div class="card mb-0">
@@ -40,16 +40,16 @@
                 <div class="row">
                     <div class="col-lg-6">&nbsp;</div>
                     <div class="col-lg-6">
-                        <img src="/assets/img/fitness.png" id="image-box" width="300" />
+                        <img src="/assets/img/fitness.png" id="image-box" width="300"/>
                     </div>
                 </div>
-                <hr />
+                <hr/>
                 Gruppo muscolare: <span id="muscular_div">Bicipiti</span>
-                <hr />
+                <hr/>
                 <p id="description_div">
                     Descrizione esercizio
                 </p>
-                <hr />
+                <hr/>
                 <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Chiudi</button>
             </div>
         </div>
@@ -99,4 +99,4 @@
     }
     
 </script>
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

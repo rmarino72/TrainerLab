@@ -3,98 +3,162 @@ using TLServer.BL;
 using TLServer.BO;
 using TLServer.DAO;
 
-namespace TrainerLab.Controllers
+namespace TrainerLab.Controllers;
+
+[Authorize]
+public class UserController : ApiController
 {
-    [Authorize]
-    public class UserController : ApiController
+    [HttpGet]
+    [Route("user/region")]
+    public RestListResult GetRegions()
     {
-        [HttpGet]
-        [Route("user/region")]
-        public RestListResult GetRegions() => UserBL.Instance.GetRegions();
+        return UserBL.Instance.GetRegions();
+    }
 
-        [HttpGet]
-        [Route("user/province")]
-        public RestListResult GetProvinces() => UserBL.Instance.GetProvinces();
+    [HttpGet]
+    [Route("user/province")]
+    public RestListResult GetProvinces()
+    {
+        return UserBL.Instance.GetProvinces();
+    }
 
-        [HttpGet]
-        [Route("user/province/{region}")]
-        public RestListResult GetProvincesByRegion(string region) => UserBL.Instance.GetProvincesByRegion(region);
+    [HttpGet]
+    [Route("user/province/{region}")]
+    public RestListResult GetProvincesByRegion(string region)
+    {
+        return UserBL.Instance.GetProvincesByRegion(region);
+    }
 
-        [HttpGet]
-        [Route("user/city")]
-        public RestListResult GetCities() => UserBL.Instance.GetCities();
+    [HttpGet]
+    [Route("user/city")]
+    public RestListResult GetCities()
+    {
+        return UserBL.Instance.GetCities();
+    }
 
-        [HttpGet]
-        [Route("user/city/{province}")]
-        public RestListResult GetCitiesByProvince(string province) => UserBL.Instance.GetCitiesByProvince(province);
+    [HttpGet]
+    [Route("user/city/{province}")]
+    public RestListResult GetCitiesByProvince(string province)
+    {
+        return UserBL.Instance.GetCitiesByProvince(province);
+    }
 
-        [HttpGet]
-        [Route("user/role")]
-        public RestListResult GetRoles() => UserBL.Instance.GetRoles();
+    [HttpGet]
+    [Route("user/role")]
+    public RestListResult GetRoles()
+    {
+        return UserBL.Instance.GetRoles();
+    }
 
-        [HttpGet]
-        [Route("user/sex")]
-        public RestListResult GetSexes() => UserBL.Instance.GetSexes();
-        
-        [HttpGet]
-        [Route("user/logout/{email}/")]
-        public RestObjectResult Logout(string email) => AuthBl.Instance.Logout(email);
+    [HttpGet]
+    [Route("user/sex")]
+    public RestListResult GetSexes()
+    {
+        return UserBL.Instance.GetSexes();
+    }
 
-        [HttpPost]
-        [Route("user/")]
-        public RestObjectResult NewUser([FromBody] FullUserView fullUser) => UserBL.Instance.NewUser(fullUser);
+    [HttpGet]
+    [Route("user/logout/{email}/")]
+    public RestObjectResult Logout(string email)
+    {
+        return AuthBl.Instance.Logout(email);
+    }
 
-        [HttpPatch]
-        [Route("user/")]
-        public RestObjectResult UpdateUser([FromBody] FullUserView fullUser) => UserBL.Instance.UpdateUser(fullUser);
+    [HttpPost]
+    [Route("user/")]
+    public RestObjectResult NewUser([FromBody] FullUserView fullUser)
+    {
+        return UserBL.Instance.NewUser(fullUser);
+    }
 
-        [HttpGet]
-        [Route("user/{email}/")]
-        public RestObjectResult GetUserByEmail(string email) => UserBL.Instance.GetUserByEmail(email);
+    [HttpPatch]
+    [Route("user/")]
+    public RestObjectResult UpdateUser([FromBody] FullUserView fullUser)
+    {
+        return UserBL.Instance.UpdateUser(fullUser);
+    }
 
-        [HttpGet]
-        [Route("user/full")]
-        public RestListResult GetFullUsers() => UserBL.Instance.GetFullUsers();
+    [HttpGet]
+    [Route("user/{email}/")]
+    public RestObjectResult GetUserByEmail(string email)
+    {
+        return UserBL.Instance.GetUserByEmail(email);
+    }
 
-        [HttpGet]
-        [Route("user/full/{email}/")]
-        public RestObjectResult GetFullUserByEmail(string email) => UserBL.Instance.GetFullUserByEmail(email);
+    [HttpGet]
+    [Route("user/full")]
+    public RestListResult GetFullUsers()
+    {
+        return UserBL.Instance.GetFullUsers();
+    }
 
-        [HttpPost]
-        [Route("user/pass")]
-        public RestObjectResult ChangePass([FromBody] ChangePassData changePassData) => UserBL.Instance.ChangePass(changePassData);
+    [HttpGet]
+    [Route("user/full/{email}/")]
+    public RestObjectResult GetFullUserByEmail(string email)
+    {
+        return UserBL.Instance.GetFullUserByEmail(email);
+    }
 
-        [HttpGet]
-        [Route("user/anthropometry/{email}/")]
-        public RestListResult GetAnthropometries(string email) => UserBL.Instance.GetAnthropometries(email);
+    [HttpPost]
+    [Route("user/pass")]
+    public RestObjectResult ChangePass([FromBody] ChangePassData changePassData)
+    {
+        return UserBL.Instance.ChangePass(changePassData);
+    }
 
-        [HttpGet]
-        [Route("user/anthropometry/{email}/{id}")]
-        public RestObjectResult GetAnthropometryById(string email, int id) => UserBL.Instance.GetAnthropometryById(id);
+    [HttpGet]
+    [Route("user/anthropometry/{email}/")]
+    public RestListResult GetAnthropometries(string email)
+    {
+        return UserBL.Instance.GetAnthropometries(email);
+    }
 
-        [HttpPost]
-        [Route("user/anthropometry/")]
-        public RestObjectResult NewAnthropometry([FromBody] FullAnthropometryView anthropometry) => UserBL.Instance.NewAnthropometry(anthropometry);
+    [HttpGet]
+    [Route("user/anthropometry/{email}/{id}")]
+    public RestObjectResult GetAnthropometryById(string email, int id)
+    {
+        return UserBL.Instance.GetAnthropometryById(id);
+    }
 
-        [HttpPatch]
-        [Route("user/anthropometry/")]
-        public RestObjectResult UpdateAnthropometry([FromBody] FullAnthropometryView anthropometry) => UserBL.Instance.UpdateAnthropometry(anthropometry);
+    [HttpPost]
+    [Route("user/anthropometry/")]
+    public RestObjectResult NewAnthropometry([FromBody] FullAnthropometryView anthropometry)
+    {
+        return UserBL.Instance.NewAnthropometry(anthropometry);
+    }
 
-        [HttpGet]
-        [Route("user/plicometry/{email}/")]
-        public RestListResult GetPlicometries(string email) => UserBL.Instance.GetPlicometry(email);
+    [HttpPatch]
+    [Route("user/anthropometry/")]
+    public RestObjectResult UpdateAnthropometry([FromBody] FullAnthropometryView anthropometry)
+    {
+        return UserBL.Instance.UpdateAnthropometry(anthropometry);
+    }
 
-        [HttpGet]
-        [Route("user/plicometry/{email}/{id}")]
-        public RestObjectResult GetPlicometryById(string email, int id) => UserBL.Instance.GetPlicometryById(id);
+    [HttpGet]
+    [Route("user/plicometry/{email}/")]
+    public RestListResult GetPlicometries(string email)
+    {
+        return UserBL.Instance.GetPlicometry(email);
+    }
 
-        [HttpPost]
-        [Route("user/plicometry")]
-        public RestObjectResult NewPlicometry([FromBody]Plicometry plicometry) => UserBL.Instance.NewPlicometry(plicometry);
+    [HttpGet]
+    [Route("user/plicometry/{email}/{id}")]
+    public RestObjectResult GetPlicometryById(string email, int id)
+    {
+        return UserBL.Instance.GetPlicometryById(id);
+    }
 
-        [HttpPatch]
-        [Route("user/plicometry")]
-        public RestObjectResult UpdatePlicometry([FromBody] Plicometry plicometry) => UserBL.Instance.UpdatePlicometry(plicometry);
+    [HttpPost]
+    [Route("user/plicometry")]
+    public RestObjectResult NewPlicometry([FromBody] Plicometry plicometry)
+    {
+        return UserBL.Instance.NewPlicometry(plicometry);
+    }
+
+    [HttpPatch]
+    [Route("user/plicometry")]
+    public RestObjectResult UpdatePlicometry([FromBody] Plicometry plicometry)
+    {
+        return UserBL.Instance.UpdatePlicometry(plicometry);
     }
 }
-

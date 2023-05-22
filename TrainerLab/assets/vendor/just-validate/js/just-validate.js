@@ -1,22 +1,33 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) {
+    if (key in obj) {
+        Object.defineProperty(obj, key, {value: value, enumerable: true, configurable: true, writable: true});
+    } else {
+        obj[key] = value;
+    }
+    return obj;
+}
 
 (function () {
     var typesToPatch = ['DocumentType', 'Element', 'CharacterData'],
         remove = function remove() {
-        // The check here seems pointless, since we're not adding this
-        // method to the prototypes of any any elements that CAN be the
-        // root of the DOM. However, it's required by spec (see point 1 of
-        // https://dom.spec.whatwg.org/#dom-childnode-remove) and would
-        // theoretically make a difference if somebody .apply()ed this
-        // method to the DOM's root node, so let's roll with it.
-        if (this.parentNode != null) {
-            this.parentNode.removeChild(this);
-        }
-    };
+            // The check here seems pointless, since we're not adding this
+            // method to the prototypes of any any elements that CAN be the
+            // root of the DOM. However, it's required by spec (see point 1 of
+            // https://dom.spec.whatwg.org/#dom-childnode-remove) and would
+            // theoretically make a difference if somebody .apply()ed this
+            // method to the DOM's root node, so let's roll with it.
+            if (this.parentNode != null) {
+                this.parentNode.removeChild(this);
+            }
+        };
 
     for (var i = 0; i < typesToPatch.length; i++) {
         var type = typesToPatch[i];
@@ -31,7 +42,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // other code modifying setTimeout (like sinon.useFakeTimers())
     var setTimeoutFunc = setTimeout;
 
-    function noop() {}
+    function noop() {
+    }
 
     // Polyfill for Function.prototype.bind
     function bind(fn, thisArg) {
@@ -413,9 +425,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         handlerKeyup: function handlerKeyup(ev) {
             var elem = ev.target,
                 item = {
-                name: elem.getAttribute('data-validate-field'),
-                value: elem.value
-            };
+                    name: elem.getAttribute('data-validate-field'),
+                    value: elem.value
+                };
             delete this.result[item.name];
             this.validateItem({
                 name: item.name,
@@ -431,16 +443,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 handler = this.bindHandlerKeyup;
             }
             switch (type) {
-                case 'add':
-                    {
-                        item.addEventListener(event, handler);
-                        break;
-                    }
-                case 'remove':
-                    {
-                        item.removeEventListener(event, handler);
-                        break;
-                    }
+                case 'add': {
+                    item.addEventListener(event, handler);
+                    break;
+                }
+                case 'remove': {
+                    item.removeEventListener(event, handler);
+                    break;
+                }
             }
         },
 
@@ -572,9 +582,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     item.addEventListener('change', function (ev) {
                         var elem = ev.target,
                             item = {
-                            name: elem.getAttribute('data-validate-field'),
-                            value: elem.checked
-                        };
+                                name: elem.getAttribute('data-validate-field'),
+                                value: elem.checked
+                            };
 
                         delete _this2.result[item.name];
                         _this2.validateItem({
@@ -603,9 +613,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     item.addEventListener('change', function (ev) {
                         var elem = ev.target,
                             item = {
-                            name: elem.getAttribute('data-validate-field'),
-                            value: elem.checked
-                        };
+                                name: elem.getAttribute('data-validate-field'),
+                                value: elem.checked
+                            };
 
                         delete _this2.result[item.name];
                         _this2.validateItem({
@@ -753,8 +763,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         generateMessage: function generateMessage(rule, name, value) {
             var messages = this.messages || this.defaultMessages;
             var customMessage = messages[name] && messages[name][rule] || this.messages && typeof this.messages[name] === 'string' && messages[name] ||
-            // (messages[name][rule]) ||
-            this.defaultMessages[rule] || this.DEFAULT_REMOTE_ERROR;
+                // (messages[name][rule]) ||
+                this.defaultMessages[rule] || this.DEFAULT_REMOTE_ERROR;
 
             if (value) {
                 customMessage = customMessage.replace(':value', value.toString());
@@ -816,176 +826,166 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     return;
                 }
                 switch (rule) {
-                    case RULE_FUNCTION:
-                        {
-                            if (typeof ruleValue !== 'function') {
-                                break;
-                            }
-                            if (ruleValue(name, value)) {
-                                break;
-                            }
-                            this.generateMessage(RULE_FUNCTION, name, ruleValue);
-                            return;
+                    case RULE_FUNCTION: {
+                        if (typeof ruleValue !== 'function') {
+                            break;
                         }
-                    case RULE_REQUIRED:
-                        {
-                            if (!ruleValue) {
-                                break;
-                            }
+                        if (ruleValue(name, value)) {
+                            break;
+                        }
+                        this.generateMessage(RULE_FUNCTION, name, ruleValue);
+                        return;
+                    }
+                    case RULE_REQUIRED: {
+                        if (!ruleValue) {
+                            break;
+                        }
 
-                            if (group.length) {
-                                var isSuccessValidateGroup = false;
+                        if (group.length) {
+                            var isSuccessValidateGroup = false;
 
-                                // At least one item in group
-                                group.forEach(function (item) {
-                                    if (_this4.validateRequired(item)) {
-                                        isSuccessValidateGroup = true;
-                                    }
-                                });
-
-                                if (isSuccessValidateGroup) {
-                                    break;
+                            // At least one item in group
+                            group.forEach(function (item) {
+                                if (_this4.validateRequired(item)) {
+                                    isSuccessValidateGroup = true;
                                 }
-                            } else {
-                                if (this.validateRequired(value)) {
-                                    break;
-                                }
-                            }
+                            });
 
-                            this.generateMessage(RULE_REQUIRED, name);
-                            return;
+                            if (isSuccessValidateGroup) {
+                                break;
+                            }
+                        } else {
+                            if (this.validateRequired(value)) {
+                                break;
+                            }
                         }
 
-                    case RULE_EMAIL:
-                        {
-                            if (!ruleValue) {
-                                break;
-                            }
-                            if (this.validateEmail(value)) {
-                                break;
-                            }
-                            this.generateMessage(RULE_EMAIL, name);
-                            return;
+                        this.generateMessage(RULE_REQUIRED, name);
+                        return;
+                    }
+
+                    case RULE_EMAIL: {
+                        if (!ruleValue) {
+                            break;
+                        }
+                        if (this.validateEmail(value)) {
+                            break;
+                        }
+                        this.generateMessage(RULE_EMAIL, name);
+                        return;
+                    }
+
+                    case RULE_MINLENGTH: {
+                        if (!ruleValue) {
+                            break;
+                        }
+                        if (this.validateMinLength(value, ruleValue)) {
+                            break;
+                        }
+                        this.generateMessage(RULE_MINLENGTH, name, ruleValue);
+                        return;
+                    }
+
+                    case RULE_MAXLENGTH: {
+                        if (!ruleValue) {
+                            break;
+                        }
+                        if (this.validateMaxLength(value, ruleValue)) {
+                            break;
+                        }
+                        this.generateMessage(RULE_MAXLENGTH, name, ruleValue);
+                        return;
+                    }
+
+                    case RULE_PHONE: {
+                        if (!ruleValue) {
+                            break;
+                        }
+                        if (this.validatePhone(value)) {
+                            break;
+                        }
+                        this.generateMessage(RULE_PHONE, name);
+                        return;
+                    }
+
+                    case RULE_PASSWORD: {
+                        if (!ruleValue) {
+                            break;
+                        }
+                        if (this.validatePassword(value)) {
+                            break;
+                        }
+                        this.generateMessage(RULE_PASSWORD, name);
+                        return;
+                    }
+
+                    case RULE_STRENGTH: {
+                        if (!ruleValue || (typeof ruleValue === 'undefined' ? 'undefined' : _typeof(ruleValue)) !== 'object') {
+                            break;
                         }
 
-                    case RULE_MINLENGTH:
-                        {
-                            if (!ruleValue) {
-                                break;
-                            }
-                            if (this.validateMinLength(value, ruleValue)) {
-                                break;
-                            }
-                            this.generateMessage(RULE_MINLENGTH, name, ruleValue);
-                            return;
+                        if (ruleValue.default && this.validateStrengthPass(value)) {
+                            break;
                         }
 
-                    case RULE_MAXLENGTH:
-                        {
-                            if (!ruleValue) {
+                        if (ruleValue.custom) {
+                            var regexp = void 0;
+
+                            try {
+                                regexp = new RegExp(ruleValue.custom);
+                            } catch (e) {
+                                regexp = this.REGEXP.strengthPass;
+
+                                // eslint-disable-next-line no-console
+                                console.error('Custom regexp for strength rule is not valid. Default regexp was used.');
+                            }
+
+                            if (regexp.test(value)) {
                                 break;
                             }
-                            if (this.validateMaxLength(value, ruleValue)) {
-                                break;
-                            }
-                            this.generateMessage(RULE_MAXLENGTH, name, ruleValue);
-                            return;
+                        }
+                        this.generateMessage(RULE_STRENGTH, name);
+                        return;
+                    }
+
+                    case RULE_ZIP: {
+                        if (!ruleValue) {
+                            break;
+                        }
+                        if (this.validateZip(value)) {
+                            break;
+                        }
+                        this.generateMessage(RULE_ZIP, name);
+                        return;
+                    }
+
+                    case RULE_REMOTE: {
+                        if (isKeyupChange) {
+                            break;
                         }
 
-                    case RULE_PHONE:
-                        {
-                            if (!ruleValue) {
-                                break;
-                            }
-                            if (this.validatePhone(value)) {
-                                break;
-                            }
-                            this.generateMessage(RULE_PHONE, name);
-                            return;
+                        if (!ruleValue) {
+                            break;
                         }
 
-                    case RULE_PASSWORD:
-                        {
-                            if (!ruleValue) {
-                                break;
-                            }
-                            if (this.validatePassword(value)) {
-                                break;
-                            }
-                            this.generateMessage(RULE_PASSWORD, name);
-                            return;
-                        }
+                        var url = ruleValue.url,
+                            successAnswer = ruleValue.successAnswer,
+                            method = ruleValue.method,
+                            sendParam = ruleValue.sendParam;
 
-                    case RULE_STRENGTH:
-                        {
-                            if (!ruleValue || (typeof ruleValue === 'undefined' ? 'undefined' : _typeof(ruleValue)) !== 'object') {
-                                break;
-                            }
+                        var $elem = this.$form.querySelector('input[data-validate-field="' + name + '"]');
+                        this.setterEventListener($elem, 'keyup', this.handlerKeyup, 'remove');
 
-                            if (ruleValue.default && this.validateStrengthPass(value)) {
-                                break;
-                            }
-
-                            if (ruleValue.custom) {
-                                var regexp = void 0;
-
-                                try {
-                                    regexp = new RegExp(ruleValue.custom);
-                                } catch (e) {
-                                    regexp = this.REGEXP.strengthPass;
-
-                                    // eslint-disable-next-line no-console
-                                    console.error('Custom regexp for strength rule is not valid. Default regexp was used.');
-                                }
-
-                                if (regexp.test(value)) {
-                                    break;
-                                }
-                            }
-                            this.generateMessage(RULE_STRENGTH, name);
-                            return;
-                        }
-
-                    case RULE_ZIP:
-                        {
-                            if (!ruleValue) {
-                                break;
-                            }
-                            if (this.validateZip(value)) {
-                                break;
-                            }
-                            this.generateMessage(RULE_ZIP, name);
-                            return;
-                        }
-
-                    case RULE_REMOTE:
-                        {
-                            if (isKeyupChange) {
-                                break;
-                            }
-
-                            if (!ruleValue) {
-                                break;
-                            }
-
-                            var url = ruleValue.url,
-                                successAnswer = ruleValue.successAnswer,
-                                method = ruleValue.method,
-                                sendParam = ruleValue.sendParam;
-
-                            var $elem = this.$form.querySelector('input[data-validate-field="' + name + '"]');
-                            this.setterEventListener($elem, 'keyup', this.handlerKeyup, 'remove');
-
-                            this.promisesRemote.push(this.validateRemote({
-                                name: name,
-                                value: value,
-                                url: url,
-                                method: method,
-                                sendParam: sendParam,
-                                successAnswer: successAnswer
-                            }));
-                            return;
-                        }
+                        this.promisesRemote.push(this.validateRemote({
+                            name: name,
+                            value: value,
+                            url: url,
+                            method: method,
+                            sendParam: sendParam,
+                            successAnswer: successAnswer
+                        }));
+                        return;
+                    }
                 }
             }
         },

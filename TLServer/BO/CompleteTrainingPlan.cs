@@ -3,7 +3,7 @@ using TLServer.DAO;
 
 namespace TLServer.BO;
 
-public class CompleteTrainingPlan: TrainingPlan
+public class CompleteTrainingPlan : TrainingPlan
 {
-    public List<TrainingPlanDetail>Details { set; get; }
+    public List<TrainingPlanDetail> Details { set; get; }
 }

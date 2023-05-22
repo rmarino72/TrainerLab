@@ -1,4 +1,4 @@
-﻿function refreshUserName(){
+﻿function refreshUserName() {
     var user = getFromStorage(STORAGE_USER);
     ajaxCall(USER_FULL + encodeURIComponent(user) + "/", 'GET', null, gotMyUser);
 }
@@ -11,8 +11,7 @@ function gotMyUser(data) {
     }
     storeObject(STORAGE_USER_DATA, data.Data);
     $('#userFirstLast').html(data.Data.FirstName + " " + data.Data.LastName);
-    if (data.Data.Role != "ADMIN") 
-    {
+    if (data.Data.Role != "ADMIN") {
         $('#adminTitle').hide();
         $('#adminMenu').hide();
     }
@@ -32,22 +31,19 @@ function validateForm(formId, rules, messages) {
     });
 }
 
-function iAmAdmin()
-{
+function iAmAdmin() {
     var user_data = getObjectFromStorage(STORAGE_USER_DATA);
-    if (user_data.Role != "ADMIN")
-    {
+    if (user_data.Role != "ADMIN") {
         storeData(STORAGE_ERROR, "Non sei autorizzato a vedere questa pagina!");
         window.location.href = "Error";
     }
 }
 
-function fillChart(elem, title, labels, data)
-{
-    var chart = new Chart($('#'+elem), {
+function fillChart(elem, title, labels, data) {
+    var chart = new Chart($('#' + elem), {
         type: 'line',
         options: {
-            
+
             legend: {
                 display: false,
             },

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Transactions;
 using Dapper;
 using RMLibs.Logging;
 using RMLibs.SQLDBManager.MySql;
@@ -10,851 +8,844 @@ using RMLibs.Utilities;
 using TLServer.BO;
 using TLServer.DAO;
 
-namespace TLServer.DBManager
+namespace TLServer.DBManager;
+
+public class TlDbManager : MySqlDapperManager
 {
-	public class TlDbManager : MySqlDapperManager
-	{
+    /// <summary>
+    ///     Constructor
+    /// </summary>
+    /// <param name="logger"></param>
+    protected TlDbManager(Logger logger = null) : base(logger)
+    {
+    }
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="logger"></param>
-		protected TlDbManager(Logger logger = null):base(logger)
-		{ 
-		}
-
-        public TLServer.DAO.Config GetConfig()
+    public DAO.Config GetConfig()
+    {
+        try
         {
-            try
-            {
-                return Conn.GetList<TLServer.DAO.Config>().First();
-            }
-            catch(Exception ex)
-            {
-                Error(ex);
-                throw;
-
-            }
+            return Conn.GetList<DAO.Config>().First();
         }
-
-        public void UpdateConfig(TLServer.DAO.Config config)
+        catch (Exception ex)
         {
-            try
-            {
-                Conn.Update(config);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
+    }
 
-		public List<StringValue> GetRegions()
-		{
-            try
-            {
-                const string query = "SELECT DISTINCT Region AS Value FROM province ORDER BY Region";
-                return Conn.Query<StringValue>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
-
-		public List<Province> GetProvinces()
-		{
-			try
-			{
-				return Conn.GetList<Province>().ToList();
-			}
-			catch (Exception ex)
-			{
-				Error(ex);
-				throw;
-			}
-		}
-
-        public List<Province> GetProvincesByRegion(string region)
+    public void UpdateConfig(DAO.Config config)
+    {
+        try
         {
-            try
-            {
-                string query = $"SELECT * FROM province WHERE region = {Apex(region)} ORDER BY Name";
-                return Conn.Query<Province>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Update(config);
         }
-
-        public List<City> GetCities()
-		{
-            try
-            {
-                return Conn.GetList<City>().ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
-        
-        public List<City> GetCitiesByProvince(string province)
+        catch (Exception ex)
         {
-            try
-            {
-                string query = $"SELECT * FROM city WHERE Province = {Apex(province)} ORDER BY Name";
-                return Conn.Query<City>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
+    }
 
-        public List<Role> GetRoles()
+    public List<StringValue> GetRegions()
+    {
+        try
         {
-            try
-            {
-                return Conn.GetList<Role>().ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-
-            }
+            const string query = "SELECT DISTINCT Region AS Value FROM province ORDER BY Region";
+            return Conn.Query<StringValue>(query).ToList();
         }
-
-        public List<Sex> GetSexes()
-		{
-            try
-            {
-                return Conn.GetList<Sex>().ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
-
-		public User GetUserByEmail(string email)
-		{
-			try
-			{
-				string query = $"SELECT * FROM user WHERE Email = {Apex(email)}";
-				return Conn.Query<User>(query).FirstOrDefault();
-			}
-			catch (Exception ex)
-			{
-				Error(ex);
-				throw;
-			}
-		}
-
-		public void UpdateUser(User user)
-		{
-			try
-			{
-				user.LastUpdateDateTime = DateTime.Now;
-				Conn.Update(user);
-			}
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
-
-		public List<FullUserView> GetFullUsers()
-		{
-			try
-			{
-				return Conn.GetList<FullUserView>().ToList();
-			}
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
-
-		public FullUserView GetFullUserByEmail(string email)
-		{
-            try
-            {
-                string query = $"SELECT * FROM fulluserview WHERE Email = {Apex(email)}";
-                return Conn.Query<FullUserView>(query).FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
-
-        public void NewUser(FullUserView fullUser)
+        catch (Exception ex)
         {
-            try
-            {
-                using (TransactionScope ts = CreateTransactionScope())
-                {
-                    User user = new User();
-                    user.Email = fullUser.Email;
-                    user.Password = "na";
-                    user.Role = fullUser.Role;
-                    user.CreationDateTime = DateTime.Now;
-                    user.LastUpdateDateTime = DateTime.Now;
-                    Conn.Insert(user);
-
-                    UserData userData = new UserData();
-                    userData.AddressStreet = fullUser.AddressStreet;
-                    userData.AddressStreetNumber = fullUser.AddressStreetNumber;
-                    userData.BirthDate = fullUser.BirthDate;
-                    userData.CAP = fullUser.CAP;
-                    userData.City = fullUser.City;
-                    userData.Email = fullUser.Email;
-                    userData.FirstName = fullUser.FirstName;
-                    userData.LastName = fullUser.LastName;
-                    userData.LastUpdateDateTime = DateTime.Now;
-                    userData.Phone = fullUser.Phone;
-                    userData.Province = string.IsNullOrEmpty(fullUser.Province) ? null : fullUser.Province;
-                    userData.Region = fullUser.Region;
-                    userData.Sex = fullUser.Sex;
-                    Conn.Insert(userData);
-
-                    ts.Complete();
-                }
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
+    }
 
-        public UserData GetUserDataByEmail(string email)
+    public List<Province> GetProvinces()
+    {
+        try
         {
-            try
-            {
-                string query = $"SELECT * FROM userdata WHERE Email = {Apex(email)}";
-                return Conn.Query<UserData>(query).FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.GetList<Province>().ToList();
         }
-
-        public void UpdateUser(FullUserView fullUser)
+        catch (Exception ex)
         {
-            try
-            {
-                User user = GetUserByEmail(fullUser.Email);
-                UserData userData = GetUserDataByEmail(fullUser.Email);
+            Error(ex);
+            throw;
+        }
+    }
 
+    public List<Province> GetProvincesByRegion(string region)
+    {
+        try
+        {
+            var query = $"SELECT * FROM province WHERE region = {Apex(region)} ORDER BY Name";
+            return Conn.Query<Province>(query).ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<City> GetCities()
+    {
+        try
+        {
+            return Conn.GetList<City>().ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<City> GetCitiesByProvince(string province)
+    {
+        try
+        {
+            var query = $"SELECT * FROM city WHERE Province = {Apex(province)} ORDER BY Name";
+            return Conn.Query<City>(query).ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<Role> GetRoles()
+    {
+        try
+        {
+            return Conn.GetList<Role>().ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<Sex> GetSexes()
+    {
+        try
+        {
+            return Conn.GetList<Sex>().ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public User GetUserByEmail(string email)
+    {
+        try
+        {
+            var query = $"SELECT * FROM user WHERE Email = {Apex(email)}";
+            return Conn.Query<User>(query).FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void UpdateUser(User user)
+    {
+        try
+        {
+            user.LastUpdateDateTime = DateTime.Now;
+            Conn.Update(user);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<FullUserView> GetFullUsers()
+    {
+        try
+        {
+            return Conn.GetList<FullUserView>().ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public FullUserView GetFullUserByEmail(string email)
+    {
+        try
+        {
+            var query = $"SELECT * FROM fulluserview WHERE Email = {Apex(email)}";
+            return Conn.Query<FullUserView>(query).FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void NewUser(FullUserView fullUser)
+    {
+        try
+        {
+            using (var ts = CreateTransactionScope())
+            {
+                var user = new User();
+                user.Email = fullUser.Email;
+                user.Password = "na";
                 user.Role = fullUser.Role;
+                user.CreationDateTime = DateTime.Now;
                 user.LastUpdateDateTime = DateTime.Now;
+                Conn.Insert(user);
 
+                var userData = new UserData();
                 userData.AddressStreet = fullUser.AddressStreet;
                 userData.AddressStreetNumber = fullUser.AddressStreetNumber;
                 userData.BirthDate = fullUser.BirthDate;
                 userData.CAP = fullUser.CAP;
-                userData.City = fullUser.City;                
+                userData.City = fullUser.City;
+                userData.Email = fullUser.Email;
                 userData.FirstName = fullUser.FirstName;
                 userData.LastName = fullUser.LastName;
                 userData.LastUpdateDateTime = DateTime.Now;
                 userData.Phone = fullUser.Phone;
-                userData.Province = string.IsNullOrEmpty(fullUser.Province) ? null: fullUser.Province;
+                userData.Province = string.IsNullOrEmpty(fullUser.Province) ? null : fullUser.Province;
                 userData.Region = fullUser.Region;
                 userData.Sex = fullUser.Sex;
+                Conn.Insert(userData);
 
-                using (TransactionScope ts = CreateTransactionScope())
-                {
-                    Conn.Update(user);
-                    Conn.Update(userData);
-                    ts.Complete();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
+                ts.Complete();
             }
         }
-
-        public void UpdateUserData(UserData userData)
+        catch (Exception ex)
         {
-            try
+            Error(ex);
+            throw;
+        }
+    }
+
+    public UserData GetUserDataByEmail(string email)
+    {
+        try
+        {
+            var query = $"SELECT * FROM userdata WHERE Email = {Apex(email)}";
+            return Conn.Query<UserData>(query).FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void UpdateUser(FullUserView fullUser)
+    {
+        try
+        {
+            var user = GetUserByEmail(fullUser.Email);
+            var userData = GetUserDataByEmail(fullUser.Email);
+
+            user.Role = fullUser.Role;
+            user.LastUpdateDateTime = DateTime.Now;
+
+            userData.AddressStreet = fullUser.AddressStreet;
+            userData.AddressStreetNumber = fullUser.AddressStreetNumber;
+            userData.BirthDate = fullUser.BirthDate;
+            userData.CAP = fullUser.CAP;
+            userData.City = fullUser.City;
+            userData.FirstName = fullUser.FirstName;
+            userData.LastName = fullUser.LastName;
+            userData.LastUpdateDateTime = DateTime.Now;
+            userData.Phone = fullUser.Phone;
+            userData.Province = string.IsNullOrEmpty(fullUser.Province) ? null : fullUser.Province;
+            userData.Region = fullUser.Region;
+            userData.Sex = fullUser.Sex;
+
+            using (var ts = CreateTransactionScope())
             {
+                Conn.Update(user);
                 Conn.Update(userData);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
+                ts.Complete();
             }
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public List<SlotStatus> GetSlotStatuses()
+    public void UpdateUserData(UserData userData)
+    {
+        try
         {
-            try
-            {
-                return Conn.GetList<SlotStatus>().ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Update(userData);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public List<FullSlotView> GetSlotByInterval(DateTimeInterval interval)
+    public List<SlotStatus> GetSlotStatuses()
+    {
+        try
         {
-            try
-            {
-                string query = string.Format(
-                    "SELECT * FROM fullslotview WHERE StartDateTime >= {0} AND EndDateTime < {1} ORDER BY StartDateTime",
-                    Apex(DateTimeUtils.DateTimeToMySqlString(interval.Start)),
-                    Apex(DateTimeUtils.DateTimeToMySqlString(interval.End))
-                    );
+            return Conn.GetList<SlotStatus>().ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-                return Conn.Query<FullSlotView>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
+    public List<FullSlotView> GetSlotByInterval(DateTimeInterval interval)
+    {
+        try
+        {
+            var query = string.Format(
+                "SELECT * FROM fullslotview WHERE StartDateTime >= {0} AND EndDateTime < {1} ORDER BY StartDateTime",
+                Apex(DateTimeUtils.DateTimeToMySqlString(interval.Start)),
+                Apex(DateTimeUtils.DateTimeToMySqlString(interval.End))
+            );
 
-        public bool VerifySlot(Slot slot)
+            return Conn.Query<FullSlotView>(query).ToList();
+        }
+        catch (Exception ex)
         {
-            try
-            {
-                string stdt = DateTimeUtils.DateTimeToMySqlString(slot.StartDateTime);
-                string eddt = DateTimeUtils.DateTimeToMySqlString(slot.EndDateTime);
-                string query = "" +
-                    "SELECT * " +
-                    "FROM slot " +
-                    "WHERE Id <> {0} " +
-                    "AND (" +
-                    "   ({1} >= slot.StartDateTime AND {2} < slot.EndDateTime) OR" +
-                    "   ({3} > slot.StartDateTime AND {4} <= slot.EndDateTime))";
+            Error(ex);
+            throw;
+        }
+    }
 
-                string fullQuery = string.Format(query, slot.Id, Apex(stdt), Apex(stdt), Apex(eddt), Apex(eddt));
+    public bool VerifySlot(Slot slot)
+    {
+        try
+        {
+            var stdt = DateTimeUtils.DateTimeToMySqlString(slot.StartDateTime);
+            var eddt = DateTimeUtils.DateTimeToMySqlString(slot.EndDateTime);
+            var query = "" +
+                        "SELECT * " +
+                        "FROM slot " +
+                        "WHERE Id <> {0} " +
+                        "AND (" +
+                        "   ({1} >= slot.StartDateTime AND {2} < slot.EndDateTime) OR" +
+                        "   ({3} > slot.StartDateTime AND {4} <= slot.EndDateTime))";
 
-                List<Slot> slots = Conn.Query<Slot>(fullQuery).ToList();
-                return slots.Count == 0;
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
+            var fullQuery = string.Format(query, slot.Id, Apex(stdt), Apex(stdt), Apex(eddt), Apex(eddt));
 
-        public void NewSlot(Slot slot)
-        {
-            try
-            {
-                Conn.Insert(slot);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            var slots = Conn.Query<Slot>(fullQuery).ToList();
+            return slots.Count == 0;
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public Slot GetSlotById(int id)
+    public void NewSlot(Slot slot)
+    {
+        try
         {
-            try
-            {
-                return Conn.Get<Slot>(id);
-            }
-            catch(Exception ex)
-            {
-                Error(ex);
-                throw;
+            Conn.Insert(slot);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-            }
+    public Slot GetSlotById(int id)
+    {
+        try
+        {
+            return Conn.Get<Slot>(id);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void UpdateSlot(Slot slot)
+    public void UpdateSlot(Slot slot)
+    {
+        try
         {
-            try
-            {
-                Conn.Update(slot);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Update(slot);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void DeleteSlot(int id)
+    public void DeleteSlot(int id)
+    {
+        try
         {
-            try
-            {
-                Conn.Delete<Slot>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Delete<Slot>(id);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public List<FullAnthropometryView> GetAnthropometries(string email)
+    public List<FullAnthropometryView> GetAnthropometries(string email)
+    {
+        try
         {
-            try
-            {
-                string query = $"SELECT * FROM fullanthropometryview WHERE Email = {Apex(email)}";
-                return Conn.Query<FullAnthropometryView>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            var query = $"SELECT * FROM fullanthropometryview WHERE Email = {Apex(email)}";
+            return Conn.Query<FullAnthropometryView>(query).ToList();
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public FullAnthropometryView GetAnthropometryById(int id)
+    public FullAnthropometryView GetAnthropometryById(int id)
+    {
+        try
         {
-            try
-            {
-                string query = $"SELECT * FROM fullanthropometryview where Id = {id}";
-                return Conn.Query<FullAnthropometryView>(query).FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            var query = $"SELECT * FROM fullanthropometryview where Id = {id}";
+            return Conn.Query<FullAnthropometryView>(query).FirstOrDefault();
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void NewAnthropometry(Anthropometry anthropometry)
+    public void NewAnthropometry(Anthropometry anthropometry)
+    {
+        try
         {
-            try
-            {
-                Conn.Insert(anthropometry);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Insert(anthropometry);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void UpdateAnthropometry(Anthropometry anthropometry)
+    public void UpdateAnthropometry(Anthropometry anthropometry)
+    {
+        try
         {
-            try
-            {
-                Conn.Update(anthropometry);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Update(anthropometry);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public List<Plicometry> GetPlicometries(string email)
+    public List<Plicometry> GetPlicometries(string email)
+    {
+        try
         {
-            try
-            {
-                string query = $"SELECT * FROM plicometry WHERE Email = {Apex(email)}";
-                return Conn.Query<Plicometry>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            var query = $"SELECT * FROM plicometry WHERE Email = {Apex(email)}";
+            return Conn.Query<Plicometry>(query).ToList();
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public Plicometry GetPlicometryById(int id)
+    public Plicometry GetPlicometryById(int id)
+    {
+        try
         {
-            try
-            {
-                return Conn.Get<Plicometry>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.Get<Plicometry>(id);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void NewPlicometry(Plicometry plicometry)
+    public void NewPlicometry(Plicometry plicometry)
+    {
+        try
         {
-            try
-            {
-                Conn.Insert(plicometry);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Insert(plicometry);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void UpdatePlicometry(Plicometry plicometry)
+    public void UpdatePlicometry(Plicometry plicometry)
+    {
+        try
         {
-            try
-            {
-                Conn.Update(plicometry);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Update(plicometry);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public List<MuscularGroup> GetMuscularGroups()
+    public List<MuscularGroup> GetMuscularGroups()
+    {
+        try
         {
-            try
-            {
-                return Conn.GetList<MuscularGroup>().ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.GetList<MuscularGroup>().ToList();
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public MuscularGroup GetMuscularGroupById(int id)
+    public MuscularGroup GetMuscularGroupById(int id)
+    {
+        try
         {
-            try
-            {
-                return Conn.Get<MuscularGroup>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.Get<MuscularGroup>(id);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public MuscularGroup GetMuscularGroupByName(string name)
+    public MuscularGroup GetMuscularGroupByName(string name)
+    {
+        try
         {
-            try
-            {
-                string query = string.Format("SELECT * FROM musculargroup WHERE name = {0}", Apex(name));
-                return Conn.Query<MuscularGroup>(query).FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            var query = string.Format("SELECT * FROM musculargroup WHERE name = {0}", Apex(name));
+            return Conn.Query<MuscularGroup>(query).FirstOrDefault();
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void NewMuscularGroup(MuscularGroup muscularGroup)
+    public void NewMuscularGroup(MuscularGroup muscularGroup)
+    {
+        try
         {
-            try
-            {
-                Conn.Insert(muscularGroup);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Insert(muscularGroup);
         }
-        
-        public void UpdateMuscularGroup(MuscularGroup muscularGroup)
+        catch (Exception ex)
         {
-            try
-            {
-                Conn.Update(muscularGroup);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
-        
-        public void DeleteMuscularGroup(int Id)
-        {
-            try
-            {
-                Conn.Delete<MuscularGroup>(Id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
+    }
 
-        public List<FullExerciseView> GetFullExercises()
+    public void UpdateMuscularGroup(MuscularGroup muscularGroup)
+    {
+        try
         {
-            try
-            {
-                return Conn.GetList<FullExerciseView>().ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Update(muscularGroup);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public FullExerciseView GetFullExerciseById(int id)
+    public void DeleteMuscularGroup(int Id)
+    {
+        try
         {
-            try
-            {
-                return Conn.Get<FullExerciseView>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Delete<MuscularGroup>(Id);
         }
-        
-        public List<FullExerciseView> GetFullExerciseByMuscularGroup(string muscularGroup)
+        catch (Exception ex)
         {
-            try
-            {
-                var query = string.Format("SELECT * FROM fullexerciseview WHERE MuscularGroup = {0} ORDER BY Name", Apex(muscularGroup));
-                return Conn.Query<FullExerciseView>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
-        
-        public Exercise GetExerciseById(int id)
-        {
-            try
-            {
-                return Conn.Get<Exercise>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
+    }
 
-        public int? NewExercise(Exercise exercise)
+    public List<FullExerciseView> GetFullExercises()
+    {
+        try
         {
-            try
-            {
-                return Conn.Insert(exercise);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.GetList<FullExerciseView>().ToList();
         }
-        
-        public int? UpdateExercise(Exercise exercise)
+        catch (Exception ex)
         {
-            try
-            {
-                return Conn.Update(exercise);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
+    }
 
-        public int? NewImage(Image image)
+    public FullExerciseView GetFullExerciseById(int id)
+    {
+        try
         {
-            try
-            {
-                return Conn.Insert(image);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.Get<FullExerciseView>(id);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public Image GetImageById(int? id)
+    public List<FullExerciseView> GetFullExerciseByMuscularGroup(string muscularGroup)
+    {
+        try
         {
-            try
-            {
-                return id==null?null:Conn.Get<Image>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            var query = string.Format("SELECT * FROM fullexerciseview WHERE MuscularGroup = {0} ORDER BY Name",
+                Apex(muscularGroup));
+            return Conn.Query<FullExerciseView>(query).ToList();
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public void DeleteImage(int? id)
+    public Exercise GetExerciseById(int id)
+    {
+        try
         {
-            try
-            {
-                Conn.Delete<Image>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.Get<Exercise>(id);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public List<TrainingPlan> GetTrainingPlansByUserId(int id)
+    public int? NewExercise(Exercise exercise)
+    {
+        try
         {
-            try
-            {
-                var query = string.Format("SELECT * FROM trainingplan WHERE USER = {0} ORDER BY Date DESC", id);
-                return Conn.Query<TrainingPlan>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.Insert(exercise);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public List<FullTrainingPlanView> GetFullTrainingPlans()
+    public int? UpdateExercise(Exercise exercise)
+    {
+        try
         {
-            try
-            {
-                return Conn.GetList<FullTrainingPlanView>().ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.Update(exercise);
         }
-        
-        public List<FullTrainingPlanView> GetFullTrainingPlansByUserEmail(string email)
+        catch (Exception ex)
         {
-            try
-            {
-                var query = $@"SELECT * FROM fulltrainingplanview WHERE Email = {Apex(email)}";
-                return Conn.Query<FullTrainingPlanView>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
+    }
 
-        public List<FullTrainingPlanView> GetFullTrainingPlanById(int id)
+    public int? NewImage(Image image)
+    {
+        try
         {
-            try
-            {
-                var query = string.Format("SELECT * FROM fulltrainingplanview WHERE TrainingPlanId = {0}", id);
-                return Conn.Query<FullTrainingPlanView>(query).ToList();
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return Conn.Insert(image);
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
-        public int? NewTrainingPlan(TrainingPlan trainingPlan)
+    public Image GetImageById(int? id)
+    {
+        try
         {
-            try
-            {
-                Conn.Insert(trainingPlan);
-                return GetLastInsertedId().lastId;
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            return id == null ? null : Conn.Get<Image>(id);
         }
-        
-        public void UpdateTrainingPlan(TrainingPlan trainingPlan)
+        catch (Exception ex)
         {
-            try
-            {
-                Conn.Update(trainingPlan);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
+    }
 
-        public void NewTrainingPlanDetail(TrainingPlanDetail trainingPlanDetail)
+    public void DeleteImage(int? id)
+    {
+        try
         {
-            try
-            {
-                Conn.Insert(trainingPlanDetail);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Conn.Delete<Image>(id);
         }
-        
-        public void UpdateTrainingPlanDetail(TrainingPlanDetail trainingPlanDetail)
+        catch (Exception ex)
         {
-            try
-            {
-                Conn.Update(trainingPlanDetail);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            Error(ex);
+            throw;
         }
-        
-        public void DeleteTrainingPlanDetail(int id)
-        {
-            try
-            {
-                Conn.Delete<TrainingPlanDetail>(id);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
-        }
+    }
 
-        public void DeleteTrainingPlanDetailByTrainingPlanId(int trainingPlanId)
+    public List<TrainingPlan> GetTrainingPlansByUserId(int id)
+    {
+        try
         {
-            try
-            {
-                var sql = $"DELETE FROM TrainingPlanDetail WHERE TrainingPlanId = {trainingPlanId}";
-                Conn.Execute(sql);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                throw;
-            }
+            var query = string.Format("SELECT * FROM trainingplan WHERE USER = {0} ORDER BY Date DESC", id);
+            return Conn.Query<TrainingPlan>(query).ToList();
         }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
 
+    public List<FullTrainingPlanView> GetFullTrainingPlans()
+    {
+        try
+        {
+            return Conn.GetList<FullTrainingPlanView>().ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<FullTrainingPlanView> GetFullTrainingPlansByUserEmail(string email)
+    {
+        try
+        {
+            var query = $@"SELECT * FROM fulltrainingplanview WHERE Email = {Apex(email)}";
+            return Conn.Query<FullTrainingPlanView>(query).ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<FullTrainingPlanView> GetFullTrainingPlanById(int id)
+    {
+        try
+        {
+            var query = string.Format("SELECT * FROM fulltrainingplanview WHERE TrainingPlanId = {0}", id);
+            return Conn.Query<FullTrainingPlanView>(query).ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public int? NewTrainingPlan(TrainingPlan trainingPlan)
+    {
+        try
+        {
+            Conn.Insert(trainingPlan);
+            return GetLastInsertedId().lastId;
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void UpdateTrainingPlan(TrainingPlan trainingPlan)
+    {
+        try
+        {
+            Conn.Update(trainingPlan);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void NewTrainingPlanDetail(TrainingPlanDetail trainingPlanDetail)
+    {
+        try
+        {
+            Conn.Insert(trainingPlanDetail);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void UpdateTrainingPlanDetail(TrainingPlanDetail trainingPlanDetail)
+    {
+        try
+        {
+            Conn.Update(trainingPlanDetail);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void DeleteTrainingPlanDetail(int id)
+    {
+        try
+        {
+            Conn.Delete<TrainingPlanDetail>(id);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void DeleteTrainingPlanDetailByTrainingPlanId(int trainingPlanId)
+    {
+        try
+        {
+            var sql = $"DELETE FROM TrainingPlanDetail WHERE TrainingPlanId = {trainingPlanId}";
+            Conn.Execute(sql);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
     }
 }
-

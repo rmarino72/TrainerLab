@@ -1,9 +1,9 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
-<br />
-<br />
+<br/>
+<br/>
 <div class="container">
     <div class="col-lg-12">
         <div class="card mb-0">
@@ -27,7 +27,7 @@
                             <input class="form-control" id="confirmPass-txt" type="password" name="confirmPassTxt" autocomplete="off" required data-validate-field="confirmPassTxt">
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
             </div>
@@ -58,7 +58,7 @@
 
     function update()
     {
-        var dt = new Object();
+        var dt = {};
         dt.Email = getFromStorage(STORAGE_USER);
         dt.OldPassword = $('#oldPass-txt').val();
         dt.NewPassword = $('#newPass-txt').val();
@@ -89,4 +89,4 @@
     }
 
 </script>
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

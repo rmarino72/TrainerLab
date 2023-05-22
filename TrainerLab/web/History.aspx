@@ -1,9 +1,9 @@
 ﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
 
-<br />
+<br/>
 <div class="container">
 
     <h3><span class="material-symbols-outlined">clinical_notes</span>&nbsp; Anamnesi personale </h3>
@@ -13,18 +13,20 @@
             <br/>
             <div class="card">
                 <div class="card-body">
-                    <strong><span id="user-txt"></span></strong><br />
-                    <br />
-                    Email: <span id="email-txt"></span><br />
-                    <br />
-                    Et&agrave;: <span id="age-txt"></span><br />
-                    <br />
+                    <strong>
+                        <span id="user-txt"></span>
+                    </strong><br/>
+                    <br/>
+                    Email: <span id="email-txt"></span><br/>
+                    <br/>
+                    Et&agrave;: <span id="age-txt"></span><br/>
+                    <br/>
                     Altezza m.: <span id="height-txt"></span>
                 </div>
             </div>
         </div>
         <div class="col-lg-6 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-header">
                     <h3 class="h4 mb-0">Peso kg.</h3>
@@ -35,12 +37,12 @@
             </div>
         </div>
     </div>
-    <hr />
+    <hr/>
 
     <h3> Misura circonferenze in cm.</h3>
     <div class="row">
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Spalle</strong>
@@ -49,7 +51,7 @@
             </div>
         </div>
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Torace</strong>
@@ -58,7 +60,7 @@
             </div>
         </div>
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Vita</strong>
@@ -69,7 +71,7 @@
     </div>
     <div class="row">
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Fianchi</strong>
@@ -78,7 +80,7 @@
             </div>
         </div>
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Braccio sinistro</strong>
@@ -87,7 +89,7 @@
             </div>
         </div>
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Braccio destro</strong>
@@ -98,7 +100,7 @@
     </div>
     <div class="row">
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Coscia sinistra</strong>
@@ -107,7 +109,7 @@
             </div>
         </div>
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Coscia destra</strong>
@@ -116,7 +118,7 @@
             </div>
         </div>
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Poplaccio sinistro</strong>
@@ -128,7 +130,7 @@
 
     <div class="row">
         <div class="col-lg-4 container-fluid">
-            <br />
+            <br/>
             <div class="card">
                 <div class="card-body">
                     <strong>Polpaccio Destro</strong>
@@ -213,4 +215,4 @@
 
     }
 </script>
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

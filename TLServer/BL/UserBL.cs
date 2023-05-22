@@ -1,361 +1,346 @@
 ﻿using System;
 using System.Linq;
-using TLServer.BO;
-using TLServer.Logging;
 using RMLibs.basic;
-using TLServer.DAO;
 using RMLibs.Utilities;
-using System.Transactions;
+using TLServer.BO;
+using TLServer.DAO;
+using TLServer.Logging;
 
-namespace TLServer.BL
+namespace TLServer.BL;
+
+public class UserBL : GenericBl
 {
-	public class UserBL: GenericBl
-	{
-
-        #region Singleton
-
-        private static UserBL instance = null;
-        private static readonly object padlock = new object();
-
-        public static UserBL Instance
+    public RestListResult GetRegions()
+    {
+        try
         {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new UserBL();
-                    }
-                    return instance;
-                }
-            }
+            return MakeRestListResponse(BODB.GetRegions().Cast<BasicObject>().ToList());
         }
-
-        private UserBL() : base(TlLogger.Instance)
+        catch (Exception ex)
         {
+            Error(ex);
+            return HandleListException(ex);
         }
+    }
 
-        #endregion
-
-        public RestListResult GetRegions()
+    public RestListResult GetProvinces()
+    {
+        try
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetRegions().Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            return MakeRestListResponse(BODB.GetProvinces().Cast<BasicObject>().ToList());
         }
-
-        public RestListResult GetProvinces()
-		{
-			try
-			{
-				return MakeRestListResponse(BODB.GetProvinces().Cast<BasicObject>().ToList());
-			}
-			catch (Exception ex)
-			{
-				Error(ex);
-				return HandleListException(ex);
-			}
-		}
-
-        public RestListResult GetProvincesByRegion(string region)
+        catch (Exception ex)
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetProvincesByRegion(region).Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            Error(ex);
+            return HandleListException(ex);
         }
+    }
 
-        public RestListResult GetCities()
+    public RestListResult GetProvincesByRegion(string region)
+    {
+        try
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetCities().Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            return MakeRestListResponse(BODB.GetProvincesByRegion(region).Cast<BasicObject>().ToList());
         }
-
-        public RestListResult GetCitiesByProvince(string province)
+        catch (Exception ex)
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetCitiesByProvince(province).Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            Error(ex);
+            return HandleListException(ex);
         }
+    }
 
-        public RestListResult GetRoles()
+    public RestListResult GetCities()
+    {
+        try
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetRoles().Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            return MakeRestListResponse(BODB.GetCities().Cast<BasicObject>().ToList());
         }
-
-        public RestListResult GetSexes()
+        catch (Exception ex)
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetSexes().Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            Error(ex);
+            return HandleListException(ex);
         }
+    }
 
-        public RestObjectResult GetUserByEmail(string email)
+    public RestListResult GetCitiesByProvince(string province)
+    {
+        try
         {
-            try
-            {
-                return MakeRestObjectResponse(BODB.GetUserByEmail(email));
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            return MakeRestListResponse(BODB.GetCitiesByProvince(province).Cast<BasicObject>().ToList());
         }
-
-        public RestListResult GetFullUsers()
+        catch (Exception ex)
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetFullUsers().Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            Error(ex);
+            return HandleListException(ex);
         }
+    }
 
-        public RestObjectResult GetFullUserByEmail(string email)
+    public RestListResult GetRoles()
+    {
+        try
         {
-            try
-            {
-                return MakeRestObjectResponse(BODB.GetFullUserByEmail(email));
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            return MakeRestListResponse(BODB.GetRoles().Cast<BasicObject>().ToList());
         }
-
-        public RestObjectResult NewUser(FullUserView fullUser)
+        catch (Exception ex)
         {
-            try
+            Error(ex);
+            return HandleListException(ex);
+        }
+    }
+
+    public RestListResult GetSexes()
+    {
+        try
+        {
+            return MakeRestListResponse(BODB.GetSexes().Cast<BasicObject>().ToList());
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleListException(ex);
+        }
+    }
+
+    public RestObjectResult GetUserByEmail(string email)
+    {
+        try
+        {
+            return MakeRestObjectResponse(BODB.GetUserByEmail(email));
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestListResult GetFullUsers()
+    {
+        try
+        {
+            return MakeRestListResponse(BODB.GetFullUsers().Cast<BasicObject>().ToList());
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleListException(ex);
+        }
+    }
+
+    public RestObjectResult GetFullUserByEmail(string email)
+    {
+        try
+        {
+            return MakeRestObjectResponse(BODB.GetFullUserByEmail(email));
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult NewUser(FullUserView fullUser)
+    {
+        try
+        {
+            var user = BODB.GetUserByEmail(fullUser.Email);
+            if (user != null)
+                return MakeRestObjectResponse(null, false, 1, "The following email already exists: " + fullUser.Email);
+            BODB.NewUser(fullUser);
+            return MakeRestObjectResponse(null);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult UpdateUser(FullUserView fullUser)
+    {
+        try
+        {
+            BODB.UpdateUser(fullUser);
+            return MakeRestObjectResponse(null);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult ChangePass(ChangePassData changePassData)
+    {
+        try
+        {
+            if (changePassData.NewPassword != changePassData.ConfirmPassword)
+                return MakeRestObjectResponse(null, false, 1, "Confirm passowrd does not match with new password");
+            var user = BODB.GetUserByEmail(changePassData.Email);
+            if (!string.IsNullOrEmpty(changePassData.OldPassword))
+                if (changePassData.OldPassword != StringUtils.DecodeBase64(user.Password))
+                    return MakeRestObjectResponse(null, false, 2, "Old password is wrong");
+            user.Password = StringUtils.EncodeBase64(changePassData.NewPassword);
+            user.LastUpdateDateTime = DateTime.Now;
+            BODB.UpdateUser(user);
+            return MakeRestObjectResponse(null);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestListResult GetAnthropometries(string email)
+    {
+        try
+        {
+            return MakeRestListResponse(BODB.GetAnthropometries(email).Cast<BasicObject>().ToList());
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleListException(ex);
+        }
+    }
+
+    public RestObjectResult GetAnthropometryById(int id)
+    {
+        try
+        {
+            return MakeRestObjectResponse(BODB.GetAnthropometryById(id));
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult NewAnthropometry(FullAnthropometryView anthropometry)
+    {
+        try
+        {
+            using (var ts = BODB.CreateTransactionScope())
             {
-                User user = BODB.GetUserByEmail(fullUser.Email);
-                if (user != null)
-                {
-                    return MakeRestObjectResponse(null, false, 1, "The following email already exists: " + fullUser.Email);
-                }
-                BODB.NewUser(fullUser);
+                anthropometry.Date = anthropometry.Date.ToLocalTime();
+                var userData = BODB.GetUserDataByEmail(anthropometry.Email);
+                userData.Height = anthropometry.Height;
+                userData.LastUpdateDateTime = DateTime.Now;
+                anthropometry.LastUpdateDateTime = DateTime.Now;
+                BODB.UpdateUserData(userData);
+                BODB.NewAnthropometry(anthropometry);
+                ts.Complete();
                 return MakeRestObjectResponse(null);
             }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
         }
-
-        public RestObjectResult UpdateUser(FullUserView fullUser)
+        catch (Exception ex)
         {
-            try
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult UpdateAnthropometry(FullAnthropometryView anthropometry)
+    {
+        try
+        {
+            using (var ts = BODB.CreateTransactionScope())
             {
-                BODB.UpdateUser(fullUser);
+                anthropometry.Date = anthropometry.Date.ToLocalTime();
+                var userData = BODB.GetUserDataByEmail(anthropometry.Email);
+                userData.Height = anthropometry.Height;
+                userData.LastUpdateDateTime = DateTime.Now;
+                anthropometry.LastUpdateDateTime = DateTime.Now;
+                BODB.UpdateUserData(userData);
+                BODB.UpdateAnthropometry(anthropometry);
+                ts.Complete();
                 return MakeRestObjectResponse(null);
             }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
         }
-
-        public RestObjectResult ChangePass(ChangePassData changePassData)
+        catch (Exception ex)
         {
-            try
-            {
-                if (changePassData.NewPassword != changePassData.ConfirmPassword)
-                {
-                    return MakeRestObjectResponse(null, false, 1, "Confirm passowrd does not match with new password");
-                }
-                User user = BODB.GetUserByEmail(changePassData.Email);
-                if (!string.IsNullOrEmpty(changePassData.OldPassword))
-                {   
-                    if (changePassData.OldPassword != StringUtils.DecodeBase64(user.Password))
-                    {
-                        return MakeRestObjectResponse(null, false, 2, "Old password is wrong");
-                    }
-                }
-                user.Password = StringUtils.EncodeBase64(changePassData.NewPassword);
-                user.LastUpdateDateTime = DateTime.Now;
-                BODB.UpdateUser(user);
-                return MakeRestObjectResponse(null);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            Error(ex);
+            return HandleObjectException(ex);
         }
+    }
 
-        public RestListResult GetAnthropometries(string email)
+    public RestListResult GetPlicometry(string email)
+    {
+        try
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetAnthropometries(email).Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            return MakeRestListResponse(BODB.GetPlicometries(email).Cast<BasicObject>().ToList());
         }
-
-        public RestObjectResult GetAnthropometryById(int id)
+        catch (Exception ex)
         {
-            try
-            {
-                return MakeRestObjectResponse(BODB.GetAnthropometryById(id));
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            Error(ex);
+            return HandleListException(ex);
         }
+    }
 
-        public RestObjectResult NewAnthropometry(FullAnthropometryView anthropometry)
+    public RestObjectResult GetPlicometryById(int id)
+    {
+        try
         {
-            try
-            {
-                using (TransactionScope ts = BODB.CreateTransactionScope())
-                {
-                    anthropometry.Date = anthropometry.Date.ToLocalTime();
-                    UserData userData = BODB.GetUserDataByEmail(anthropometry.Email);
-                    userData.Height = anthropometry.Height;
-                    userData.LastUpdateDateTime = DateTime.Now;
-                    anthropometry.LastUpdateDateTime = DateTime.Now;
-                    BODB.UpdateUserData(userData);
-                    BODB.NewAnthropometry((Anthropometry)anthropometry);
-                    ts.Complete();
-                    return MakeRestObjectResponse(null);
-                }
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            return MakeRestObjectResponse(BODB.GetPlicometryById(id));
         }
-
-        public RestObjectResult UpdateAnthropometry(FullAnthropometryView anthropometry)
+        catch (Exception ex)
         {
-            try
-            {
-                using (TransactionScope ts = BODB.CreateTransactionScope())
-                {
-                    anthropometry.Date = anthropometry.Date.ToLocalTime();
-                    UserData userData = BODB.GetUserDataByEmail(anthropometry.Email);
-                    userData.Height = anthropometry.Height;
-                    userData.LastUpdateDateTime = DateTime.Now;
-                    anthropometry.LastUpdateDateTime = DateTime.Now;
-                    BODB.UpdateUserData(userData);
-                    BODB.UpdateAnthropometry((Anthropometry)anthropometry);
-                    ts.Complete();
-                    return MakeRestObjectResponse(null);
-                }
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            Error(ex);
+            return HandleObjectException(ex);
         }
+    }
 
-        public RestListResult GetPlicometry(string email)
+    public RestObjectResult NewPlicometry(Plicometry plicometry)
+    {
+        try
         {
-            try
-            {
-                return MakeRestListResponse(BODB.GetPlicometries(email).Cast<BasicObject>().ToList());
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleListException(ex);
-            }
+            BODB.NewPlicometry(plicometry);
+            return MakeRestObjectResponse(null);
         }
-
-        public RestObjectResult GetPlicometryById(int id)
+        catch (Exception ex)
         {
-            try
-            {
-                return MakeRestObjectResponse(BODB.GetPlicometryById(id));
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            Error(ex);
+            return HandleObjectException(ex);
         }
+    }
 
-        public RestObjectResult NewPlicometry(Plicometry plicometry)
+    public RestObjectResult UpdatePlicometry(Plicometry plicometry)
+    {
+        try
         {
-            try
-            {
-                BODB.NewPlicometry(plicometry);
-                return MakeRestObjectResponse(null);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
-            }
+            BODB.UpdatePlicometry(plicometry);
+            return MakeRestObjectResponse(null);
         }
-
-        public RestObjectResult UpdatePlicometry(Plicometry plicometry)
+        catch (Exception ex)
         {
-            try
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    #region Singleton
+
+    private static UserBL instance;
+    private static readonly object padlock = new();
+
+    public static UserBL Instance
+    {
+        get
+        {
+            lock (padlock)
             {
-                BODB.UpdatePlicometry(plicometry);
-                return MakeRestObjectResponse(null);
-            }
-            catch (Exception ex)
-            {
-                Error(ex);
-                return HandleObjectException(ex);
+                if (instance == null) instance = new UserBL();
+                return instance;
             }
         }
     }
-}
 
+    private UserBL() : base(TlLogger.Instance)
+    {
+    }
+
+    #endregion
+}

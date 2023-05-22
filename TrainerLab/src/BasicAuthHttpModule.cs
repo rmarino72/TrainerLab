@@ -6,110 +6,100 @@ using System.Threading;
 using System.Web;
 using TLServer.BL;
 
-namespace TrainerLab
+namespace TrainerLab;
+
+public class BasicAuthHttpModule : IHttpModule
 {
-    public class BasicAuthHttpModule : IHttpModule
+    private const string Realm = "My Realm";
+
+    public void Init(HttpApplication context)
     {
-        private const string Realm = "My Realm";
+        // Register event handlers
+        context.AuthenticateRequest += OnApplicationAuthenticateRequest;
+        context.EndRequest += OnApplicationEndRequest;
+    }
 
-        public void Init(HttpApplication context)
-        {
-            // Register event handlers
-            context.AuthenticateRequest += OnApplicationAuthenticateRequest;
-            context.EndRequest += OnApplicationEndRequest;
-        }
+    public void Dispose()
+    {
+    }
 
-        private static void SetPrincipal(IPrincipal principal)
+    private static void SetPrincipal(IPrincipal principal)
+    {
+        Thread.CurrentPrincipal = principal;
+        if (HttpContext.Current != null) HttpContext.Current.User = principal;
+    }
+
+
+    protected static string VerifyCredentials(string user, string password)
+    {
+        if (user == "trainerlab" && password == "Tr@1nerLab") return "OK";
+        return AuthBl.Instance.VerifyToken(user, password);
+    }
+
+
+    // TODO: Here is where you would validate the username and password.
+    private static bool CheckPassword(string username, string password)
+    {
+        var token = VerifyCredentials(username, password);
+
+        HttpContext.Current.Response.Headers.Add("token", token);
+        return token != string.Empty;
+    }
+
+    private static void AuthenticateUser(string credentials)
+    {
+        try
         {
-            Thread.CurrentPrincipal = principal;
-            if (HttpContext.Current != null)
+            var encoding = Encoding.GetEncoding("iso-8859-1");
+            credentials = encoding.GetString(Convert.FromBase64String(credentials));
+
+            var separator = credentials.IndexOf(':');
+            var name = credentials.Substring(0, separator);
+            var password = credentials.Substring(separator + 1);
+
+            if (CheckPassword(name, password))
             {
-                HttpContext.Current.User = principal;
+                var identity = new GenericIdentity(name);
+                SetPrincipal(new GenericPrincipal(identity, null));
             }
-        }
-        
-                
-        protected static string VerifyCredentials(string user, string password)
-        {
-            if (user == "trainerlab" && password == "Tr@1nerLab")
+            else
             {
-                return "OK";
-            }
-            return AuthBl.Instance.VerifyToken(user, password);
-        }
-        
-
-        // TODO: Here is where you would validate the username and password.
-        private static bool CheckPassword(string username, string password)
-        {
-            string token = VerifyCredentials(username, password);
-            
-            HttpContext.Current.Response.Headers.Add("token", token);
-            return token != string.Empty;
-            
-        }
-
-        private static void AuthenticateUser(string credentials)
-        {
-            try
-            {
-                var encoding = Encoding.GetEncoding("iso-8859-1");
-                credentials = encoding.GetString(Convert.FromBase64String(credentials));
-
-                int separator = credentials.IndexOf(':');
-                string name = credentials.Substring(0, separator);
-                string password = credentials.Substring(separator + 1);
-
-                if (CheckPassword(name, password))
-                {
-                    var identity = new GenericIdentity(name);
-                    SetPrincipal(new GenericPrincipal(identity, null));
-                }
-                else
-                {
-                    // Invalid username or password.
-                    HttpContext.Current.Response.StatusCode = 401;
-                }
-            }
-            catch (FormatException)
-            {
-                // Credentials were not formatted correctly.
+                // Invalid username or password.
                 HttpContext.Current.Response.StatusCode = 401;
             }
         }
-
-        private static void OnApplicationAuthenticateRequest(object sender, EventArgs e)
+        catch (FormatException)
         {
-            var request = HttpContext.Current.Request;
-            var authHeader = request.Headers["Authorization"];
-            if (authHeader != null)
-            {
-                var authHeaderVal = AuthenticationHeaderValue.Parse(authHeader);
+            // Credentials were not formatted correctly.
+            HttpContext.Current.Response.StatusCode = 401;
+        }
+    }
 
-                // RFC 2617 sec 1.2, "scheme" name is case-insensitive
-                if (authHeaderVal.Scheme.Equals("basic",
-                StringComparison.OrdinalIgnoreCase) &&
+    private static void OnApplicationAuthenticateRequest(object sender, EventArgs e)
+    {
+        var request = HttpContext.Current.Request;
+        var authHeader = request.Headers["Authorization"];
+        if (authHeader != null)
+        {
+            var authHeaderVal = AuthenticationHeaderValue.Parse(authHeader);
+
+            // RFC 2617 sec 1.2, "scheme" name is case-insensitive
+            if (authHeaderVal.Scheme.Equals("basic",
+                    StringComparison.OrdinalIgnoreCase) &&
                 authHeaderVal.Parameter != null)
-                {
-                    AuthenticateUser(authHeaderVal.Parameter);
-                }
-            }
+                AuthenticateUser(authHeaderVal.Parameter);
         }
+    }
 
-        // If the request was unauthorized, add the WWW-Authenticate header 
-        // to the response.
-        private static void OnApplicationEndRequest(object sender, EventArgs e)
+    // If the request was unauthorized, add the WWW-Authenticate header 
+    // to the response.
+    private static void OnApplicationEndRequest(object sender, EventArgs e)
+    {
+        var response = HttpContext.Current.Response;
+        if (response.StatusCode == 401)
         {
-            var response = HttpContext.Current.Response;
-            if (response.StatusCode == 401)
-            {
-                //Remove this to avoid Chrome prompt and force error handling by JQuery
-                //response.Headers.Add("WWW-Authenticate", string.Format("Basic realm=\"{0}\"", Realm));
-            }
-        }
-
-        public void Dispose()
-        {
+            //Remove this to avoid Chrome prompt and force error handling by JQuery
+            //response.Headers.Add("WWW-Authenticate", string.Format("Basic realm=\"{0}\"", Realm));
         }
     }
 }

@@ -4,7 +4,7 @@
 <%@ Register Src="~/Components/Foot.ascx" TagPrefix="uc1" TagName="Foot" %>
 
 
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 
 <div class="text-center">
     <img src="/assets/img/logo.png" width="80%"/>
@@ -15,4 +15,4 @@
 </div>
 
 
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

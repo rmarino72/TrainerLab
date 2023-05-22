@@ -5,7 +5,7 @@
 
 
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
-<uc1:Head runat="server" id="Head" />
+<uc1:Head runat="server" id="Head"/>
 <div class="col-lg-12" id="listPg">
     <div class="container">
         <div class="card mb-0">
@@ -16,15 +16,15 @@
         <div class="card-body pt-0">
             <br/>
             <br/>
-            
+
             <div class="table-responsive">
                 <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="listTable">
                     <thead>
-                        <tr>
-                            <th data-field="Id" data-visible="false">#</th>
-                            <th data-field="Date">Data</th>
-                            <th data-field="Name">Nome</th>
-                        </tr>
+                    <tr>
+                        <th data-field="Id" data-visible="false">#</th>
+                        <th data-field="Date">Data</th>
+                        <th data-field="Name">Nome</th>
+                    </tr>
                     </thead>
                     <tbody role="button"></tbody>
                 </table>
@@ -48,9 +48,9 @@
                 <br/>
                 <h4>Annotazioni sul piano di allenamento:</h4>
                 <br/>
-<pre>
+                <pre>
 <span id="Notes-txt"></span>
-</pre>                
+</pre>
                 <br/>
                 <hr/>
                 <br/>
@@ -188,4 +188,4 @@ function gotPlanForId(data)
 
 </script>
 
-<uc1:Foot runat="server" id="Foot" />
+<uc1:Foot runat="server" id="Foot"/>

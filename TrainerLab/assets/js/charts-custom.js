@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var lineChartExample = new Chart(LINECHARTEXMPLE, {
         type: "line",
         options: {
-            legend: { labels: { fontColor: "#777", fontSize: 12 } },
+            legend: {labels: {fontColor: "#777", fontSize: 12}},
             scales: {
                 xAxes: [
                     {
