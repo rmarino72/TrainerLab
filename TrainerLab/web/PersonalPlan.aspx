@@ -57,25 +57,25 @@
                 <div id="day1Div">
                     <h4 class="text-center">Giorno 1</h4>
                     <br/>
-                    <div id="day1Id"></div>
+                    <div id="day1Id" class="row"></div>
                     <br/>
                 </div>
                 <div id="day2Div">
                     <h4 class="text-center">Giorno 2</h4>
                     <br/>
-                    <div id="day2Id"></div>
+                    <div id="day2Id" class="row"></div>
                     <br/>
                 </div>
                 <div id="day3Div">
                     <h4 class="text-center">Giorno 3</h4>
                     <br/>
-                    <div id="day3Id"></div>
+                    <div id="day3Id" class="row"></div>
                     <br/>
                 </div>
                 <div id="day4Div">
                     <h4 class="text-center">Giorno 4</h4>
                     <br/>
-                    <div id="day4Id"></div>
+                    <div id="day4Id" class="row"></div>
                     <br/>
                 </div>
             </div>
@@ -139,14 +139,17 @@ function gotPlanForId(data)
     data.Data.forEach(e =>
     {
         let currentDay = e.Day;
-        let h = '<b>' + e.ExerciseName + '</b><br/><br/>';
+        let h = '<div class="card col-lg-4">';
         
+        h = h + '<div class="card-header"><b>' + e.SeqNumber + ' - ' + e.ExerciseName + '</b><br/></div>';
+        h = h + '<div class="card-body">';
+        h = h + '<img src="/Images/'+e.Image+'" width="100%"/><br/>';
         h = h + "- Serie: " + e.Sequences + "<br/>";
         h = h + "- Ripetizioni: " + e.Repetitions + "<br/>";
         h = h + "- Tempo: " + e.Time + "<br/><br/>";
         h = h + "Annotazioni per questo esercizio:<br/><br/><pre>" + e.Notes + "</pre><br/>";
         
-        h = h + "<hr/>";
+        h = h + "</div></div>";
         
         htmls[currentDay - 1] = htmls[currentDay - 1] + h;
         
