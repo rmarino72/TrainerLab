@@ -73,9 +73,9 @@
                 <input type="hidden" id="user-id"/>
                 <input type="hidden" id="trainingplan-id"/>
                 <br/>
-                                <br/>
-                                <button type="button" class="btn btn-primary" id="cancel-btn"><span class="material-symbols-outlined">arrow_back_ios</span>&nbsp; Indietro</button>
-                                <button type="submit" class="btn btn-primary"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button> &nbsp;
+                <br/>
+                <button type="button" class="btn btn-primary" id="cancel-btn"><span class="material-symbols-outlined">arrow_back_ios</span>&nbsp; Indietro</button>
+                <button type="submit" class="btn btn-primary"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button> &nbsp;
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="input-material-group col-lg-12">
@@ -111,7 +111,7 @@
                     <button type="button" onclick="addExercise(1);" class="btn btn-primary" id="addday1-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" 
+                    <table class="table mb-0 table-striped table-sm"
                            data-reorderable-rows="true"
                            data-use-row-attr-func="true"
                            data-mobile-responsive="true" id="day1-tbl">
@@ -139,7 +139,7 @@
                     <button type="button" onclick="addExercise(2);" class="btn btn-primary" id="addday2-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" 
+                    <table class="table mb-0 table-striped table-sm"
                            data-reorderable-rows="true"
                            data-use-row-attr-func="true"
                            data-mobile-responsive="true" id="day2-tbl">
@@ -167,7 +167,7 @@
                     <button type="button" onclick="addExercise(3);" class="btn btn-primary" id="addday3-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" 
+                    <table class="table mb-0 table-striped table-sm"
                            data-reorderable-rows="true"
                            data-use-row-attr-func="true"
                            data-mobile-responsive="true" id="day3-tbl">
@@ -195,7 +195,7 @@
                     <button type="button" class="btn btn-primary" onclick="addExercise(4);" id="addday4-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" 
+                    <table class="table mb-0 table-striped table-sm"
                            data-reorderable-rows="true"
                            data-use-row-attr-func="true"
                            data-mobile-responsive="true" id="day4-tbl">
@@ -224,7 +224,7 @@
                         <textarea id="Notes-txt" class="form-control"></textarea>
                     </div>
                 </div>
-                
+
             </form>
         </div>
     </div>

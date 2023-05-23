@@ -265,26 +265,24 @@ public class ExercisePlanBl : GenericBl
         if (completeTrainingPlan.Details.Count == 0)
             return HandleObjectException(new Exception("Non sono stati inseriti esercizi per questo piano!"));
 
-        using (var ts = BODB.CreateTransactionScope())
+        using var ts = BODB.CreateTransactionScope();
+        try
         {
-            try
+            var id = BODB.NewTrainingPlan(completeTrainingPlan);
+            foreach (var detail in completeTrainingPlan.Details)
             {
-                var id = BODB.NewTrainingPlan(completeTrainingPlan);
-                foreach (var detail in completeTrainingPlan.Details)
-                {
-                    detail.TrainingPlanId = id;
-                    BODB.NewTrainingPlanDetail(detail);
-                }
+                detail.TrainingPlanId = id;
+                BODB.NewTrainingPlanDetail(detail);
+            }
 
-                ts.Complete();
-                ts.Dispose();
-                return MakeRestObjectResponse(null);
-            }
-            catch (Exception ex)
-            {
-                ts.Dispose();
-                return HandleObjectException(ex);
-            }
+            ts.Complete();
+            ts.Dispose();
+            return MakeRestObjectResponse(null);
+        }
+        catch (Exception ex)
+        {
+            ts.Dispose();
+            return HandleObjectException(ex);
         }
     }
 
@@ -292,28 +290,29 @@ public class ExercisePlanBl : GenericBl
     {
         if (completeTrainingPlan.Details.Count == 0)
             return HandleObjectException(new Exception("Non sono stati inseriti esercizi per questo piano!"));
-        using (var ts = BODB.CreateTransactionScope())
+        using var ts = BODB.CreateTransactionScope();
+        try
         {
-            try
+            var id = completeTrainingPlan.Id;
+            if (id != null)
             {
-                var id = completeTrainingPlan.Id;
                 BODB.DeleteTrainingPlanDetailByTrainingPlanId((int)id);
                 foreach (var detail in completeTrainingPlan.Details)
                 {
                     detail.TrainingPlanId = id;
                     BODB.NewTrainingPlanDetail(detail);
                 }
+            }
 
-                BODB.UpdateTrainingPlan(completeTrainingPlan);
-                ts.Complete();
-                ts.Dispose();
-                return MakeRestObjectResponse(null);
-            }
-            catch (Exception ex)
-            {
-                ts.Dispose();
-                return HandleObjectException(ex);
-            }
+            BODB.UpdateTrainingPlan(completeTrainingPlan);
+            ts.Complete();
+            ts.Dispose();
+            return MakeRestObjectResponse(null);
+        }
+        catch (Exception ex)
+        {
+            ts.Dispose();
+            return HandleObjectException(ex);
         }
     }
 

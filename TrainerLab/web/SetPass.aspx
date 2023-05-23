@@ -3,8 +3,8 @@
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
 <uc1:Head runat="server" id="Head"/>
 
-<br />
-<br />
+<br/>
+<br/>
 <div class="col-lg-12" id="mainPg">
 
     <div class="container">
@@ -16,14 +16,14 @@
                 <div class="table-responsive">
                     <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="dataTable">
                         <thead>
-                            <tr>
-                                <th data-field="Id">#</th>
-                                <th data-field="FirstName">Nome</th>
-                                <th data-field="LastName">Cognome</th>
-                                <th data-field="Email">Email</th>
-                                <th data-field="BirthDate">Data di nascita</th>
-                                <th data-field="City">Citt&agrave;</th>
-                            </tr>
+                        <tr>
+                            <th data-field="Id">#</th>
+                            <th data-field="FirstName">Nome</th>
+                            <th data-field="LastName">Cognome</th>
+                            <th data-field="Email">Email</th>
+                            <th data-field="BirthDate">Data di nascita</th>
+                            <th data-field="City">Citt&agrave;</th>
+                        </tr>
                         </thead>
                         <tbody role="button"></tbody>
                     </table>
@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                     <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
                     <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>

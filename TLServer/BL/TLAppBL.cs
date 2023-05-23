@@ -34,17 +34,17 @@ public class TLAppBL : GenericBl
 
     #region Singleton
 
-    private static TLAppBL instance;
-    private static readonly object padlock = new();
+    private static TLAppBL _instance;
+    private static readonly object Padlock = new();
 
     public static TLAppBL Instance
     {
         get
         {
-            lock (padlock)
+            lock (Padlock)
             {
-                if (instance == null) instance = new TLAppBL();
-                return instance;
+                if (_instance == null) _instance = new TLAppBL();
+                return _instance;
             }
         }
     }

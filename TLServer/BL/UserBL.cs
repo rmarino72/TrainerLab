@@ -323,17 +323,17 @@ public class UserBL : GenericBl
 
     #region Singleton
 
-    private static UserBL instance;
-    private static readonly object padlock = new();
+    private static UserBL _instance;
+    private static readonly object Padlock = new();
 
     public static UserBL Instance
     {
         get
         {
-            lock (padlock)
+            lock (Padlock)
             {
-                if (instance == null) instance = new UserBL();
-                return instance;
+                if (_instance == null) _instance = new UserBL();
+                return _instance;
             }
         }
     }

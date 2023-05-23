@@ -6,17 +6,16 @@ public class BoDbInstance : TlDbManager
 {
     #region Singleton
 
-    private static BoDbInstance instance;
-    private static readonly object padlock = new();
+    private static BoDbInstance _instance;
+    private static readonly object Padlock = new();
 
     public static BoDbInstance Instance
     {
         get
         {
-            lock (padlock)
+            lock (Padlock)
             {
-                if (instance == null) instance = new BoDbInstance();
-                return instance;
+                return _instance ??= new BoDbInstance();
             }
         }
     }
@@ -30,6 +29,11 @@ public class BoDbInstance : TlDbManager
         DbName = Config.DbName;
         OpenConnection();
         CloseConnection();
+    }
+
+    public sealed override void OpenConnection()
+    {
+        base.OpenConnection();
     }
 
     #endregion
