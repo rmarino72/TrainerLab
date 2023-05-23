@@ -2,6 +2,8 @@
 <%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
 <uc1:Head runat="server" id="Head"/>
+<link rel="stylesheet" href="/assets/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.css">
+
 <br/>
 
 <div class="col-lg-12" id="mainPg">
@@ -70,6 +72,10 @@
             <form id="editForm" action="javascript:update();" method="get">
                 <input type="hidden" id="user-id"/>
                 <input type="hidden" id="trainingplan-id"/>
+                <br/>
+                                <br/>
+                                <button type="button" class="btn btn-primary" id="cancel-btn"><span class="material-symbols-outlined">arrow_back_ios</span>&nbsp; Indietro</button>
+                                <button type="submit" class="btn btn-primary"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button> &nbsp;
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="input-material-group col-lg-12">
@@ -105,7 +111,10 @@
                     <button type="button" onclick="addExercise(1);" class="btn btn-primary" id="addday1-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day1-tbl">
+                    <table class="table mb-0 table-striped table-sm" 
+                           data-reorderable-rows="true"
+                           data-use-row-attr-func="true"
+                           data-mobile-responsive="true" id="day1-tbl">
                         <thead>
                         <tr>
                             <th data-field="Id" data-visible="false">#</th>
@@ -130,7 +139,10 @@
                     <button type="button" onclick="addExercise(2);" class="btn btn-primary" id="addday2-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day2-tbl">
+                    <table class="table mb-0 table-striped table-sm" 
+                           data-reorderable-rows="true"
+                           data-use-row-attr-func="true"
+                           data-mobile-responsive="true" id="day2-tbl">
                         <thead>
                         <tr>
                             <th data-field="Id" data-visible="false">#</th>
@@ -155,7 +167,10 @@
                     <button type="button" onclick="addExercise(3);" class="btn btn-primary" id="addday3-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day3-tbl">
+                    <table class="table mb-0 table-striped table-sm" 
+                           data-reorderable-rows="true"
+                           data-use-row-attr-func="true"
+                           data-mobile-responsive="true" id="day3-tbl">
                         <thead>
                         <tr>
                             <th data-field="Id" data-visible="false">#</th>
@@ -180,7 +195,10 @@
                     <button type="button" class="btn btn-primary" onclick="addExercise(4);" id="addday4-btn"><span class="material-symbols-outlined">add</span>&nbsp;Aggiungi</button> &nbsp;
                     <br/>
                     <br/>
-                    <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="day4-tbl">
+                    <table class="table mb-0 table-striped table-sm" 
+                           data-reorderable-rows="true"
+                           data-use-row-attr-func="true"
+                           data-mobile-responsive="true" id="day4-tbl">
                         <thead>
                         <tr>
                             <th data-field="Id" data-visible="false">#</th>
@@ -206,10 +224,7 @@
                         <textarea id="Notes-txt" class="form-control"></textarea>
                     </div>
                 </div>
-                <br/>
-                <br/>
-                <button type="button" class="btn btn-primary" id="cancel-btn"><span class="material-symbols-outlined">arrow_back_ios</span>&nbsp; Indietro</button>
-                <button type="submit" class="btn btn-primary"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button> &nbsp;
+                
             </form>
         </div>
     </div>
@@ -305,6 +320,7 @@
     let currentExerciseId = null;
     let currentSeqNumber = -1;
     let editingExercise = false;
+    let modified = false;
     function init()
     {
         iAmAdmin();
@@ -372,6 +388,8 @@
     function prepareForNew()
     {
         editing = false
+        modified = true;
+        resetForm('editForm');
         initData();
         showDays();
         $('#deleteExercise').hide();
@@ -381,6 +399,19 @@
     
     function cancelEdit()
     {
+        if(modified)
+        {
+            alertify.confirm("Sono state apportate delle modifiche al piano: confermi di volerle annullare?", confirmCancelEdit);
+        }
+        else
+        {
+            confirmCancelEdit();
+        }
+    }
+    
+    function confirmCancelEdit()
+    {
+        modified = false;
         $('#listPg').show();
         $('#editPg').hide();
     }
@@ -417,10 +448,71 @@
         if (d > 2) $('#day3-div').show(); else $('#day3-div').hide();
         if (d > 3) $('#day4-div').show(); else $('#day4-div').hide();
         let tp = getObjectFromStorage(STORAGE_TRAININGPLANDETAIL);
-        fillDataTable('day1-tbl', tp.day1, editExercise, true, false);
+        
+        let tableOptions = 
+        {
+            cardView: false,
+            trimOnSearch: false,
+            pagination: false,
+            search: false,
+            showHeader: true,
+            onClickRow: editExercise,
+            onReorderRow: function(){ dropped(); }
+        };
+        
+        tableOptions.data = tp.day1;
+        $('#day1-tbl').bootstrapTable('destroy');
+        $('#day1-tbl').bootstrapTable(tableOptions);
+        tableOptions.data = tp.day2;
+        $('#day2-tbl').bootstrapTable('destroy');
+        $('#day2-tbl').bootstrapTable(tableOptions);
+        tableOptions.data = tp.day3;
+        $('#day3-tbl').bootstrapTable('destroy');
+        $('#day3-tbl').bootstrapTable(tableOptions);
+        tableOptions.data = tp.day4;
+        $('#day4-tbl').bootstrapTable('destroy');
+        $('#day4-tbl').bootstrapTable(tableOptions);
+        
+        /*fillDataTable('day1-tbl', tp.day1, editExercise, true, false);
         fillDataTable('day2-tbl', tp.day2, editExercise, true, false);
         fillDataTable('day3-tbl', tp.day3, editExercise, true, false);
-        fillDataTable('day4-tbl', tp.day4, editExercise, true, false);
+        fillDataTable('day4-tbl', tp.day4, editExercise, true, false);*/
+    }
+    
+    function dropped(r)
+    {
+        modified = true;
+        let tp = getObjectFromStorage(STORAGE_TRAININGPLANDETAIL);
+        tp.day1 = [];
+        tp.day2 = [];
+        tp.day3 = [];
+        tp.day4 = [];  
+        
+        for (var i = 1; i<= 4; i++)
+        {
+            let table_id = "day" + i + "-tbl";
+            let tblData = $('#' + table_id).bootstrapTable('getData');
+            let day = i==1?tp.day1:i==2?tp.day2:i==3?tp.day3:tp.day4;
+            let s = 0;
+            tblData.forEach(d => {
+                s++;
+                let o = {};
+                o.Id = d.Id;
+                o.ExerciseId = d.ExerciseId;
+                o.Repetitions = d.Repetitions;
+                o.Sequences = d.Sequences;
+                o.Time = d.Time;
+                o.MuscularGroupId = d.MuscularGroupId;
+                o.ExerciseName = d.ExerciseName;
+                o.ExerciseNotes = d.ExerciseNotes;
+                o.Day = i;
+                o.SeqNumber = s;
+                day.push(o);
+            });
+            
+        }
+        storeObject(STORAGE_TRAININGPLANDETAIL, tp);
+        showDays();
     }
     
     function addExercise(day)
@@ -461,6 +553,8 @@
     
     function cancelExercise()
     {
+        modified = true;
+        showDays();
         $('#editPg').show();
         $('#editExercisePg').hide();
     }
@@ -548,6 +642,7 @@
     
     function updateExercise()
     {
+        modified = true;
         let ex = formToObj();
         let tp = getObjectFromStorage(STORAGE_TRAININGPLANDETAIL)
         let day = currentDay==1?tp.day1:currentDay==2?tp.day2:currentDay==3?tp.day3:tp.day4;
@@ -566,6 +661,7 @@
     
     function update()
     {
+        modified = true;
         editingExercise = true;
         let Details = [];
         let tpId = editing?parseInt($('#trainingplan-id').val()):-1;
@@ -607,6 +703,7 @@
             alertify.error(data.Message);
             return;
         }
+        modified = false;
         let id = parseInt($('#user-id').val());
         $('#editPg').hide();
         ajaxCall(EXERCISEPLAN_TRAININGPLAN_BYUSER + id, 'GET', null, gotList);
@@ -700,3 +797,5 @@
     
 </script>
 <uc1:Foot runat="server" id="Foot"/>
+<script src="/assets/js/TableDnD/jquery.tablednd.js"></script>
+<script src="/assets/bootstrap-table/extensions/reorder-rows/bootstrap-table-reorder-rows.js"></script>
