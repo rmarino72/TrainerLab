@@ -337,13 +337,7 @@ public class TlDbManager : MySqlDapperManager
         {
             var stdt = DateTimeUtils.DateTimeToMySqlString(slot.StartDateTime);
             var eddt = DateTimeUtils.DateTimeToMySqlString(slot.EndDateTime);
-            var query = "" +
-                        "SELECT * " +
-                        "FROM slot " +
-                        "WHERE Id <> {0} " +
-                        "AND (" +
-                        "   ({1} >= slot.StartDateTime AND {2} < slot.EndDateTime) OR" +
-                        "   ({3} > slot.StartDateTime AND {4} <= slot.EndDateTime))";
+            var query = "SELECT * FROM slot + WHERE Id <> {0} AND ( + ({1} >= slot.StartDateTime AND {2} < slot.EndDateTime) OR ({3} > slot.StartDateTime AND {4} <= slot.EndDateTime))";
 
             var fullQuery = string.Format(query, slot.Id, Apex(stdt), Apex(stdt), Apex(eddt), Apex(eddt));
 
@@ -582,11 +576,11 @@ public class TlDbManager : MySqlDapperManager
         }
     }
 
-    public void DeleteMuscularGroup(int Id)
+    public void DeleteMuscularGroup(int id)
     {
         try
         {
-            Conn.Delete<MuscularGroup>(Id);
+            Conn.Delete<MuscularGroup>(id);
         }
         catch (Exception ex)
         {
@@ -625,7 +619,7 @@ public class TlDbManager : MySqlDapperManager
     {
         try
         {
-            var query = string.Format("SELECT * FROM fullexerciseview WHERE MuscularGroup = {0} ORDER BY Name",
+            var query = string.Format("SELECT * FROM fullexerciseview WHERE MuscularGroupName = {0} ORDER BY Name",
                 Apex(muscularGroup));
             return Conn.Query<FullExerciseView>(query).ToList();
         }

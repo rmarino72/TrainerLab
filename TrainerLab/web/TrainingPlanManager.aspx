@@ -389,8 +389,8 @@
     {
         editing = false
         modified = true;
-        resetForm('editForm');
         initData();
+        resetForm('editForm');
         showDays();
         $('#deleteExercise').hide();
         $('#listPg').hide();
