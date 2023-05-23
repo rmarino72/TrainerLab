@@ -22,6 +22,7 @@ public class Anthropometry : BasicObject
     public float? ThighRightCirc { set; get; }
     public float? CalfLeftCirc { set; get; }
     public float? CalfRightCirc { set; get; }
+    public float? BMI { set; get; }
     public string Notes { set; get; }
     public DateTime LastUpdateDateTime { set; get; }
 }
