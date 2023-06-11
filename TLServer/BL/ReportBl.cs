@@ -68,7 +68,7 @@ public class ReportBl:GenericBl
                     tr.CharacterFormat.Bold = true;
 
                     p = lastSection.AddParagraph();
-                    p.AppendText("Sequenze: " + exercise.Sequences + " - Ripetizioni: " + exercise.Repetitions +
+                    p.AppendText("Serie: " + exercise.Sequences + " - Ripetizioni: " + exercise.Repetitions +
                                  " - Tempo: " + exercise.Time);
                     p = lastSection.AddParagraph();
                     p.AppendText("Note sull'esercizio: " + exercise.Notes);
