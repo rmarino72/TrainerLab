@@ -40,7 +40,9 @@
             </div>
             <div class="card-body">
                 <br/>
+                <input type="hidden" id="planId"/>
                 <button id="cancelBtn" class="btn btn-danger" type="button"><span class="material-symbols-outlined">cancel</span> Chiudi</button>
+                <button id="printBtn" class="btn btn-danger" type="button"><span class="material-symbols-outlined">print</span> Stampa</button>
                 <br/>
                 <br/>
                 <h4>Nome della scheda: <span id="name-txt"></span></h4><br/>
@@ -94,6 +96,7 @@ function init()
     $('#day3Div').hide();
     $('#day4Div').hide();
     $('#cancelBtn').click(refreshPage);
+    $('#printBtn').click(print);
     ajaxCall(EXERCISEPLAN_TRAININGPLAN_BYUSER + userId, 'GET', null, gotList);
 }
 function initData()
@@ -121,6 +124,7 @@ function gotList(data)
 
 function showPlan(row)
 {
+    $('#planId').val(row.Id);
     ajaxCall(EXERCISEPLAN_TRAININGPLAN + row.Id +'/', 'GET', null, gotPlanForId);
 }
 
@@ -188,6 +192,21 @@ function gotPlanForId(data)
     $('#listPg').hide();
     $('#editPg').show();
 }
+
+function print()
+    {
+        let id = $('#planId').val();
+        ajaxCall(EXERCISEPLAN_TRAININGPLAN_PRINT + id, 'get', null, printed);
+    }
+    
+    function printed(data)
+    {
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
+        }
+        window.open("/Tmp/"+data.Message);
+    }
 
 </script>
 
