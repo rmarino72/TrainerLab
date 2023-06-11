@@ -22,6 +22,8 @@ public static class Config
     public static bool Verbose { set; get; }
 
     public static string ImagesPath { set; get; }
+    public static string TemplatesPath { set; get; }
+    public static string TmpPath { set; get; }
 
     /*Config table*/
     public static int DismissTolerance { set; get; }

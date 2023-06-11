@@ -25,6 +25,8 @@ public class Global : HttpApplication
         Config.Debug = bool.Parse(ConfigurationManager.AppSettings.Get("Debug"));
         Config.Verbose = bool.Parse(ConfigurationManager.AppSettings.Get("Verbose"));
         Config.ImagesPath = ConfigurationManager.AppSettings.Get("ImagePath");
+        Config.TemplatesPath = ConfigurationManager.AppSettings.Get("TemplatePath");
+        Config.TmpPath = ConfigurationManager.AppSettings.Get("TmpPath");
         TlLogger.Instance.Info("Trainer Lab Started!");
     }
 

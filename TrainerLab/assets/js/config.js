@@ -32,4 +32,5 @@ var EXERCISEPLAN_EXERCISE = "/exerciseplan/exercise/";
 var EXERCISEPLAN_EXERCISE_BYMUSCULARGROUP = "/exerciseplan/exercise/bymusculargroup/";
 var EXERCISEPLAN_TRAININGPLAN = "/exerciseplan/trainingplan/";
 var EXERCISEPLAN_TRAININGPLAN_BYUSER = "/exerciseplan/trainingplan/user/";
+var EXERCISEPLAN_TRAININGPLAN_PRINT = "/exerciseplan/print/";
 

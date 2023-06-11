@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -62,61 +62,61 @@
         <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
             <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
         </Reference>
-        <Reference Include="System"/>
+        <Reference Include="System" />
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
         </Reference>
-        <Reference Include="System.Configuration"/>
-        <Reference Include="System.Core"/>
+        <Reference Include="System.Configuration" />
+        <Reference Include="System.Core" />
         <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
         </Reference>
-        <Reference Include="System.Drawing"/>
+        <Reference Include="System.Drawing" />
         <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\System.IO.Pipelines.5.0.2\lib\net461\System.IO.Pipelines.dll</HintPath>
         </Reference>
-        <Reference Include="System.Management"/>
+        <Reference Include="System.Management" />
         <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
         </Reference>
-        <Reference Include="System.Numerics"/>
+        <Reference Include="System.Numerics" />
         <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
         </Reference>
         <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
         </Reference>
-        <Reference Include="System.Security"/>
+        <Reference Include="System.Security" />
         <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
         </Reference>
-        <Reference Include="System.Transactions"/>
-        <Reference Include="System.Web"/>
-        <Reference Include="System.Xml.Linq"/>
-        <Reference Include="System.Data.DataSetExtensions"/>
-        <Reference Include="Microsoft.CSharp"/>
-        <Reference Include="System.Data"/>
-        <Reference Include="System.Net.Http"/>
-        <Reference Include="System.Xml"/>
+        <Reference Include="System.Transactions" />
+        <Reference Include="System.Web" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Net.Http" />
+        <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Basic\BasicObject.cs"/>
-        <Compile Include="Logging\Logger.cs"/>
-        <Compile Include="SQLDBManager\DAO\LastId.cs"/>
-        <Compile Include="SQLDBManager\MySql\MySqlDapperManager.cs"/>
-        <Compile Include="SQLDBManager\MySql\MySqlManager.cs"/>
-        <Compile Include="SQLDBManager\SqlDbManager.cs"/>
-        <Compile Include="Utilities\DateTime.cs"/>
-        <Compile Include="Utilities\MathUtils.cs"/>
-        <Compile Include="Utilities\SecurityUtils.cs"/>
-        <Compile Include="Utilities\StringUtils.cs"/>
+        <Compile Include="Basic\BasicObject.cs" />
+        <Compile Include="Logging\Logger.cs" />
+        <Compile Include="SQLDBManager\DAO\LastId.cs" />
+        <Compile Include="SQLDBManager\MySql\MySqlDapperManager.cs" />
+        <Compile Include="SQLDBManager\MySql\MySqlManager.cs" />
+        <Compile Include="SQLDBManager\SqlDbManager.cs" />
+        <Compile Include="Utilities\DateTimeUtils.cs" />
+        <Compile Include="Utilities\MathUtils.cs" />
+        <Compile Include="Utilities\SecurityUtils.cs" />
+        <Compile Include="Utilities\StringUtils.cs" />
     </ItemGroup>
     <ItemGroup>
-        <None Include="app.config"/>
-        <None Include="packages.config"/>
+        <None Include="app.config" />
+        <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Properties\"/>
+        <Folder Include="Properties\" />
     </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

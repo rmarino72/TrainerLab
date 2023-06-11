@@ -113,4 +113,8 @@ public class ExercisePlanController : ApiController
     {
         return ExercisePlanBl.Instance.UpdateTrainingPlan(completeTrainingPlan);
     }
+
+    [HttpGet]
+    [Route("exerciseplan/print/{id}")]
+    public RestObjectResult PrintPlan(int id) => new ReportBl().PrintPlan(id);
 }

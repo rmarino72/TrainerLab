@@ -75,7 +75,8 @@
                 <br/>
                 <br/>
                 <button type="button" class="btn btn-primary" id="cancel-btn"><span class="material-symbols-outlined">arrow_back_ios</span>&nbsp; Indietro</button>
-                <button type="submit" class="btn btn-primary"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button> &nbsp;
+                <button type="submit" class="btn btn-primary"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
+                <button type="button" class="btn btn-primary" id="print-btn"><span class="material-symbols-outlined">print</span>&nbsp; Stampa</button> &nbsp;
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="input-material-group col-lg-12">
@@ -342,6 +343,7 @@
         
         $('#cancel-list-btn').click(cancelList);
         $('#cancel-btn').click(cancelEdit);
+        $('#print-btn').click(askPrint);
         $('#cancel-exercise-btn').click(cancelExercise);
         $('#deleteExercise').click(deleteExercise);
         $('#listPg').hide();
@@ -473,10 +475,6 @@
         $('#day4-tbl').bootstrapTable('destroy');
         $('#day4-tbl').bootstrapTable(tableOptions);
         
-        /*fillDataTable('day1-tbl', tp.day1, editExercise, true, false);
-        fillDataTable('day2-tbl', tp.day2, editExercise, true, false);
-        fillDataTable('day3-tbl', tp.day3, editExercise, true, false);
-        fillDataTable('day4-tbl', tp.day4, editExercise, true, false);*/
     }
     
     function dropped(r)
@@ -793,6 +791,33 @@
         storeObject(STORAGE_TRAININGPLANDETAIL, tp);
         showDays();
         cancelExercise();
+    }
+    
+    function askPrint()
+    {
+        if(modified)
+        {
+            alertify.confirm("Sono state apportate delle modifiche al piano: confermi di volerle annullare le modifiche e stampare??", confirmPrint);
+        }
+        else
+        {
+            confirmPrint();
+        }
+    }
+    
+    function confirmPrint()
+    {
+        let id = $('#trainingplan-id').val();
+        ajaxCall(EXERCISEPLAN_TRAININGPLAN_PRINT + id, 'get', null, printed);
+    }
+    
+    function printed(data)
+    {
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
+        }
+        window.open("/Tmp/"+data.Message);
     }
     
 </script>
