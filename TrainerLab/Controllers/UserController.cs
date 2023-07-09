@@ -161,4 +161,11 @@ public class UserController : ApiController
     {
         return UserBL.Instance.UpdatePlicometry(plicometry);
     }
+
+    [HttpGet]
+    [Route("user/percentage/{email}/{plicoSum}")]
+    public RestObjectResult GetPercentages(string email, double plicoSum)
+    {
+        return UserBL.Instance.GetPercentages(email, plicoSum);
+    }
 }

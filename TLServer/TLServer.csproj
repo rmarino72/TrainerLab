@@ -116,6 +116,7 @@
         <Compile Include="BO\FullTrainingPlanView.cs" />
         <Compile Include="BO\FullUserView.cs" />
         <Compile Include="BO\LoginCredentials.cs" />
+        <Compile Include="BO\Percentages.cs" />
         <Compile Include="BO\RESTListResult.cs" />
         <Compile Include="BO\RESTObjectResult.cs" />
         <Compile Include="BO\StringValue.cs" />

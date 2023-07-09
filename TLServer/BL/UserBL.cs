@@ -321,6 +321,28 @@ public class UserBL : GenericBl
         }
     }
 
+    public RestObjectResult GetPercentages(string email, double plicoSum)
+    {
+        try
+        {
+            UserData user = BODB.GetUserDataByEmail(email);
+            var tmp = (DateTime.Now - user.BirthDate);
+            var age = (new DateTime(tmp.Ticks)).Year;
+            var bodyDensity = user.Sex == "M"? 
+                GymnFormulas.BodyDensityMan(plicoSum, age) :
+                GymnFormulas.BodyDensityWoman(plicoSum, age);
+            bodyDensity = Math.Round(bodyDensity, 2);
+            var fatPerc = Math.Round(GymnFormulas.FatPercentage(bodyDensity), 2);
+            var percentages = new Percentages { FatPercentage = fatPerc, BodyDensity = bodyDensity };
+            return MakeRestObjectResponse(percentages);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
     #region Singleton
 
     private static UserBL _instance;
