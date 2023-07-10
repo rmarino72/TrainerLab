@@ -26,6 +26,7 @@ var USER_PROVINCE = "/user/province/";
 var USER_REGION = "/user/region/";
 var USER_ROLE = "/user/role/";
 var USER_SEX = "/user/sex";
+var USER_PERCENTAGE = "/user/percentage/";
 
 var EXERCISEPLAN_MUSCULARGROUP = "/exerciseplan/musculargroup/";
 var EXERCISEPLAN_EXERCISE = "/exerciseplan/exercise/";

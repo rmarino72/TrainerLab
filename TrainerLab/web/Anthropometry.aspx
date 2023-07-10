@@ -534,9 +534,32 @@
                     </div>
                     <hr/>
                     <button class="btn btn-primary" type="button" id="plico-cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
+                    <button class="btn btn-primary" type="button" id="plico-preview-btn"><span class="material-symbols-outlined">preview</span>&nbsp; Anteprima</button>
                     <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+<div id="plicoPrevPg" class="col-lg-12">
+    <div class="container">
+        <div class="card mb-0">
+            <div class="card-header">
+                <h3 class="h4 mb-0"><span class="material-symbols-outlined">preview</span>&nbsp; Anteprima Scheda Plicometria - <span id="prev-user-txt"></span></h3>
+            </div>
+        </div>
+        <div class="card-body pt-0">
+            <br/>
+            <br/>
+            <h3>Plicometriche:</h3>
+            <canvas id="plicoChart"></canvas>
+            <br/>
+            <br/>
+            <h3>Percentuali corporee:</h3>
+            <canvas id="percentagePie"></canvas>
+            
+            <hr/>
+            <button class="btn btn-primary" type="button" id="plico-prev-cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Chiudi</button>
         </div>
     </div>
 </div>
@@ -574,9 +597,12 @@
         $('#plico-cancel-btn').click(cancel);
         $('#new-btn').click(prepareForNew);
         $('#new-btn-plico').click(prepareForNewPlico);
+        $('#plico-preview-btn').click(plicoPreview);
+        $('#plico-prev-cancel-btn').click(plicoPreviewCancel);
         $('#listPg').hide();
         $('#editPg').hide();
         $('#plicoPg').hide();
+        $('#plicoPrevPg').hide();
         $("#weight-txt").on('change keyup paste', bmi);
         $("#height-txt").on('change keyup paste', bmi);
         
@@ -613,6 +639,109 @@
         validateForm('plicoForm', rules, messages);
         ajaxCall(USER_FULL, 'GET', null, gotUsers);
     }
+    
+    function plicoPreview()
+    {
+        $('#plicoPg').hide();
+        $('#plicoPrevPg').show();
+        
+        var plicoSum = 0;
+        var data = [];
+        data.push(parseFloat($('#pectoral-txt').val()));
+        data.push(parseFloat($('#axillary-txt').val()));
+        data.push(parseFloat($('#suprailiac-txt').val()));
+        data.push(parseFloat($('#abdominal-txt').val()));
+        data.push(parseFloat($('#thigh-txt').val()));
+        data.push(parseFloat($('#subscapular-txt').val()));
+        data.push(parseFloat($('#triceps-txt').val()));
+        
+        for(var i=0; i<data.length; i++)
+            plicoSum += data[i];
+        
+        var pc=$('#plicoChart');
+        new Chart(pc, {
+                type: "bar",
+                options: {
+                    scales: {
+                        xAxes: [
+                            {
+                                display: true,
+                                gridLines: {
+                                    color: "transparent",
+                                },
+                            },
+                        ],
+                        yAxes: [
+                            {
+                                display: true,
+                                gridLines: {
+                                    color: "transparent",
+                                },
+                            },
+                        ],
+                    },
+                },
+                data: {
+                    labels: ["Pettorale", "Ascellare", "Sopra Iliaca", "Addominale", "Coscia", "Subscapolare", "Tricipite"],
+                    datasets: [
+                        {
+                            label: "Valori pliche",
+                            backgroundColor: ["#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9"],
+                            hoverBackgroundColor: ["#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9"],
+                            borderColor: ["#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9", "#864DD9"],
+                            borderWidth: 0.5,
+                            data: data,
+                        
+                        },
+                    ],
+                },
+            });
+        
+        ajaxCall(USER_PERCENTAGE + currentUser + "/" + plicoSum + "/", 'get', null, gotPercentage);
+    }
+    
+    function gotPercentage(data)
+    {
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
+        }
+        
+        var chartData = [];
+        chartData.push(data.Data.FatPercentage);
+        chartData.push(100 - data.Data.FatPercentage);
+        var pieChart = $('#percentagePie');
+        new Chart(pieChart, {
+                type: "pie",
+                options: {
+                    legend: {
+                        display: true,
+                        position: "left",
+                    },
+                },
+                data: {
+                    labels: ["% massa grassa", "% massa magra"],
+                    datasets: [
+                        {
+                            data: chartData,
+                            borderWidth: 0,
+                            backgroundColor: ["#723ac3", "#864DD9", "#9762e6", "#a678eb"],
+                            hoverBackgroundColor: ["#723ac3", "#864DD9", "#9762e6", "#a678eb"],
+                        },
+                    ],
+                },
+            });
+        
+            var pieChartExample = {
+                responsive: true,
+            };
+    }
+    
+    function plicoPreviewCancel()
+    {
+        $('#plicoPg').show();
+        $('#plicoPrevPg').hide();
+    }
 
     function gotUsers(data) {
         if (!data.Outcome) {
@@ -628,7 +757,6 @@
 
     function updateListPage(r)
     {
-        
         let email = r.Email;
         currentUser = email;
         ajaxCall(USER_ANTHROPOMETRY + email + "/", 'GET', null, gotList);
@@ -718,6 +846,7 @@
             return;
         }
         $('#user-txt').text(data.Data.FirstName + " " + data.Data.LastName);
+        $('#prev-user-txt').text(data.Data.FirstName + " " + data.Data.LastName);
         ajaxCall(USER_PLICOMETRY + currentUser + "/", 'GET', null, gotPlicometries);
 
     }
