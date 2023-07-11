@@ -96,6 +96,7 @@ public class ReportBl:GenericBl
         var baseWorkbook = excelApp.Workbooks.Open(Path.Combine(Config.BaseDir, Config.TemplatesPath, "PlicoTemplate.xlsx"), 2, false);
         try
         {
+            DeleteOldFiles();
             var plicometry = BODB.GetPlicometryById(id);
             var userData = BODB.GetUserDataByEmail(plicometry.Email);
             var tmp = (DateTime.Now - userData.BirthDate);
@@ -118,11 +119,9 @@ public class ReportBl:GenericBl
             
             if (plicoSum != null)
             {
-                var percentages =userData.Sex =="M"? 
-                    GymnFormulas.FatPercentage(GymnFormulas.BodyDensityMan((double)plicoSum, age)):
-                    GymnFormulas.FatPercentage(GymnFormulas.BodyDensityWoman((double)plicoSum, age));
-                baseSheet.Cells[30, 2] = Math.Round((100 - percentages),2);
-                baseSheet.Cells[31, 2] = Math.Round(percentages);
+                var percentages =(Percentages) UserBL.Instance.GetPercentages(userData.Email, (double)plicoSum).Data;
+                baseSheet.Cells[30, 2] = Math.Round((100 - percentages.FatPercentage),2);
+                baseSheet.Cells[31, 2] = Math.Round(percentages.FatPercentage, 2);
             }
 
             var fileName = SecurityUtils.GetNewGuid() + ".pdf";
