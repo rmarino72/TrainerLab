@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.Office.Interop.Excel;
+using System.Net;
 using RMLibs.Utilities;
 using Spire.Doc;
 using Spire.Doc.Documents;
 using Spire.Doc.Fields;
 using TLServer.BO;
+using OfficeOpenXml;
+using Spire.Xls;
+using FileFormat = Spire.Doc.FileFormat;
+
 
 namespace TLServer.BL;
 
@@ -92,26 +96,28 @@ public class ReportBl:GenericBl
 
     public RestObjectResult PrintPlicometry(int id)
     {
-        var excelApp = new Application();
-        var baseWorkbook = excelApp.Workbooks.Open(Path.Combine(Config.BaseDir, Config.TemplatesPath, "PlicoTemplate.xlsx"), 2, false);
         try
         {
+            ExcelPackage excelPackage = new ExcelPackage(new FileInfo(Path.Combine(Config.BaseDir, Config.TemplatesPath, "PlicoTemplate.xlsx")));
+            var ws = excelPackage.Workbook.Worksheets[1];
+            //excelApp = new Application();
+            //baseWorkbook = excelApp.Workbooks.Open(Path.Combine(Config.BaseDir, Config.TemplatesPath, "PlicoTemplate.xlsx"), 2, false);
             DeleteOldFiles();
             var plicometry = BODB.GetPlicometryById(id);
             var userData = BODB.GetUserDataByEmail(plicometry.Email);
             var tmp = (DateTime.Now - userData.BirthDate);
             var age = (new DateTime(tmp.Ticks)).Year;
             
-            var baseSheet = (Worksheet)baseWorkbook.Worksheets.Item[1];
+            //var baseSheet = (Worksheet)baseWorkbook.Worksheets.Item[1];
 
-            baseSheet.Cells[10, 1] = userData.FirstName + " " + userData.LastName;
-            baseSheet.Cells[16, 2] = plicometry.Pectoral;
-            baseSheet.Cells[17, 2] = plicometry.Axillary;
-            baseSheet.Cells[18, 2] = plicometry.Suprailiac;
-            baseSheet.Cells[19, 2] = plicometry.Abdominal;
-            baseSheet.Cells[20, 2] = plicometry.Thigh;
-            baseSheet.Cells[21, 2] = plicometry.Subscapular;
-            baseSheet.Cells[22, 2] = plicometry.Triceps;
+            ws.Cells[10, 1].Value = userData.FirstName + " " + userData.LastName;
+            ws.Cells[16, 2].Value = plicometry.Pectoral;
+            ws.Cells[17, 2].Value = plicometry.Axillary;
+            ws.Cells[18, 2].Value = plicometry.Suprailiac;
+            ws.Cells[19, 2].Value = plicometry.Abdominal;
+            ws.Cells[20, 2].Value = plicometry.Thigh;
+            ws.Cells[21, 2].Value = plicometry.Subscapular;
+            ws.Cells[22, 2].Value = plicometry.Triceps;
 
             double? plicoSum = plicometry.Pectoral + plicometry.Axillary +
                               plicometry.Suprailiac + plicometry.Abdominal +
@@ -120,21 +126,28 @@ public class ReportBl:GenericBl
             if (plicoSum != null)
             {
                 var percentages =(Percentages) UserBL.Instance.GetPercentages(userData.Email, (double)plicoSum).Data;
-                baseSheet.Cells[30, 2] = Math.Round((100 - percentages.FatPercentage),2);
-                baseSheet.Cells[31, 2] = Math.Round(percentages.FatPercentage, 2);
+                ws.Cells[30, 2].Value = Math.Round((100 - percentages.FatPercentage),2);
+                ws.Cells[31, 2].Value = Math.Round(percentages.FatPercentage, 2);
             }
 
-            var fileName = SecurityUtils.GetNewGuid() + ".pdf";
-            baseWorkbook.ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.Combine(Config.BaseDir, Config.TmpPath, fileName));
+            var fileName = SecurityUtils.GetNewGuid();
+            /*baseWorkbook.ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.Combine(Config.BaseDir, Config.TmpPath, fileName));
             excelApp.DisplayAlerts = false;
             baseWorkbook.Close();
-            excelApp.Quit();
-            return MakeRestObjectResponse(null, message: fileName);
+            excelApp.Quit();*/
+            excelPackage.SaveAs(new FileInfo(Path.Combine(Config.BaseDir, Config.TmpPath, fileName + ".xlsx")));
+            excelPackage.Dispose();
+
+            Workbook workbook = new Workbook();
+            workbook.LoadFromFile(Path.Combine(Config.BaseDir, Config.TmpPath, fileName + ".xlsx"));
+            workbook.SaveToFile(Path.Combine(Config.BaseDir, Config.TmpPath, fileName + ".pdf"), Spire.Xls.FileFormat.PDF);
+            workbook.Dispose();
+            File.Delete(Path.Combine(Config.BaseDir, Config.TmpPath, fileName + ".xlsx"));
+            return MakeRestObjectResponse(null, message: fileName + ".pdf");
         }
         catch (Exception ex)
         {
-            baseWorkbook.Close();
-            excelApp.Quit();
+            
             Error(ex);
             return HandleObjectException(ex);
         }
