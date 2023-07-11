@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.Office.Interop.Excel;
 using RMLibs.Utilities;
 using Spire.Doc;
 using Spire.Doc.Documents;
@@ -87,5 +88,56 @@ public class ReportBl:GenericBl
             return HandleObjectException(ex);
         }
         
+    }
+
+    public RestObjectResult PrintPlicometry(int id)
+    {
+        var excelApp = new Application();
+        var baseWorkbook = excelApp.Workbooks.Open(Path.Combine(Config.BaseDir, Config.TemplatesPath, "PlicoTemplate.xlsx"), 2, false);
+        try
+        {
+            var plicometry = BODB.GetPlicometryById(id);
+            var userData = BODB.GetUserDataByEmail(plicometry.Email);
+            var tmp = (DateTime.Now - userData.BirthDate);
+            var age = (new DateTime(tmp.Ticks)).Year;
+            
+            var baseSheet = (Worksheet)baseWorkbook.Worksheets.Item[1];
+
+            baseSheet.Cells[10, 1] = userData.FirstName + " " + userData.LastName;
+            baseSheet.Cells[16, 2] = plicometry.Pectoral;
+            baseSheet.Cells[17, 2] = plicometry.Axillary;
+            baseSheet.Cells[18, 2] = plicometry.Suprailiac;
+            baseSheet.Cells[19, 2] = plicometry.Abdominal;
+            baseSheet.Cells[20, 2] = plicometry.Thigh;
+            baseSheet.Cells[21, 2] = plicometry.Subscapular;
+            baseSheet.Cells[22, 2] = plicometry.Triceps;
+
+            double? plicoSum = plicometry.Pectoral + plicometry.Axillary +
+                              plicometry.Suprailiac + plicometry.Abdominal +
+                              plicometry.Thigh + plicometry.Subscapular + plicometry.Triceps;
+            
+            if (plicoSum != null)
+            {
+                var percentages =userData.Sex =="M"? 
+                    GymnFormulas.FatPercentage(GymnFormulas.BodyDensityMan((double)plicoSum, age)):
+                    GymnFormulas.FatPercentage(GymnFormulas.BodyDensityWoman((double)plicoSum, age));
+                baseSheet.Cells[30, 2] = Math.Round((100 - percentages),2);
+                baseSheet.Cells[31, 2] = Math.Round(percentages);
+            }
+
+            var fileName = SecurityUtils.GetNewGuid() + ".pdf";
+            baseWorkbook.ExportAsFixedFormat(XlFixedFormatType.xlTypePDF, Path.Combine(Config.BaseDir, Config.TmpPath, fileName));
+            excelApp.DisplayAlerts = false;
+            baseWorkbook.Close();
+            excelApp.Quit();
+            return MakeRestObjectResponse(null, message: fileName);
+        }
+        catch (Exception ex)
+        {
+            baseWorkbook.Close();
+            excelApp.Quit();
+            Error(ex);
+            return HandleObjectException(ex);
+        }
     }
 }

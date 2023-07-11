@@ -551,15 +551,31 @@
         <div class="card-body pt-0">
             <br/>
             <br/>
-            <h3>Plicometriche:</h3>
+            <h3>Plicometriche:</h3><br/>
+            <br/>
+            <b>MISURE PLICHE (mm.)</b><br/>
+            <br/>
+            <table>
+            <tr><td>Pettorale:      </td><td><span id="pl0"></span></td></tr>
+            <tr><td>Ascellare:      </td><td><span id="pl1"></span></td></tr>
+            <tr><td>Sopra iliaca:   </td><td><span id="pl2"></span></td></tr>
+            <tr><td>Addominale:     </td><td><span id="pl3"></span></td></tr>
+            <tr><td>Coscia:         </td><td><span id="pl4"></span></td></tr>
+            <tr><td>Subscapolare:   </td><td><span id="pl5"></span></td></tr>
+            <tr><td>Tricipite:      </td><td><span id="pl6"></span></td></tr>
+            </table>
             <canvas id="plicoChart"></canvas>
             <br/>
             <br/>
             <h3>Percentuali corporee:</h3>
+            <br/>
+            <b>Massa magra: <span id="perc1"></span>%</b><br/>
+            <b>Massa grassa <span id="perc0"></span>%</b><br/>
             <canvas id="percentagePie"></canvas>
             
             <hr/>
             <button class="btn btn-primary" type="button" id="plico-prev-cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Chiudi</button>
+            <button class="btn btn-primary" type="button" id="plico-print-btn"><span class="material-symbols-outlined">print</span>&nbsp; Stampa</button>
         </div>
     </div>
 </div>
@@ -599,6 +615,7 @@
         $('#new-btn-plico').click(prepareForNewPlico);
         $('#plico-preview-btn').click(plicoPreview);
         $('#plico-prev-cancel-btn').click(plicoPreviewCancel);
+        $('#plico-print-btn').click(plicoPrint);
         $('#listPg').hide();
         $('#editPg').hide();
         $('#plicoPg').hide();
@@ -638,6 +655,27 @@
 
         validateForm('plicoForm', rules, messages);
         ajaxCall(USER_FULL, 'GET', null, gotUsers);
+    }
+    
+    function plicoPrint()
+    {
+        var a = plicoformToObj(true);
+        ajaxCall(USER_ANTHROPOMETRY, 'PATCH', JSON.stringify(a), print);
+    }
+    
+    function print()
+    {
+        let plicoId = $('#plicometry-id').val();
+        ajaxCall(USER_PRINTPLICO + plicoId, 'get', null, printed);
+    }
+    
+    function printed(data)
+    {
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
+        }
+        window.open("/Tmp/"+data.Message);
     }
     
     function plicoPreview()
@@ -696,7 +734,13 @@
                     ],
                 },
             });
-        
+        $('#pl0').html(data[0]);
+        $('#pl1').html(data[1]);
+        $('#pl2').html(data[2]);
+        $('#pl3').html(data[3]);
+        $('#pl4').html(data[4]);
+        $('#pl5').html(data[5]);
+        $('#pl6').html(data[6]);
         ajaxCall(USER_PERCENTAGE + currentUser + "/" + plicoSum + "/", 'get', null, gotPercentage);
     }
     
@@ -709,7 +753,7 @@
         
         var chartData = [];
         chartData.push(data.Data.FatPercentage);
-        chartData.push(100 - data.Data.FatPercentage);
+        chartData.push((100 - data.Data.FatPercentage).toFixed(2));
         var pieChart = $('#percentagePie');
         new Chart(pieChart, {
                 type: "pie",
@@ -735,6 +779,8 @@
             var pieChartExample = {
                 responsive: true,
             };
+        $('#perc1').html(chartData[1]);
+        $('#perc0').html(chartData[0]);
     }
     
     function plicoPreviewCancel()
@@ -888,6 +934,7 @@
         $('#plicodate-txt').val(dt.toJSON().slice(0, 16));
         $('#plicoPg').show();
         $('#listPg').hide();
+        $('#plico-preview-btn').hide();
     }
 
     function readyForNew(data)
@@ -909,6 +956,7 @@
     }
 
     function prepareForEditPlico(r) {
+        $('#plico-preview-btn').show();
         ajaxCall(USER_PLICOMETRY + currentUser + "/" + r.Id, "GET", null, gotPlicometry);
     }
 
@@ -973,7 +1021,7 @@
 
     function update()
     {
-        var a = formToObj(editing);
+        var a = formToObj(true);
         if (!editing)
         {
             ajaxCall(USER_ANTHROPOMETRY, 'POST', JSON.stringify(a), updated);
