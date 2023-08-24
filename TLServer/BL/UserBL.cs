@@ -4,6 +4,7 @@ using RMLibs.basic;
 using RMLibs.Utilities;
 using TLServer.BO;
 using TLServer.DAO;
+using TLServer.DBManager;
 using TLServer.Logging;
 
 namespace TLServer.BL;
@@ -335,6 +336,93 @@ public class UserBL : GenericBl
             var fatPerc = Math.Round(GymnFormulas.FatPercentage(bodyDensity), 2);
             var percentages = new Percentages { FatPercentage = fatPerc, BodyDensity = bodyDensity };
             return MakeRestObjectResponse(percentages);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestListResult GetMedicalHistoriesByMail(string email)
+    {
+        try
+        {
+            return MakeRestListResponse(BODB.GetFullMedicalAnthropometryViewsByMail(email).Cast<BasicObject>()
+                .ToList());
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleListException(ex);
+        }
+    }
+
+    public RestObjectResult GetMedicalAnthropometryById(int id)
+    {
+        try
+        {
+            return MakeRestObjectResponse(BODB.GetMedicalAnthropometryById(id));
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult NewMedicalAnthropometry(MedicalAnthropometry medicalAnthropometry)
+    {
+        try
+        {
+            using (var ts = BODB.CreateTransactionScope())
+            {
+                var id = BODB.NewMedicalAnthropometry(medicalAnthropometry);
+                UserData userData = BODB.GetUserDataByEmail(medicalAnthropometry.Mail);
+                userData.Height = medicalAnthropometry.Height;
+                userData.LastUpdateDateTime = DateTime.Now;
+                BODB.UpdateUserData(userData);
+                ts.Complete();
+                ts.Dispose();
+                return MakeRestObjectResponse(BoDbInstance.Instance.GetMedicalAnthropometryById(id));
+            }
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+    
+    public RestObjectResult UpdateMedicalAnthropometry(MedicalAnthropometry medicalAnthropometry)
+    {
+        try
+        {
+            using (var ts = BODB.CreateTransactionScope())
+            {
+                BODB.UpdateMedicalAnthropometry(medicalAnthropometry);
+                UserData userData = BODB.GetUserDataByEmail(medicalAnthropometry.Mail);
+                userData.Height = medicalAnthropometry.Height;
+                userData.LastUpdateDateTime = DateTime.Now;
+                BODB.UpdateUserData(userData);
+                ts.Complete();
+                ts.Dispose();
+                return MakeRestObjectResponse(BODB.GetMedicalAnthropometryById(medicalAnthropometry.Id));
+            }
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            return HandleObjectException(ex);
+        }
+    }
+
+    public RestObjectResult DeleteMedicalAnthropometry(int id)
+    {
+        try
+        {
+            BODB.DeleteMedicalAnthropometry(id);
+            return MakeRestObjectResponse(null);
         }
         catch (Exception ex)
         {

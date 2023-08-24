@@ -464,6 +464,7 @@
     <Content Include="Log\log.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\AnthropometryTemplate.xlsx" />
     <Content Include="Templates\PlicoTemplate.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -485,6 +486,7 @@
     <Content Include="web\Logout.aspx" />
     <Content Include="web\Main.aspx" />
     <Content Include="web\Me.aspx" />
+    <Content Include="web\MedicalHistory.aspx" />
     <Content Include="web\MuscularGroup.aspx" />
     <Content Include="web\PersonalPlan.aspx" />
     <Content Include="web\SetPass.aspx" />
@@ -619,6 +621,13 @@
     </Compile>
     <Compile Include="web\Me.aspx.designer.cs">
       <DependentUpon>Me.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\MedicalHistory.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>MedicalHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\MedicalHistory.aspx.designer.cs">
+      <DependentUpon>MedicalHistory.aspx</DependentUpon>
     </Compile>
     <Compile Include="web\MuscularGroup.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>

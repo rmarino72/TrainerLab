@@ -432,11 +432,12 @@ public class TlDbManager : MySqlDapperManager
         }
     }
 
-    public void NewAnthropometry(Anthropometry anthropometry)
+    public int NewAnthropometry(Anthropometry anthropometry)
     {
         try
         {
             Conn.Insert(anthropometry);
+            return GetLastInsertedId().lastId;
         }
         catch (Exception ex)
         {
@@ -485,11 +486,12 @@ public class TlDbManager : MySqlDapperManager
         }
     }
 
-    public void NewPlicometry(Plicometry plicometry)
+    public int NewPlicometry(Plicometry plicometry)
     {
         try
         {
             Conn.Insert(plicometry);
+            return GetLastInsertedId().lastId;
         }
         catch (Exception ex)
         {
@@ -836,6 +838,73 @@ public class TlDbManager : MySqlDapperManager
         {
             var sql = $"DELETE FROM TrainingPlanDetail WHERE TrainingPlanId = {trainingPlanId}";
             Conn.Execute(sql);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public List<FullMedicalAnthropometryView> GetFullMedicalAnthropometryViewsByMail(string email)
+    {
+        try
+        {
+            var query = $"SELECT * FROM fullmedicalanthropometryview WHERE Mail = {Apex(email)}";
+            return Conn.Query<FullMedicalAnthropometryView>(query).ToList();
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public MedicalAnthropometry GetMedicalAnthropometryById(int id)
+    {
+        try
+        {
+            return Conn.Get<MedicalAnthropometry>(id);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public int NewMedicalAnthropometry(MedicalAnthropometry medicalAnthropometry)
+    {
+        try
+        {
+            Conn.Insert(medicalAnthropometry);
+            return GetLastInsertedId().lastId;
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+    
+    public void UpdateMedicalAnthropometry(MedicalAnthropometry medicalAnthropometry)
+    {
+        try
+        {
+            Conn.Update(medicalAnthropometry);
+        }
+        catch (Exception ex)
+        {
+            Error(ex);
+            throw;
+        }
+    }
+
+    public void DeleteMedicalAnthropometry(int id)
+    {
+        try
+        {
+            Conn.Delete<MedicalAnthropometry>(id);
         }
         catch (Exception ex)
         {

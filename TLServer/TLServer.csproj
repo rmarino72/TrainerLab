@@ -119,6 +119,7 @@
     <Compile Include="BO\DateTimeInterval.cs" />
     <Compile Include="BO\FullAnthropometryView.cs" />
     <Compile Include="BO\FullExerciseView.cs" />
+    <Compile Include="BO\FullMedicalAnthropometryView.cs" />
     <Compile Include="BO\FullSlotView.cs" />
     <Compile Include="BO\FullTrainingPlanView.cs" />
     <Compile Include="BO\FullUserView.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="DAO\Config.cs" />
     <Compile Include="DAO\Exercise.cs" />
     <Compile Include="DAO\Image.cs" />
+    <Compile Include="DAO\MedicalAnthropometry.cs" />
     <Compile Include="DAO\MuscularGroup.cs" />
     <Compile Include="DAO\Plicometry.cs" />
     <Compile Include="DAO\Province.cs" />

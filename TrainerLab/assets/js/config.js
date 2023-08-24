@@ -28,6 +28,9 @@ var USER_ROLE = "/user/role/";
 var USER_SEX = "/user/sex";
 var USER_PERCENTAGE = "/user/percentage/";
 var USER_PRINTPLICO = "/user/plicometry/print/";
+var USER_PRINTANTHRO = "/user/anthropometry/print/";
+
+var USER_MEDICALANTHROPOMETRY = "/user/medicalanthropometry/";
 
 var EXERCISEPLAN_MUSCULARGROUP = "/exerciseplan/musculargroup/";
 var EXERCISEPLAN_EXERCISE = "/exerciseplan/exercise/";

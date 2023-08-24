@@ -1,16 +1,14 @@
-﻿<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
+<%@ Page Language="C#" CodeBehind="MedicalHistory.aspx.cs" Inherits="TrainerLab.web.MedicalHistory" %>
+<%@ Register Src="~/Components/HeadApp.ascx" TagPrefix="uc1" TagName="Head" %>
 <%@ Register Src="~/Components/FootApp.ascx" TagPrefix="uc1" TagName="Foot" %>
 <uc1:Head runat="server" id="Head"/>
-
-
 <br/>
 
 <div class="col-lg-12" id="mainPg">
-
     <div class="container">
         <div class="card mb-0">
             <div class="card-header">
-                <h3 class="h4 mb-0"><span class="material-symbols-outlined">monitor_weight</span>&nbsp; Anamnesi Antropometrica</h3>
+                <h3 class="h4 mb-0"><span class="material-symbols-outlined">monitor_weight</span>&nbsp; Anamnesi </h3>
             </div>
             <div class="card-body pt-0">
                 <div class="table-responsive">
@@ -32,11 +30,8 @@
         </div>
     </div>
 </div>
-
 <div class="col-lg-12" id="listPg">
     <div class="container">
-
-
         <button type="button" class="btn btn-primary" id="cancel-list-btn"><span class="material-symbols-outlined">arrow_back_ios</span>&nbsp; Indietro</button>
         <hr/>
         <h2>
@@ -44,12 +39,12 @@
         </h2>
         <br/>
         <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-12">
                 <br/>
 
                 <div class="card mb-0">
                     <div class="card-header">
-                        <h3 class="h4 mb-0"><span class="material-symbols-outlined">monitor_weight</span>&nbsp; Antropometriche </h3>
+                        <h3 class="h4 mb-0"><span class="material-symbols-outlined">monitor_weight</span>&nbsp;Schede Antropometriche </h3>
                     </div>
 
                     <div class="card-body pt-0">
@@ -60,7 +55,8 @@
                                 <thead>
                                 <tr>
                                     <th data-field="Id" data-visible="false">#</th>
-                                    <th data-field="Date">Data e Ora</th>
+                                    <th data-field="Name">Nome Scheda</th>
+                                    <th data-field="DateTime">Data e Ora</th>
                                 </tr>
                                 </thead>
                                 <tbody role="button"></tbody>
@@ -69,33 +65,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 container-fluid">
-                <br/>
-
-                <div class="card mb-0">
-                    <div class="card-header">
-                        <h3 class="h4 mb-0"><span class="material-symbols-outlined">body_fat</span>&nbsp; Plicometriche</h3>
-                    </div>
-                    <div class="card-body pt-0">
-                        <button type="button" class="btn btn-primary" id="new-btn-plico"><span class="material-symbols-outlined">add</span>&nbsp; Nuovo</button> &nbsp;
-                        <hr/>
-                        <div class="table-responsive">
-                            <table class="table mb-0 table-striped table-sm" data-mobile-responsive="true" id="plicoTable">
-                                <thead>
-                                <tr>
-                                    <th data-field="Id" data-visible="false">#</th>
-                                    <th data-field="Date">Data e Ora</th>
-                                </tr>
-                                </thead>
-                                <tbody role="button"></tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 container-fluid">
+            <hr />
+            <div class="col-lg-12 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-header">
@@ -106,13 +77,12 @@
                     </div>
                 </div>
             </div>
+            
         </div>
-
         <hr/>
-
         <h3> Misura circonferenze in cm.</h3>
         <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -121,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -130,7 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -139,9 +109,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -150,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -159,7 +127,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -168,9 +136,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -179,7 +145,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -188,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -197,9 +163,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -208,14 +172,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid"></div>
-            <div class="col-lg-4 container-fluid"></div>
         </div>
         <hr/>
         
         <h3> Valutazioni</h3>
         <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -229,7 +191,7 @@
 
         <h3> Plicometria</h3>
         <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -238,7 +200,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -247,7 +209,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -256,9 +218,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -267,7 +227,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -276,7 +236,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -285,9 +245,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
-        <div class="row">
-            <div class="col-lg-4 container-fluid">
+            <div class="col-lg-6 container-fluid">
                 <br/>
                 <div class="card">
                     <div class="card-body">
@@ -296,21 +254,28 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div> 
     </div>
 </div>
-
 <div class="col-lg-12" id="editPg">
     <div class="container">
         <div class="card mb-0">
             <div class="card-header">
-                <h3 class="h4 mb-0"><span class="material-symbols-outlined">monitor_weight</span>&nbsp; Scheda Antropometrica <span id="user-txt"></span></h3>
+                <h3 class="h4 mb-0"><span class="material-symbols-outlined">monitor_weight</span>&nbsp; Scheda Antropometrica <span id="user2-txt"></span></h3>
             </div>
             <div class="card-body pt-0">
-
-                <form id="editForm" action="javascript:update();" method="get">
-                    <input type="hidden" id="anthropometry-id"/>
+                <form id="editForm" method="get" action="javascript:update();">
+                    <button class="btn btn-primary" type="button" id="delete-btn"><span class="material-symbols-outlined">delete</span>&nbsp; Elimina</button>
+                    &nbsp;
+                    <button class="btn btn-primary" type="button" id="preview-btn" onclick="preview()"><span class="material-symbols-outlined">preview</span>&nbsp; Anteprima</button>
+                    <input type="hidden" id="medicalAnthropometryId"/>
                     <div class="row">
+                         <div class="col-lg-6">
+                            <div class="input-material-group col-lg-12">
+                                <label class="form-label" for="name-txt">Nome Scheda *</label>
+                                <input class="form-control" id="name-txt" type="text" name="nameTxt" required data-validate-field="nameTxt">
+                            </div>
+                        </div>
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="date-txt">Data e Ora *</label>
@@ -322,13 +287,13 @@
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="height-txt">Altezza in m.</label>
-                                <input class="form-control" id="height-txt" type="number" name="heightTxt" required data-validate-field="heightTxt">
+                                <input class="form-control" id="height-txt" type="number" name="heightTxt"  data-validate-field="heightTxt">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="weight-txt">Peso in kg.</label>
-                                <input class="form-control" id="weight-txt" type="number" name="weightTxt" required data-validate-field="weightTxt">
+                                <input class="form-control" id="weight-txt" type="number" name="weightTxt"  data-validate-field="weightTxt">
                             </div>
                         </div>
                     </div>
@@ -337,80 +302,67 @@
                         <strong>BMI</strong>
                         <div class="col-lg-6">
                             <div class="input-material-group col-lg-12">
-                                
                                 <input class="form-control" id="bmi-txt" type="number" readonly="readonly">
                             </div>                    
                         </div>
                     </div>
-                    <div class="row">&nbsp;</div>
+                    <hr/>
                     <div class="row">
                         <strong>Misurazione circonferenze in cm.</strong>
                     </div>
                     <div class="row">
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="shoulder-txt">spalle </label>
                                 <input class="form-control" id="shoulder-txt" type="number">
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="chest-txt">torace </label>
                                 <input class="form-control" id="chest-txt" type="number">
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="belly-txt">vita </label>
                                 <input class="form-control" id="belly-txt" type="number">
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="hips-txt">fianchi </label>
                                 <input class="form-control" id="hips-txt" type="number">
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="armleft-txt">braccio sinistro </label>
                                 <input class="form-control" id="armleft-txt" type="number">
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="armright-txt">braccio destro </label>
                                 <input class="form-control" id="armright-txt" type="number">
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="thighleft-txt">coscia sinistra </label>
                                 <input class="form-control" id="thighleft-txt" type="number">
                             </div>
                         </div>
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="thighright-txt">coscia destra </label>
                                 <input class="form-control" id="thighright-txt" type="number">
                             </div>
                         </div>
-
                     </div>
-
                     <div class="row">
-
                         <div class="col-lg-3">
                             <div class="input-material-group col-lg-12">
                                 <label class="form-label" for="calfleft-txt">polpaccio sinistro </label>
@@ -423,46 +375,8 @@
                                 <input class="form-control" id="calfright-txt" type="number">
                             </div>
                         </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-lg-12">
-                            <div class="input-material-group col-lg-12">
-                                <label class="form-label" for="notes-txt">note </label>
-                                <textarea id="notes-txt" class="form-control"></textarea>
-                            </div>
-                        </div>
                     </div>
                     <hr/>
-                    <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
-                    <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="plicoPg" class="col-lg-12">
-    <div class="container">
-        <div class="card mb-0">
-            <div class="card-header">
-                <h3 class="h4 mb-0"><span class="material-symbols-outlined">body_fat</span>&nbsp; Scheda Plicometria <span id="user-txt"></span></h3>
-            </div>
-            <div class="card-body pt-0">
-                <form id="plicoForm" action="javascript:updateplico();" method="get">
-                    <input type="hidden" id="plicometry-id"/>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="input-material-group col-lg-12">
-                                <label class="form-label" for="plicodate-txt">Data e Ora *</label>
-                                <input class="form-control" id="plicodate-txt" type="datetime-local" name="plicodateTxt" required data-validate-field="plicodateTxt">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">&nbsp;</div>
                     <div class="row">
                         <strong>Misurazione plicometria in mm.</strong>
                     </div>
@@ -527,21 +441,23 @@
 
                         <div class="col-lg-12">
                             <div class="input-material-group col-lg-12">
-                                <label class="form-label" for="pliconotes-txt">note </label>
-                                <textarea id="pliconotes-txt" class="form-control"></textarea>
+                                <label class="form-label" for="notes-txt">note </label>
+                                <textarea id="notes-txt" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
                     <hr/>
-                    <button class="btn btn-primary" type="button" id="plico-cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Annulla</button>
-                    <button class="btn btn-primary" type="button" id="plico-preview-btn"><span class="material-symbols-outlined">preview</span>&nbsp; Anteprima</button>
-                    <button class="btn btn-primary" type="submit"><span class="material-symbols-outlined">done</span>&nbsp; Ok</button>
+                    <button class="btn btn-primary" type="button" id="cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Chiudi</button>
+                    <button class="btn btn-primary" type="submit" ><span class="material-symbols-outlined">save</span>&nbsp; Salva</button>
+                    
+                    
                 </form>
             </div>
         </div>
     </div>
 </div>
-<div id="plicoPrevPg" class="col-lg-12">
+
+<div id="previewPg" class="col-lg-12">
     <div class="container">
         <div class="card mb-0">
             <div class="card-header">
@@ -551,18 +467,43 @@
         <div class="card-body pt-0">
             <br/>
             <br/>
+            <h3>Misure:</h3><br/>
+            <br/>
+            <table>
+                <tr><td>Altezza (m.):         </td><td>&nbsp;&nbsp;<span id="m0"></span></td></tr>
+                <tr><td>Peso (kg.):           </td><td>&nbsp;&nbsp;<span id="m1"></span></td></tr>
+                <tr><td>&nbsp;                </td><td>&nbsp;&nbsp;<span></span></td></tr>
+                <tr><td>BMI Calcolato:        </td><td>&nbsp;&nbsp;<span id="m2"></span></td></tr>
+            </table>
+            <br/>
+            <br/>
+            <b>MISURE CIRCONFERENZE (cm.)</b><br/>
+            <table>
+                <tr><td>Spalle:      </td><td>&nbsp;&nbsp;<span id="c0"></span></td></tr>
+                <tr><td>Torace:      </td><td>&nbsp;&nbsp;<span id="c1"></span></td></tr>
+                <tr><td>Vita:        </td><td>&nbsp;&nbsp;<span id="c2"></span></td></tr>
+                <tr><td>Fianchi:     </td><td>&nbsp;&nbsp;<span id="c3"></span></td></tr>
+                <tr><td>Braccio Sx:  </td><td>&nbsp;&nbsp;<span id="c4"></span></td></tr>
+                <tr><td>Braccio Dx:  </td><td>&nbsp;&nbsp;<span id="c5"></span></td></tr>
+                <tr><td>Coscia Sx:   </td><td>&nbsp;&nbsp;<span id="c6"></span></td></tr>
+                <tr><td>Coscia Dx:   </td><td>&nbsp;&nbsp;<span id="c7"></span></td></tr>
+                <tr><td>Polpaccio Sx:</td><td>&nbsp;&nbsp;<span id="c8"></span></td></tr>
+                <tr><td>Polpaccio Dx:</td><td>&nbsp;&nbsp;<span id="c9"></span></td></tr>
+            </table>
+            <br/>
+            <br/>
             <h3>Plicometriche:</h3><br/>
             <br/>
             <b>MISURE PLICHE (mm.)</b><br/>
             <br/>
             <table>
-            <tr><td>Pettorale:      </td><td><span id="pl0"></span></td></tr>
-            <tr><td>Ascellare:      </td><td><span id="pl1"></span></td></tr>
-            <tr><td>Sopra iliaca:   </td><td><span id="pl2"></span></td></tr>
-            <tr><td>Addominale:     </td><td><span id="pl3"></span></td></tr>
-            <tr><td>Coscia:         </td><td><span id="pl4"></span></td></tr>
-            <tr><td>Subscapolare:   </td><td><span id="pl5"></span></td></tr>
-            <tr><td>Tricipite:      </td><td><span id="pl6"></span></td></tr>
+            <tr><td>Pettorale:      </td><td>&nbsp;&nbsp;<span id="pl0"></span></td></tr>
+            <tr><td>Ascellare:      </td><td>&nbsp;&nbsp;<span id="pl1"></span></td></tr>
+            <tr><td>Sopra iliaca:   </td><td>&nbsp;&nbsp;<span id="pl2"></span></td></tr>
+            <tr><td>Addominale:     </td><td>&nbsp;&nbsp;<span id="pl3"></span></td></tr>
+            <tr><td>Coscia:         </td><td>&nbsp;&nbsp;<span id="pl4"></span></td></tr>
+            <tr><td>Subscapolare:   </td><td>&nbsp;&nbsp;<span id="pl5"></span></td></tr>
+            <tr><td>Tricipite:      </td><td>&nbsp;&nbsp;<span id="pl6"></span></td></tr>
             </table>
             <canvas id="plicoChart"></canvas>
             <br/>
@@ -574,15 +515,110 @@
             <canvas id="percentagePie"></canvas>
             
             <hr/>
-            <button class="btn btn-primary" type="button" id="plico-prev-cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Chiudi</button>
-            <button class="btn btn-primary" type="button" id="plico-print-btn"><span class="material-symbols-outlined">print</span>&nbsp; Stampa</button>
+            <button class="btn btn-primary" type="button" id="prev-cancel-btn"><span class="material-symbols-outlined">close</span>&nbsp; Chiudi</button>
+            <button class="btn btn-primary" type="button" id="print-btn" onclick="print()"><span class="material-symbols-outlined">print</span>&nbsp; Stampa</button>
         </div>
     </div>
 </div>
+
 <script>
 
-    let currentUser = null;
-    let editing = false;
+let currentUser = null;
+let editing = false;
+let changed = false;
+
+let rules = {
+        nameTxt: {
+            required: true,
+        },   
+        dateTxt: {
+            required: true,
+        }
+    };
+    let messages = {
+        nameTxt: "Il nome della scheda &egrave; obbligatorio",
+        dateTxt: "Inserire una data ed un'ora valida",
+        heightTxt: "Inserire un valore di altezza valido",
+        weightTxt: "Inserire un valore di peso",
+    }
+
+    function emptyFunction()
+    {}
+function init()
+{
+    iAmAdmin();
+
+    validateForm('editForm', rules, messages);
+    
+    $('#cancel-list-btn').click(refreshPage);
+    $('#cancel-btn').click(cancel);
+    $('#new-btn').click(prepareForNew);
+    $('#delete-btn').click(deleteMA);
+    $('#prev-cancel-btn').click(previewCancel);
+    $('#listPg').hide();
+    $('#editPg').hide();
+    $('#previewPg').hide();
+    
+    $('#name-txt').on('change keyup paste', change);
+    $('#medicalAnthropometryId').on('change keyup paste', change);   
+    $('#date-txt').on('change keyup paste', change);
+    $('#shoulder-txt').on('change keyup paste', change);
+    $('#belly-txt').on('change keyup paste', change);
+    $('#chest-txt').on('change keyup paste', change);
+    $('#hips-txt').on('change keyup paste', change);
+    $('#armleft-txt').on('change keyup paste', change);
+    $('#armright-txt').on('change keyup paste', change);
+    $('#thighleft-txt').on('change keyup paste', change);
+    $('#thighright-txt').on('change keyup paste', change);
+    $('#calfleft-txt').on('change keyup paste', change);
+    $('#calfright-txt').on('change keyup paste', change);
+    $('#bmi-txt').on('change keyup paste', change);
+    $('#plicometry-id').on('change keyup paste', change);
+    $('#pectoral-txt').on('change keyup paste', change);
+    $('#axillary-txt').on('change keyup paste', change);
+    $('#suprailiac-txt').on('change keyup paste', change);
+    $('#abdominal-txt').on('change keyup paste', change);
+    $('#thigh-txt').on('change keyup paste', change);
+    $('#subscapular-txt').on('change keyup paste', change);
+    $('#triceps-txt').on('change keyup paste', change);
+    $('#notes-txt').on('change keyup paste', change);
+    
+    $("#weight-txt").on('change keyup paste', bmi);
+    $("#height-txt").on('change keyup paste', bmi);
+            
+    ajaxCall(USER_FULL, 'GET', null, gotUsers);
+}
+
+function change()
+{
+    changed = true;
+}
+
+function gotUsers(data) {
+    if (!data.Outcome) {
+        alertify.error(data.Message);
+        return;
+    }
+    data.Data.forEach(e => {
+        e.BirthDate = italianFormatDate(new Date(e.BirthDate));
+    });
+
+    fillDataTable('dataTable', data.Data, updateListPage, true);
+}
+
+function updateListPage(r) {
+    let email = r.Email;
+    currentUser = email;
+    ajaxCall(USER_MEDICALANTHROPOMETRY + email + "/", 'GET', null, gotList);
+}
+
+function gotList(data)
+{
+    if (!data.Outcome) {
+        alertify.error(data.Message);
+        return;
+    }
+    
     let labels = [];
     let weightData = [];
     let shoulderData = [];
@@ -604,84 +640,288 @@
     let subscapualrData = [];
     let tricepsData = [];
     
-    function init()
-    {
-        iAmAdmin();
-
-        $('#cancel-list-btn').click(refreshPage);
-        $('#cancel-btn').click(cancel);
-        $('#plico-cancel-btn').click(cancel);
-        $('#new-btn').click(prepareForNew);
-        $('#new-btn-plico').click(prepareForNewPlico);
-        $('#plico-preview-btn').click(plicoPreview);
-        $('#plico-prev-cancel-btn').click(plicoPreviewCancel);
-        $('#plico-print-btn').click(plicoPrint);
-        $('#listPg').hide();
-        $('#editPg').hide();
-        $('#plicoPg').hide();
-        $('#plicoPrevPg').hide();
-        $("#weight-txt").on('change keyup paste', bmi);
-        $("#height-txt").on('change keyup paste', bmi);
+    data.Data.forEach(e => {
+        let dtTmp = new Date(e.DateTime);
+        e.DateTime = italianFormatDateTime(dtTmp);
         
-        let rules = {
-           
-            dateTxt: {
-                required: true,
-            },
-            heightTxt: {
-                required: true,
-            },
-            weightTxt: {
-                required: true,
-            }
-        };
-        let messages = {
-            dateTxt: "Inserire una data ed un'ora valida",
-            heightTxt: "Inserire un valore di altezza valido",
-            weightTxt: "Inserire un valore di peso",
-        }
-
-        validateForm('editForm', rules, messages);
-
-        rules = {
-
-            plicodateTxt: {
-                required: true,
-            }
-        };
-        messages = {
-            plicodateTxt: "Inserire una data ed un'ora valida",
-        }
-
-        validateForm('plicoForm', rules, messages);
-        ajaxCall(USER_FULL, 'GET', null, gotUsers);
-    }
+        labels.push(dtTmp.getDate() + "/" + (dtTmp.getMonth()+1));
+        weightData.push(e.Weight);
+        shoulderData.push(e.ShoulderCirc);
+        chestData.push(e.ChestCirc);
+        bellyData.push(e.BellyCirc);
+        hipsData.push(e.HipsCirc);
+        armLData.push(e.ArmLeftCirc);
+        armRData.push(e.ArmRightCirc);
+        thighLData.push(e.ThighLeftCirc);
+        thighRData.push(e.ThighRightCirc);
+        calfLData.push(e.CalfLeftCirc);
+        calfRData.push(e.CalfRightCirc);
+        bmiData.push(e.Bmi);
+        pectoralData.push(e.Pectoral);
+        axillaryData.push(e.Axillary);
+        suprailiacData.push(e.Suprailiac);
+        abdominalData.push(e.Abdominal);
+        thighData.push(e.Thigh);
+        subscapualrData.push(e.Subscapular);
+        tricepsData.push(e.Triceps);
+    });
+    fillChart('weightChart', 'kg.', labels.slice(-15), weightData.slice(-15));
+    fillChart('shoulderChart', 'spalle', labels.slice(-15), shoulderData.slice(-15));
+    fillChart('chestChart', 'torace', labels.slice(-15), chestData.slice(-15));
+    fillChart('bellyChart', 'vita', labels.slice(-15), bellyData.slice(-15));
+    fillChart('hipsChart', 'fianchi', labels.slice(-15), hipsData.slice(-15));
+    fillChart('armLChart', 'braccio sx', labels.slice(-15), armLData.slice(-15));
+    fillChart('armRChart', 'braccio dx', labels.slice(-15), armRData.slice(-15));
+    fillChart('thighLChart', 'fianchi', labels.slice(-15), thighLData.slice(-15));
+    fillChart('thighRChart', 'braccio sx', labels.slice(-15), thighRData.slice(-15));
+    fillChart('calfLChart', 'braccio dx', labels.slice(-15), calfLData.slice(-15));
+    fillChart('calfRChart', 'braccio dx', labels.slice(-15), calfRData.slice(-15));
+    fillChart('bmiChart', 'bmi', labels.slice(-15), bmiData.slice(-15));
+    fillChart('pectoralChart', 'kg.', labels.slice(-15), pectoralData.slice(-15));
+    fillChart('axillaryChart', 'kg.', labels.slice(-15), axillaryData.slice(-15));
+    fillChart('suprailiacChart', 'kg.', labels.slice(-15), suprailiacData.slice(-15));
+    fillChart('abdominalChart', 'kg.', labels.slice(-15), abdominalData.slice(-15));
+    fillChart('thighChart', 'kg.', labels.slice(-15), thighData.slice(-15));
+    fillChart('subscapularChart', 'kg.', labels.slice(-15), subscapualrData.slice(-15));
+    fillChart('tricepsChart', 'kg.', labels.slice(-15), tricepsData.slice(-15));
     
-    function plicoPrint()
-    {
-        var a = plicoformToObj(true);
-        ajaxCall(USER_ANTHROPOMETRY, 'PATCH', JSON.stringify(a), print);
+    fillDataTable('listTable', data.Data.reverse(), prepareForEdit, true);
+    ajaxCall(USER_FULL + currentUser + "/", 'GET', null, gotUser);
+}
+
+function gotUser(data) {
+
+    if (!data.Outcome) {
+        alertify.error(data.Message);
+        return;
     }
-    
-    function print()
-    {
-        let plicoId = $('#plicometry-id').val();
-        ajaxCall(USER_PRINTPLICO + plicoId, 'get', null, printed);
+    $('#user-txt').text(data.Data.FirstName + " " + data.Data.LastName);
+    $('#user2-txt').text(data.Data.FirstName + " " + data.Data.LastName);
+    $('#prev-user-txt').text(data.Data.FirstName + " " + data.Data.LastName);
+    $('#mainPg').hide();
+    $('#listPg').show();
+    $('#editPg').hide();
+
+}
+
+function prepareForEdit(r)
+{
+    changed = false;
+    $('#delete-btn').show();
+    $('#preview-btn').show();
+    $('#name-txt').attr("readonly", "true");
+    $('#date-txt').attr("readonly", "true");
+    editing = true;
+    ajaxCall(USER_MEDICALANTHROPOMETRY + currentUser + "/" + r.Id +"/", "GET", null, gotAnthropometry);
+}
+
+function gotAnthropometry(data)
+{
+    if (!data.Outcome) {
+        alertify.error(data.Message);
+        return;
     }
-    
-    function printed(data)
+    editing = true;
+    resetForm('editForm');
+    var o = data.Data;
+    $('#name-txt').val(o.Name);
+    $('#medicalAnthropometryId').val(o.Id);
+    $('#height-txt').val(o.Height);
+    $('#date-txt').val(o.DateTime);
+    $('#weight-txt').val(o.Weight);
+    $('#shoulder-txt').val(o.ShoulderCirc);
+    $('#belly-txt').val(o.BellyCirc);
+    $('#chest-txt').val(o.ChestCirc);
+    $('#hips-txt').val(o.HipsCirc);
+    $('#armleft-txt').val(o.ArmLeftCirc);
+    $('#armright-txt').val(o.ArmRightCirc);
+    $('#thighleft-txt').val(o.ThighLeftCirc);
+    $('#thighright-txt').val(o.ThighRightCirc);
+    $('#calfleft-txt').val(o.CalfLeftCirc);
+    $('#calfright-txt').val(o.CalfRightCirc);
+    $('#bmi-txt').val(o.Bmi);
+    $('#plicometry-id').val(o.Id);
+    $('#pectoral-txt').val(o.Pectoral);
+    $('#axillary-txt').val(o.Axillary);
+    $('#suprailiac-txt').val(o.Suprailiac);
+    $('#abdominal-txt').val(o.Abdominal);
+    $('#thigh-txt').val(o.Thigh);
+    $('#subscapular-txt').val(o.Subscapular);
+    $('#triceps-txt').val(o.Triceps);
+    $('#notes-txt').val(o.Notes);
+    $('#editPg').show();
+    $('#listPg').hide();
+}
+
+function prepareForNew()
+{
+    changed = false;
+    editing = false;
+    $('#name-txt').removeAttr("readonly");
+    $('#date-txt').removeAttr("readonly");
+    $('#delete-btn').hide();
+    $('#preview-btn').hide();
+    resetForm('editForm');
+    ajaxCall(USER_FULL + currentUser + "/", "GET", null, readyForNew);
+}
+
+    function readyForNew(data)
     {
         if (!data.Outcome) {
             alertify.error(data.Message);
             return;
         }
-        window.open("/Tmp/"+data.Message);
+        $('#height-txt').val(data.Data.Height);
+        var dt = new Date();
+        $('#date-txt').val(dt.toJSON().slice(0, 16));
+        $('#editPg').show();
+        $('#listPg').hide();
+    }
+
+function formToObj(withId=false)
+    {
+        var o = {};
+        o.Id = withId ? parseInt($('#medicalAnthropometryId').val()) : -1;
+        o.Name = $('#name-txt').val();
+        o.Height = nullable(parseFloat($('#height-txt').val()));
+        o.Mail = currentUser;
+        o.DateTime = dateForCSharp(new Date($('#date-txt').val()));
+        o.Weight = nullable(parseFloat($('#weight-txt').val()));
+        o.ShoulderCirc = nullable(parseFloat($('#shoulder-txt').val()));
+        o.BellyCirc = nullable(parseFloat($('#belly-txt').val()));
+        o.ChestCirc = nullable(parseFloat($('#chest-txt').val()));
+        o.HipsCirc = nullable(parseFloat($('#hips-txt').val()));
+        o.ArmLeftCirc = nullable(parseFloat($('#armleft-txt').val()));
+        o.ArmRightCirc = nullable(parseFloat($('#armright-txt').val()));
+        o.ThighLeftCirc = nullable(parseFloat($('#thighleft-txt').val()));
+        o.ThighRightCirc = nullable(parseFloat($('#thighright-txt').val()));
+        o.CalfLeftCirc = nullable(parseFloat($('#calfleft-txt').val()));
+        o.CalfRightCirc = nullable(parseFloat($('#calfright-txt').val()));
+        o.Pectoral = nullable(parseFloat($('#pectoral-txt').val()));
+        o.Axillary = nullable(parseFloat($('#axillary-txt').val()));
+        o.Suprailiac = nullable(parseFloat($('#suprailiac-txt').val()));
+        o.Abdominal = nullable(parseFloat($('#abdominal-txt').val()));
+        o.Thigh = nullable(parseFloat($('#thigh-txt').val()));
+        o.Subscapular = nullable(parseFloat($('#subscapular-txt').val()));
+        o.Triceps = nullable(parseFloat($('#triceps-txt').val()));
+        o.Notes = $('#notes-txt').val();
+        o.LastUpdateDateTime = dateForCSharp(new Date());
+        o.Bmi = nullable(parseFloat($('#bmi-txt').val()));
+        return o;
     }
     
-    function plicoPreview()
+    function confirmCancel()
     {
-        $('#plicoPg').hide();
-        $('#plicoPrevPg').show();
+        var r = {};
+        changed = false;
+        r.Email = currentUser;
+        updateListPage(r);
+    }
+    
+    function cancel()
+    {
+        if(!changed) 
+            confirmCancel();
+        else 
+            alertify.confirm("Annulla", "Sono state apportate delle modifiche. Annullare comunque?", confirmCancel, null);
+    }
+    
+    function update()
+    {
+        let a = formToObj(editing);
+        let method = editing?'patch':'post';
+        ajaxCall(USER_MEDICALANTHROPOMETRY, method, JSON.stringify(a), updated);
+    }
+    
+    function bmi()
+    {
+        change();
+        let bmi = null;
+        let height = $('#height-txt').val();
+        let weight = $('#weight-txt').val();
+        if(!isEmpty(weight) && !isEmpty(height))
+        {
+            let h = parseFloat(height);
+            let w = parseFloat(weight);
+            bmi = w/(h*h);
+            bmi = bmi.toFixed(2);
+        }
+        $('#bmi-txt').val(bmi);
+    }
+    
+    function updated(data) {
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
+        }
+        var r = {};
+        changed = false;
+        let id = data.Data.Id;
+        $('#medicalAnthropometryId').val(id);
+        editing = true;
+        $('#delete-btn').show();
+        $('#preview-btn').show();
+        $('#name-txt').attr("readonly", "true");
+        $('#date-txt').attr("readonly", "true");
+        alertify.success("Modifiche salvate con successo");
+    }
+    
+    function deleteMA()
+    {
+        alertify.confirm("Elimina", "Vuoi elminiare questa scheda definitivamente?", confirmDelete, null);
+    }
+    
+    function confirmDelete()
+    {
+        let id = $('#medicalAnthropometryId').val();
+        ajaxCall(USER_MEDICALANTHROPOMETRY + id, 'delete', null, deleted);
+    }
+    
+    function deleted(data)
+    {
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
+        }
+        let r = {};
+        r.Email = currentUser;
+        updateListPage(r);
+    }
+
+    function preview()
+    {
+        if(!changed)
+            doPreview();
+        else
+            alertify.confirm("Anteprima", "I dati modificati saranno prima salvati. Continuare?", save, null);
+    }
+        
+    function save()
+    {        
+        var a = formToObj(true);
+        ajaxCall(USER_MEDICALANTHROPOMETRY, 'PATCH', JSON.stringify(a), doPreview);
+    }
+    
+    function doPreview()
+    {
+        changed = false;
+        $('#editPg').hide();
+        $('#previewPg').show();
+        
+        $('#m0').html($('#height-txt').val());
+        $('#m1').html($('#weight-txt').val());
+        $('#m2').html($('#bmi-txt').val());
+        
+        $('#c0').html($('#shoulder-txt').val());
+        $('#c1').html($('#chest-txt').val());
+        $('#c2').html($('#belly-txt').val());
+        $('#c3').html($('#hips-txt').val());
+        $('#c4').html($('#armleft-txt').val());
+        $('#c5').html($('#armright-txt').val());
+        $('#c6').html($('#thighleft-txt').val());
+        $('#c7').html($('#thighright-txt').val());
+        $('#c8').html($('#calfleft-txt').val());
+        $('#c9').html($('#calfright-txt').val());
         
         var plicoSum = 0;
         var data = [];
@@ -743,7 +983,7 @@
         $('#pl6').html(data[6]);
         ajaxCall(USER_PERCENTAGE + currentUser + "/" + plicoSum + "/", 'get', null, gotPercentage);
     }
-    
+        
     function gotPercentage(data)
     {
         if (!data.Outcome) {
@@ -783,331 +1023,26 @@
         $('#perc0').html(chartData[0]);
     }
     
-    function plicoPreviewCancel()
+    function previewCancel()
     {
-        $('#plicoPg').show();
-        $('#plicoPrevPg').hide();
-    }
-
-    function gotUsers(data) {
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        data.Data.forEach(e => {
-            e.BirthDate = italianFormatDate(new Date(e.BirthDate));
-        });
-
-        fillDataTable('dataTable', data.Data, updateListPage, true);
-    }
-
-    function updateListPage(r)
-    {
-        let email = r.Email;
-        currentUser = email;
-        ajaxCall(USER_ANTHROPOMETRY + email + "/", 'GET', null, gotList);
-    }
-
-    function gotList(data)
-    {
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        var dt = data.Data;
-
-        dt.forEach(e => {
-            let dtTmp = new Date(e.Date);
-            e.Date = italianFormatDateTime(dtTmp);
-            labels.push(dtTmp.getDate() + "/" + (dtTmp.getMonth()+1));
-            weightData.push(e.Weight);
-            shoulderData.push(e.ShoulderCirc);
-            chestData.push(e.ChestCirc);
-            bellyData.push(e.BellyCirc);
-            hipsData.push(e.HipsCirc);
-            armLData.push(e.ArmLeftCirc);
-            armRData.push(e.ArmRightCirc);
-            thighLData.push(e.ThighLeftCirc);
-            thighRData.push(e.ThighRightCirc);
-            calfLData.push(e.CalfLeftCirc);
-            calfRData.push(e.CalfRightCirc);
-            bmiData.push(e.BMI);
-        });
-        fillChart('weightChart', 'kg.', labels.slice(-15), weightData.slice(-15));
-        fillChart('shoulderChart', 'spalle', labels.slice(-15), shoulderData.slice(-15));
-        fillChart('chestChart', 'torace', labels.slice(-15), chestData.slice(-15));
-        fillChart('bellyChart', 'vita', labels.slice(-15), bellyData.slice(-15));
-        fillChart('hipsChart', 'fianchi', labels.slice(-15), hipsData.slice(-15));
-        fillChart('armLChart', 'braccio sx', labels.slice(-15), armLData.slice(-15));
-        fillChart('armRChart', 'braccio dx', labels.slice(-15), armRData.slice(-15));
-        fillChart('thighLChart', 'fianchi', labels.slice(-15), thighLData.slice(-15));
-        fillChart('thighRChart', 'braccio sx', labels.slice(-15), thighRData.slice(-15));
-        fillChart('calfLChart', 'braccio dx', labels.slice(-15), calfLData.slice(-15));
-        fillChart('calfRChart', 'braccio dx', labels.slice(-15), calfRData.slice(-15));
-        fillChart('bmiChart', 'bmi', labels.slice(-15), bmiData.slice(-15));
-
-        fillDataTable('listTable', dt.reverse(), prepareForEdit, true);
-        ajaxCall(USER_FULL + currentUser + "/", 'GET', null, gotUser);
+        $('#editPg').show();
+        $('#previewPg').hide();
     }
     
-    function gotPlicoList(data)
+    function print()
     {
-        if (!data.Outcome) 
-        {
-            alertify.error(data.Message);
-            return;
-        }
-        let dt = data.Data;
-
-        dt.forEach(e => 
-        {
-            let dtTmp = new Date(e.Date);
-            labels.push(dtTmp.getDate() + "/" + (dtTmp.getMonth() + 1));
-            pectoralData.push(e.Pectoral);
-            axillaryData.push(e.Axillary);
-            suprailiacData.push(e.Suprailiac);
-            abdominalData.push(e.Abdominal);
-            thighData.push(e.Thigh);
-            subscapualrData.push(e.Subscapular);
-            tricepsData.push(e.Triceps);
-        });
-        
-        fillChart('pectoralChart', 'kg.', labels.slice(-15), pectoralData.slice(-15));
-        fillChart('axillaryChart', 'kg.', labels.slice(-15), axillaryData.slice(-15));
-        fillChart('suprailiacChart', 'kg.', labels.slice(-15), suprailiacData.slice(-15));
-        fillChart('abdominalChart', 'kg.', labels.slice(-15), abdominalData.slice(-15));
-        fillChart('thighChart', 'kg.', labels.slice(-15), thighData.slice(-15));
-        fillChart('subscapularChart', 'kg.', labels.slice(-15), subscapualrData.slice(-15));
-        fillChart('tricepsChart', 'kg.', labels.slice(-15), tricepsData.slice(-15));
-    }
-
-    function gotUser(data) {
-
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        $('#user-txt').text(data.Data.FirstName + " " + data.Data.LastName);
-        $('#prev-user-txt').text(data.Data.FirstName + " " + data.Data.LastName);
-        ajaxCall(USER_PLICOMETRY + currentUser + "/", 'GET', null, gotPlicometries);
-
-    }
-
-    function gotPlicometries(data)
-    {
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        var dt = data.Data;
-
-
-        dt.forEach(e => {
-            var dtTmp = new Date(e.Date);
-            e.Date = italianFormatDateTime(dtTmp);
-        });
-
-        fillDataTable('plicoTable', dt.reverse(), prepareForEditPlico, true);
-        
-        ajaxCall(USER_PLICOMETRY + currentUser + "/", 'GET', null, gotPlicoList);
-
-        $('#mainPg').hide();
-        $('#listPg').show();
-        $('#editPg').hide();
-    }
-
-    function prepareForNew()
-    {
-        editing = false;
-        resetForm('editForm');
-        ajaxCall(USER_FULL + currentUser + "/", "GET", null, readyForNew);
-    }
-
-    function prepareForNewPlico() {
-        editing = false;
-        resetForm('plicoForm');
-        var dt = new Date();
-        $('#plicodate-txt').val(dt.toJSON().slice(0, 16));
-        $('#plicoPg').show();
-        $('#listPg').hide();
-        $('#plico-preview-btn').hide();
-    }
-
-    function readyForNew(data)
-    {
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        $('#height-txt').val(data.Data.Height);
-        var dt = new Date();
-        $('#date-txt').val(dt.toJSON().slice(0, 16));
-        $('#editPg').show();
-        $('#listPg').hide();
-    }
-
-    function prepareForEdit(r)
-    {
-        ajaxCall(USER_ANTHROPOMETRY + currentUser + "/" + r.Id, "GET", null, gotAnthropometry);
-    }
-
-    function prepareForEditPlico(r) {
-        $('#plico-preview-btn').show();
-        ajaxCall(USER_PLICOMETRY + currentUser + "/" + r.Id, "GET", null, gotPlicometry);
-    }
-
-    function gotPlicometry(data)
-    {
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        editing = true;
-        resetForm('plicoForm');
-        var o = data.Data;
-        $('#plicometry-id').val(o.Id);
-        $('#plicodate-txt').val(o.Date);
-        $('#pectoral-txt').val(o.Pectoral);
-        $('#axillary-txt').val(o.Axillary);
-        $('#suprailiac-txt').val(o.Suprailiac);
-        $('#abdominal-txt').val(o.Abdominal);
-        $('#thigh-txt').val(o.Thigh);
-        $('#subscapular-txt').val(o.Subscapular);
-        $('#triceps-txt').val(o.Triceps);
-        $('#pliconotes-txt').val(o.Notes);
-        $('#plicoPg').show();
-        $('#listPg').hide();
-    }
-
-    function gotAnthropometry(data)
-    {
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        editing = true;
-        resetForm('editForm');
-        var o = data.Data;
-        $('#anthropometry-id').val(o.Id);
-        $('#height-txt').val(o.Height);
-        $('#date-txt').val(o.Date);
-        $('#weight-txt').val(o.Weight);
-        $('#shoulder-txt').val(o.ShoulderCirc);
-        $('#belly-txt').val(o.BellyCirc);
-        $('#chest-txt').val(o.ChestCirc);
-        $('#hips-txt').val(o.HipsCirc);
-        $('#armleft-txt').val(o.ArmLeftCirc);
-        $('#armright-txt').val(o.ArmRightCirc);
-        $('#thighleft-txt').val(o.ThighLeftCirc);
-        $('#thighright-txt').val(o.ThighRightCirc);
-        $('#calfleft-txt').val(o.CalfLeftCirc);
-        $('#calfright-txt').val(o.CalfRightCirc);
-        $('#bmi-txt').val(o.BMI);
-        $('#notes-txt').val(o.Notes);
-        $('#editPg').show();
-        $('#listPg').hide();
-    }
-
-    function cancel()
-    {
-        $('#editPg').hide();
-        $('#plicoPg').hide();
-        $('#listPg').show();
-    }
-
-    function update()
-    {
-        var a = formToObj(true);
-        if (!editing)
-        {
-            ajaxCall(USER_ANTHROPOMETRY, 'POST', JSON.stringify(a), updated);
-        }
-        else
-        {
-            ajaxCall(USER_ANTHROPOMETRY, 'PATCH', JSON.stringify(a), updated);
-        }
-    }
-
-    function updateplico() {
-        var a = plicoformToObj(editing);
-        if (!editing) {
-            ajaxCall(USER_PLICOMETRY, 'POST', JSON.stringify(a), updated);
-        }
-        else {
-            ajaxCall(USER_PLICOMETRY, 'PATCH', JSON.stringify(a), updated);
-        }
-    }
-
-    function updated(data) {
-        if (!data.Outcome) {
-            alertify.error(data.Message);
-            return;
-        }
-        var r = {};
-        r.Email = currentUser;
-        updateListPage(r);
-    }
-
-    function formToObj(withId=false)
-    {
-        var o = {};
-        o.Id = withId ? parseInt($('#anthropometry-id').val()) : -1;
-        o.FirstName = "";
-        o.LastName = "";
-        o.BirthDate = dateForCSharp(new Date())
-        o.Sex = "";
-        o.Height = nullable(parseFloat($('#height-txt').val()));
-        o.Email = currentUser;
-        o.Date = dateForCSharp(new Date($('#date-txt').val()));
-        o.Weight = nullable(parseFloat($('#weight-txt').val()));
-        o.ShoulderCirc = nullable(parseFloat($('#shoulder-txt').val()));
-        o.BellyCirc = nullable(parseFloat($('#belly-txt').val()));
-        o.ChestCirc = nullable(parseFloat($('#chest-txt').val()));
-        o.HipsCirc = nullable(parseFloat($('#hips-txt').val()));
-        o.ArmLeftCirc = nullable(parseFloat($('#armleft-txt').val()));
-        o.ArmRightCirc = nullable(parseFloat($('#armright-txt').val()));
-        o.ThighLeftCirc = nullable(parseFloat($('#thighleft-txt').val()));
-        o.ThighRightCirc = nullable(parseFloat($('#thighright-txt').val()));
-        o.CalfLeftCirc = nullable(parseFloat($('#calfleft-txt').val()));
-        o.CalfRightCirc = nullable(parseFloat($('#calfright-txt').val()));
-        o.Notes = nullable($('#notes-txt').val());
-        o.LastUpdateDateTime = dateForCSharp(new Date());
-        o.BMI = nullable($('#bmi-txt').val());
-        return o;
-    }
-
-    function plicoformToObj(withId = false) {
-        var o = {};
-        o.Id = withId ? $('#plicometry-id').val() : -1;
-        o.Date = dateForCSharp(new Date($('#plicodate-txt').val()));
-        o.Email = currentUser;
-        o.Pectoral = nullable($('#pectoral-txt').val());
-        o.Axillary = nullable($('#axillary-txt').val());
-        o.Suprailiac = nullable($('#suprailiac-txt').val());
-        o.Abdominal = nullable($('#abdominal-txt').val());
-        o.Thigh = nullable($('#thigh-txt').val());
-        o.Subscapular = nullable($('#subscapular-txt').val());
-        o.Triceps = nullable($('#triceps-txt').val());
-        o.Notes = nullable($('#pliconotes-txt').val());
-        o.LastUpdateDateTime = dateForCSharp(new Date());
-        return o;
+        let id = $('#medicalAnthropometryId').val();
+        ajaxCall(USER_PRINTANTHRO + id, 'get', null, printed);
     }
     
-    function bmi()
+    function printed(data)
     {
-        let bmi = null;
-        let height = $('#height-txt').val();
-        let weight = $('#weight-txt').val();
-        if(!isEmpty(weight) && !isEmpty(height))
-        {
-            let h = parseFloat(height);
-            let w = parseFloat(weight);
-            bmi = w/(h*h);
-            bmi = bmi.toFixed(2);
+        if (!data.Outcome) {
+            alertify.error(data.Message);
+            return;
         }
-        $('#bmi-txt').val(bmi);
+        window.open("/Tmp/"+data.Message);
     }
-
+    
 </script>
-
 <uc1:Foot runat="server" id="Foot"/>

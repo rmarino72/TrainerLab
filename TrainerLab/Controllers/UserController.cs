@@ -175,4 +175,34 @@ public class UserController : ApiController
     {
         return new ReportBl().PrintPlicometry(id);
     }
+
+    [HttpGet]
+    [Route("user/medicalanthropometry/{email}/")]
+    public RestListResult GetMedicalHistoriesByMail(string email) => UserBL.Instance.GetMedicalHistoriesByMail(email);
+
+    [HttpPost]
+    [Route("user/medicalanthropometry/")]
+    public RestObjectResult NewMedicalAnthropometry([FromBody] MedicalAnthropometry medicalAnthropometry) =>
+        UserBL.Instance.NewMedicalAnthropometry(medicalAnthropometry);
+    
+    [HttpPatch]
+    [Route("user/medicalanthropometry/")]
+    public RestObjectResult UpdateMedicalAnthropometry([FromBody] MedicalAnthropometry medicalAnthropometry) =>
+        UserBL.Instance.UpdateMedicalAnthropometry(medicalAnthropometry);
+
+    [HttpGet]
+    [Route("user/medicalanthropometry/{email}/{id}/")]
+    public RestObjectResult GetMedicalAnthropometryById(string email, int id) => UserBL.Instance.GetMedicalAnthropometryById(id);
+
+    [HttpDelete]
+    [Route("user/medicalanthropometry/{id}/")]
+    public RestObjectResult DeleteMedicalAnthropometry(int id) => UserBL.Instance.DeleteMedicalAnthropometry(id);
+    
+    [HttpGet]
+    [Route("user/anthropometry/print/{id}")]
+    public RestObjectResult PrintAnthropometry(int id)
+    {
+        return new ReportBl().PrintAnthropometry(id);
+    }
+
 }
