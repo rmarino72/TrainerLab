@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BL\AuthBl.cs" />
+    <Compile Include="BL\Enums\SexEnum.cs" />
     <Compile Include="BL\ExercisePlanBl.cs" />
     <Compile Include="BL\GenericBl.cs" />
     <Compile Include="BL\GymnFormulas.cs" />

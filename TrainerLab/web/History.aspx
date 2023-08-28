@@ -261,7 +261,7 @@
         $('#email-txt').text(data.Data.Email);
         $('#age-txt').text(data.Data.Age);
         $('#height-txt').text(data.Data.Height);
-        ajaxCall(USER_ANTHROPOMETRY + data.Data.Email + "/", 'GET', null, gotList);
+        ajaxCall(USER_MEDICALANTHROPOMETRY + data.Data.Email + "/", 'GET', null, gotList);
     }
 
 
@@ -276,7 +276,7 @@
         let dt = data.Data;
 
         dt.forEach(e => {
-            let dtTmp = new Date(e.Date);
+            let dtTmp = new Date(e.DateTime);
 
             labels.push(dtTmp.getDate() + "/" + (dtTmp.getMonth() + 1));
             weightData.push(e.Weight);
@@ -290,7 +290,14 @@
             thighRData.push(e.ThighRightCirc);
             calfLData.push(e.CalfLeftCirc);
             calfRData.push(e.CalfRightCirc);
-            bmiData.push(e.BMI);
+            bmiData.push(e.Bmi);
+            pectoralData.push(e.Pectoral);
+            axillaryData.push(e.Axillary);
+            suprailiacData.push(e.Suprailiac);
+            abdominalData.push(e.Abdominal);
+            thighData.push(e.Thigh);
+            subscapualrData.push(e.Subscapular);
+            tricepsData.push(e.Triceps);
         });
         fillChart('weightChart', 'kg.', labels.slice(-15), weightData.slice(-15));
 
@@ -307,31 +314,6 @@
         fillChart('calfLChart', 'braccio dx', labels.slice(-15), calfLData.slice(-15));
         fillChart('calfRChart', 'braccio dx', labels.slice(-15), calfRData.slice(-15));
         fillChart('bmiChart', 'bmi', labels.slice(-15), bmiData.slice(-15));
-        let user = getFromStorage(STORAGE_USER);
-        ajaxCall(USER_PLICOMETRY + user + "/", 'GET', null, gotPlicoList);
-    }
-    
-    function gotPlicoList(data)
-    {
-        if (!data.Outcome) 
-        {
-            alertify.error(data.Message);
-            return;
-        }
-        let dt = data.Data;
-
-        dt.forEach(e => 
-        {
-            let dtTmp = new Date(e.Date);
-            labels.push(dtTmp.getDate() + "/" + (dtTmp.getMonth() + 1));
-            pectoralData.push(e.Pectoral);
-            axillaryData.push(e.Axillary);
-            suprailiacData.push(e.Suprailiac);
-            abdominalData.push(e.Abdominal);
-            thighData.push(e.Thigh);
-            subscapualrData.push(e.Subscapular);
-            tricepsData.push(e.Triceps);
-        });
         
         fillChart('pectoralChart', 'kg.', labels.slice(-15), pectoralData.slice(-15));
         fillChart('axillaryChart', 'kg.', labels.slice(-15), axillaryData.slice(-15));
@@ -341,5 +323,6 @@
         fillChart('subscapularChart', 'kg.', labels.slice(-15), subscapualrData.slice(-15));
         fillChart('tricepsChart', 'kg.', labels.slice(-15), tricepsData.slice(-15));
     }
-</script>
+    
+    </script>
 <uc1:Foot runat="server" id="Foot"/>

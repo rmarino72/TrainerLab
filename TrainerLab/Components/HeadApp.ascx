@@ -188,7 +188,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="Anthropometry">
+                    <a class="sidebar-link" href="MedicalHistory">
                         <span class="material-symbols-outlined">
                             monitor_weight
                         </span>

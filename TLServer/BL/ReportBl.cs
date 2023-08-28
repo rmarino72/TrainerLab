@@ -102,6 +102,8 @@ public class ReportBl:GenericBl
             var userData = BODB.GetUserDataByEmail(anthropometryData.Mail);
             var tmp = (DateTime.Now - userData.BirthDate);
             var age = (new DateTime(tmp.Ticks)).Year;
+            var mhr = GymnFormulas.MaximumHeartRate(age);
+            var iw = GymnFormulas.IdealWeight(userData.Sex, userData.Height * 100 ?? 0);
             
             ExcelPackage excelPackage = new ExcelPackage(new FileInfo(Path.Combine(Config.BaseDir, Config.TemplatesPath, "AnthropometryTemplate.xlsx")));
             var ws = excelPackage.Workbook.Worksheets[1];
@@ -129,8 +131,12 @@ public class ReportBl:GenericBl
             
             ws.Cells[25, 2].Value = anthropometryData.CalfLeftCirc;
             ws.Cells[25, 4].Value = anthropometryData.CalfRightCirc;
+
+            ws.Cells[60, 4].Value = mhr;
+            ws.Cells[61, 4].Value = anthropometryData.Bmi;
+            ws.Cells[62, 4].Value = iw;
             
-            ws.Cells[59, 1].Value = anthropometryData.Notes;
+            ws.Cells[65, 1].Value = anthropometryData.Notes;
             
             double? plicoSum = anthropometryData.Pectoral + anthropometryData.Axillary +
                                anthropometryData.Suprailiac + anthropometryData.Abdominal +
@@ -181,7 +187,6 @@ public class ReportBl:GenericBl
             var tmp = (DateTime.Now - userData.BirthDate);
             var age = (new DateTime(tmp.Ticks)).Year;
             
-
             ws.Cells[10, 1].Value = userData.FirstName + " " + userData.LastName;
             ws.Cells[16, 2].Value = plicometry.Pectoral;
             ws.Cells[17, 2].Value = plicometry.Axillary;

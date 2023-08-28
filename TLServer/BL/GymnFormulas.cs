@@ -1,4 +1,5 @@
 using System;
+using TLServer.BL.Enums;
 
 namespace TLServer.BL;
 
@@ -26,5 +27,17 @@ public class GymnFormulas
     public static double FatPercentage(double bodyDensity)
     {
         return (495/bodyDensity)-450;
+    }
+
+    public static int MaximumHeartRate(int age)
+    {
+        return 220 - age;
+    }
+
+    public static float IdealWeight(string sex, float height)
+    {
+        if (height == 0) return 0;
+        float y = sex == SexEnum.MALE ? (height - 150) * (float)0.75 + 50 : (height - 150) * (float)0.6 + 50;
+        return (float)Math.Round(y, 1);
     }
 }
